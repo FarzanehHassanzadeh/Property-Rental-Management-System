@@ -9,7 +9,7 @@ body
 }
 header{
   height: 100vh;
-  background: url('img/welcome-home.png') no-repeat center / cover;
+  background: url('IMG/welcome-home.png') no-repeat center / cover;
 }
 nav{
   max-width: 960px;

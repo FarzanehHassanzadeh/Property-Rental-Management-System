@@ -7,13 +7,14 @@
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="signup_page.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup_page.css') }}" />
     <title>Sign in Form</title>
   </head>
   <body>
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
+
           <form action="#" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
@@ -31,14 +32,14 @@
 
             </div>
              <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-            <label>Remember me    <a href="html.html">Log in</a></label>
+            <label>Remember me    <a href=" {{ url_for('login_page') }}">Log in</a></label>
             <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
               <!--with click Kiarash can go to home page  -->
             <button class="btn" onclick="location.href='home.html'">Sign Up</button>
 
-
-
           </form>
+
+
           <form action="#" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
@@ -54,7 +55,7 @@
               <input type="password" placeholder="Password" />
             </div>
             <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-            <label>Remember me    <a href="html.html">Log in</a></label>
+            <label>Remember me    <a href=" {{ url_for('login_page') }}">Log in</a></label>
            
               <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
@@ -96,6 +97,6 @@
       </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
 </html>

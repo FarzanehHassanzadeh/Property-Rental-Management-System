@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--  <link rel="stylesheet" href="statis/font-awesome/css/font-awesome.min.css">-->
+<!--  <link rel="stylesheet" href="static/fonts.css">-->
+<!--  <link rel="stylesheet" href="static/start_page.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='start_page.css') }}">
+
+  <title>STARTER</title>
+</head>
+<body>
+
+  <header>
+    <nav>
+        <ul>
+<!--            <li><a href="static/signup_page.html">Sign Up</a></li>-->
+            <li><a href="{{ url_for('signup_page') }}">Sign Up</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Guid</a></li>
+            <li><a href="#">about</a></li>
+        </ul>
+    </nav>
+
+  </header>
+
+   <script src="static/js/script.js"></script>
+</body>
+</html>
