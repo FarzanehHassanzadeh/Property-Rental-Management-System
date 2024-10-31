@@ -6,8 +6,7 @@ body
 {
   direction: rtl;
   font-family: 'iransansdnwebbold' !important;
-}
-header{
+}header {
   height: 100vh;
   background: url('IMG/welcome-home.png') no-repeat center / cover;
 }

@@ -1,112 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>login</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup_page.css') }}" />
+    <title>Log in Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+          <!--These are for owners-->
+          <form action="#" class="sign-in-form" method="POST">
+            <h2 class="title">Log in</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" name="username-owner" placeholder="Username" />
+            </div>
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email-owner" placeholder="Email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password-owner" placeholder="Password" />
 
-</head>
-<body>
+            </div>
+             <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+            <label>Remember me    <a href=" {{ url_for('login_page') }}" >Sign up</a></label>
+            <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+              <!--with click Kiarash can go to home page  -->
+            <button class="btn" onclick="location.href='{{ url_for('home_page') }}'" type="button" name="Signup" value="owner_signup">Log in</button>
 
-<header class="header">
-   
-   <section class="flex">
+          </form>
 
-      <a href="home.html" class="logo">Educa.</a>
+           <!--These are for tenants-->
+          <form action="#" class="sign-up-form" method="POST">
+            <h2 class="title">Log in</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" name="username-tenant" placeholder="Username" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email-tenant" placeholder="Email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password-tenant" placeholder="Password" />
+            </div>
+            <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+            <label>Remember me    <a href=" {{ url_for('login_page2') }}">Sign up</a></label>
 
-      <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
+              <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
-      <div class="icons">
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="search-btn" class="fas fa-search"></div>
-         <div id="user-btn" class="fas fa-user"></div>
-         <div id="toggle-btn" class="fas fa-sun"></div>
+            <!-- the bottun Sign up is  value="Signcbcvb up"-->
+
+               <!--with click Kiarash can go to home page  -->
+               <button class="btn" onclick="location.href='{{ url_for('home_page') }}'" type="submit" name="Signup" value="tenant_signup">Log in</button>
+            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+          </form>
+        </div>
       </div>
 
-      <div class="profile">
-         <img src="images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">shaikh anas</h3>
-         <p class="role">studen</p>
-         <a href="profile.html" class="btn">view profile</a>
-         <div class="flex-btn">
-            <a href="login.html" class="option-btn">login</a>
-            <a href="register.html" class="option-btn">register</a>
-         </div>
+    <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here ?</h3>
+            <p>
+             If you are Tenant Please Click Hear
+            </p>
+               <button type="submit"  name="tenant" class="btn transparent" id="sign-up-btn">
+             Tenant
+             </button>
+
+
+          </div>
+          <img src="static/img/log.svg" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us ?</h3>
+            <p>
+              If you are Owner Please Click Hear
+            </p>
+            <button type="submit" name="owner" class="btn transparent" id="sign-in-btn">
+             Owner
+            </button>
+          </div>
+          <img src="static/img/register.svg" class="image" alt="" />
+        </div>
       </div>
-
-   </section>
-
-</header>   
-
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">shaikh anas</h3>
-      <p class="role">studen</p>
-      <a href="profile.html" class="btn">view profile</a>
-   </div>
-
-   <nav class="navbar">
-      <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
-      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
-   </nav>
-
 </div>
 
-<section class="form-container">
 
-   <form action="" method="post" enctype="multipart/form-data">
-      <h3>login now</h3>
-      <p>your email <span>*</span></p>
-      <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
-      <p>your password <span>*</span></p>
-      <input type="password" name="pass" placeholder="enter your password" required maxlength="20" class="box">
-      <input type="submit" value="login new" name="submit" class="btn">
-   </form>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
-
-</footer>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-   
-</body>
+  </body>
 </html>

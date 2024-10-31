@@ -17,7 +17,7 @@ def start_page():
 
 @app.route('/sign_up', methods=['POST', 'GET'])
 def signup_page():
-    return render_template('signup_page.html')
+    return render_template('login.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -30,7 +30,7 @@ def login_page():
         users_data.insert_one(d)
         return redirect(url_for('login_page'))
 
-    return render_template('html.html')
+    return render_template('signup.html')
 
 
 @app.route('/login2', methods=['GET', 'POST'])
@@ -44,7 +44,7 @@ def login_page2():
         users_data.insert_one(d)
         return redirect(url_for('login_page2'))
 
-    return render_template('html2.html')
+    return render_template('signup2.html')
 
 
 @app.route('/home', methods=['GET', 'POST'])
