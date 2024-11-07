@@ -16,7 +16,7 @@
         <div class="signin-signup">
 
           <!--These are for owners-->
-          <form action="#" class="sign-in-form" method="POST">
+          <form action="/login" class="sign-in-form" method="POST">
             <h2 class="title">Log in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -33,15 +33,15 @@
 
             </div>
              <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-            <label>Remember me    <a href=" {{ url_for('login_page') }}" >Sign up</a></label>
+            <label>Remember me    <a href=" {{ url_for('signup_page') }}" >Sign up</a></label>
             <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
               <!--with click Kiarash can go to home page  -->
-            <button class="btn" onclick="location.href='{{ url_for('home_page') }}'" type="button" name="Signup" value="owner_signup">Log in</button>
+            <button class="btn" type="submit" name="login_status" value="owner_login">Log in</button>
 
           </form>
 
            <!--These are for tenants-->
-          <form action="#" class="sign-up-form" method="POST">
+          <form action="" class="sign-up-form" method="GET">
             <h2 class="title">Log in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -56,14 +56,14 @@
               <input type="password" name="password-tenant" placeholder="Password" />
             </div>
             <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-            <label>Remember me    <a href=" {{ url_for('login_page2') }}">Sign up</a></label>
+            <label>Remember me    <a href=" {{ url_for('signup_page2') }}">Sign up</a></label>
 
               <!-- ***********hands offfffff!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
             <!-- the bottun Sign up is  value="Signcbcvb up"-->
 
                <!--with click Kiarash can go to home page  -->
-               <button class="btn" onclick="location.href='{{ url_for('home_page') }}'" type="submit" name="Signup" value="tenant_signup">Log in</button>
+               <button class="btn" type="submit" name="login_status" value="tenant_login">Log in</button>
             <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
           </form>
