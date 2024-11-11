@@ -95,6 +95,8 @@ def signup_page():
     if request.method == 'POST':
 
         if ((not validate_password(request.form['password'])) or
+                (not validate_password(request.form['firstname'])) or
+                (not validate_password(request.form['lastname'])) or
                 (not validate_email(request.form['email']))
                 or (not validate_birthday(request.form['birthday']))):
             # The password or email is not in a valid format.
@@ -105,7 +107,7 @@ def signup_page():
             # This username or user has already existed, so you can't create another account again.
             return render_template('signup.html')
 
-        user = User(request.form['username'], request.form['password'], request.form['email'], request.form['birthday'],
+        user = User(request.form['username'], request.form['firstname'],request.form['lastname'],request.form['password'], request.form['email'], request.form['birthday'],
                     Role='owner')
         # This is a dictionary that is used for storing a record's attribute
         d = dict()
@@ -122,6 +124,8 @@ def signup_page():
 def signup_page2():
     if request.method == 'POST':
         if ((not validate_password(request.form['password'])) or
+                (not validate_password(request.form['firstname'])) or
+                (not validate_password(request.form['lastname'])) or
                 (not validate_email(request.form['email']))
                 or (not validate_birthday(request.form['birthday']))):
             # The password or email is not in a valid format.
@@ -132,7 +136,7 @@ def signup_page2():
             # This username or user has already existed, so you can't create another account again.
             return render_template('signup2.html')
 
-        user = User(request.form['username'], request.form['password'], request.form['email'], request.form['birthday'],
+        user = User(request.form['username'],request.form['firstname'],request.form['lastname'], request.form['password'], request.form['email'], request.form['birthday'],
                     Role='tenant')
 
         # This is a dictionary that is used for storing a record's attribute
