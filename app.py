@@ -48,7 +48,7 @@ def start_page():
 def login_page():
     # This variable is used to specify that the login is for owner or tenant.
     # The default state is for owner
-    login_stat = "owner_login"
+    login_stat = "tenant_login"
     if request.method == 'POST':
         # Get inputs for owner
         username_owner_input = request.form.get("username-owner")
@@ -155,4 +155,4 @@ db = client['Property_data']
 users_data = db['users_data']
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
