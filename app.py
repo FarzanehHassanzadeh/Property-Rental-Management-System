@@ -43,6 +43,8 @@ def start_page():
     return render_template('start.html')
 
 
+
+# ******************************************************
 # This Function is used for login page
 @app.route('/login', methods=['POST', 'GET'])
 def login_page():
@@ -105,7 +107,8 @@ def signup_page():
             # This username or user has already existed, so you can't create another account again.
             return render_template('signup.html')
 
-        user = User(request.form['username'], request.form['firstname'], request.form['lastname'], request.form['password'], request.form['email'], request.form['birthday'], Role='owner')
+        user = User(request.form['username'], request.form['firstname'], request.form['lastname'],
+                    request.form['password'], request.form['email'], request.form['birthday'], Role='owner')
         # This is a dictionary that is used for storing a record's attribute
         d = dict()
         d = user.__dict__
@@ -131,14 +134,15 @@ def signup_page2():
             # This username or user has already existed, so you can't create another account again.
             return render_template('signup2.html')
 
-        user = User(request.form['username'], request.form['firstname'], request.form['lastname'], request.form['password'], request.form['email'], request.form['birthday'], Role='tenant')
+        user = User(request.form['username'], request.form['firstname'], request.form['lastname'],
+                    request.form['password'], request.form['email'], request.form['birthday'], Role='tenant')
 
         # This is a dictionary that is used for storing a record's attribute
         d = dict()
         d = user.__dict__
         # This will insert a new record in MongoDB collection.
         users_data.insert_one(d)
-        return redirect(url_for('home_page'))
+        return redirect(url_for('hometenant.html'))
 
     return render_template('signup2.html')
 
@@ -146,6 +150,61 @@ def signup_page2():
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
+
+
+# ----------------------------------------------------------------------------------------------
+
+# *******************owner****************
+@app.route('/home', methods=['GET', 'POST'])
+def add_page():
+    return render_template('addhome_owner.html')
+
+#Route for owner add home page
+@app.route('/addhome_owner', methods=['GET', 'POST'])
+def home_owner_to_addhome():
+    return render_template('addhome_owner.html')
+@app.route('/home', methods=['GET', 'POST'])
+def Contact_page():
+    return render_template('contact.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def show_page():
+    return render_template('show_home_owner.html')
+# hometenant
+
+# **************owner**************************
+
+@app.route('/home', methods=['GET', 'POST'])
+def add_page_owner():
+    return render_template('rent_tenant.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def Contact_page_owner():
+    return render_template('contact.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def show_page_owner():
+    return render_template('show_home_tenant.html')
+# **********************tenant *****************
+
+@app.route('/home', methods=['GET', 'POST'])
+def add_page_tenant():
+    return render_template('rent_tenant.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def Contact_page_tenant():
+    return render_template('contact.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def show_page_tenant():
+    return render_template('show_home_tenant.html')
+
+# ---------------------------------------------------------------
 
 
 # Creates a database called Property_data

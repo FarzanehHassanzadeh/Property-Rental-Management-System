@@ -63,7 +63,11 @@
             <!-- the bottun Sign up is  value="Signcbcvb up"-->
 
                <!--with click Kiarash can go to home page  -->
-               <button class="btn" type="submit" name="login_status" value="tenant_login">Log in</button>
+               <form action="{{ url_for('home_page') }}" method="POST">
+
+    <button class="btn" type="submit" name="login_status" value="tenant_login">Log in</button>
+</form>
+
             <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
           </form>
