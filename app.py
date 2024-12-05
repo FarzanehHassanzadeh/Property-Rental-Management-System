@@ -142,64 +142,54 @@ def signup_page2():
         d = user.__dict__
         # This will insert a new record in MongoDB collection.
         users_data.insert_one(d)
-        return redirect(url_for('hometenant.html'))
+        return redirect(url_for('home_page_tenant'))
 
     return render_template('signup2.html')
 
+
+# ----------------------------------------------------------------------------------------------
+
+# **************owner***************************************************
+#Route for owner  home page
 
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
 
-
-# ----------------------------------------------------------------------------------------------
-
-# *******************owner****************
-@app.route('/home', methods=['GET', 'POST'])
-def add_page():
-    return render_template('addhome_owner.html')
-
 #Route for owner add home page
 @app.route('/addhome_owner', methods=['GET', 'POST'])
 def home_owner_to_addhome():
     return render_template('addhome_owner.html')
-@app.route('/home', methods=['GET', 'POST'])
-def Contact_page():
-    return render_template('contact.html')
 
-
-@app.route('/home', methods=['GET', 'POST'])
-def show_page():
-    return render_template('show_home_owner.html')
-# hometenant
-
-# **************owner**************************
-
-@app.route('/home', methods=['GET', 'POST'])
-def add_page_owner():
-    return render_template('rent_tenant.html')
-
-
+#Route for owner contact  page
 @app.route('/home', methods=['GET', 'POST'])
 def Contact_page_owner():
     return render_template('contact.html')
 
-
+#Route for owner show page
 @app.route('/home', methods=['GET', 'POST'])
 def show_page_owner():
     return render_template('show_home_tenant.html')
-# **********************tenant *****************
+# **********************tenant *****************************************
 
+#Route for owner  home page
+
+@app.route('/home', methods=['GET', 'POST'])
+def home_page_tenant():
+    return render_template('hometenant.html')
+
+
+#Route for tenant  rent_home page
 @app.route('/home', methods=['GET', 'POST'])
 def add_page_tenant():
     return render_template('rent_tenant.html')
 
-
+#Route for tenant  contact_home page
 @app.route('/home', methods=['GET', 'POST'])
 def Contact_page_tenant():
     return render_template('contact.html')
 
-
+#Route for tenant  show_home page
 @app.route('/home', methods=['GET', 'POST'])
 def show_page_tenant():
     return render_template('show_home_tenant.html')
