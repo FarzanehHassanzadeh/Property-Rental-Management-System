@@ -50,7 +50,7 @@ def start_page():
 def login_page():
     # This variable is used to specify that the login is for owner or tenant.
     # The default state is for owner
-    login_stat = "tenant_login"
+    login_stat = "owner_login"
     if request.method == 'POST':
         # Get inputs for owner
         username_owner_input = request.form.get("username-owner")
@@ -84,7 +84,7 @@ def login_page():
                                                'role': 'tenant'})
 
             if user_record:
-                return redirect(url_for('home_page'))
+                return redirect(url_for('home_page_tenant'))
             else:
                 return render_template('login.html', login_status=login_stat)
 
@@ -157,40 +157,44 @@ def home_page():
     return render_template('home.html')
 
 #Route for owner add home page
-@app.route('/addhome_owner', methods=['GET', 'POST'])
+@app.route('/home/addhome_owner', methods=['GET', 'POST'])
 def home_owner_to_addhome():
     return render_template('addhome_owner.html')
 
 #Route for owner contact  page
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home/contact', methods=['GET', 'POST'])
 def Contact_page_owner():
     return render_template('contact.html')
 
 #Route for owner show page
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home/show_home_owner', methods=['GET', 'POST'])
 def show_page_owner():
-    return render_template('show_home_tenant.html')
-# **********************tenant *****************************************
+    return render_template('show_home_owner.html')
 
-#Route for owner  home page
 
-@app.route('/home', methods=['GET', 'POST'])
+
+
+
+
+# **********************tenant ****************************************
+#Route for tenant  home page
+
+@app.route('/home2', methods=['GET', 'POST'])
 def home_page_tenant():
     return render_template('hometenant.html')
 
-
 #Route for tenant  rent_home page
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home2/rent_tenant', methods=['GET', 'POST'])
 def add_page_tenant():
     return render_template('rent_tenant.html')
 
 #Route for tenant  contact_home page
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home2/contact', methods=['GET', 'POST'])
 def Contact_page_tenant():
     return render_template('contact.html')
 
 #Route for tenant  show_home page
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home2/show_page_tenant', methods=['GET', 'POST'])
 def show_page_tenant():
     return render_template('show_home_tenant.html')
 
@@ -204,4 +208,4 @@ db = client['Property_data']
 users_data = db['users_data']
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
