@@ -225,12 +225,17 @@ def show_page_owner():
 
 @app.route('/home2', methods=['GET', 'POST'])
 def home_page_tenant():
-    return render_template('hometenant.html')
+    global global_fullname
+    property_list = []
+
+    if request.method == 'POST':
+        property_list = property_owner_data.find()
+    return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 #Route for tenant  rent_home page
 @app.route('/home2/rent_tenant', methods=['GET', 'POST'])
 def add_page_tenant():
-    return render_template('rent_tenant.html')
+    return render_template('rent_tenant.html', full_name=global_fullname)
 
 #Route for tenant  contact_home page
 @app.route('/home2/contact', methods=['GET', 'POST'])
@@ -240,7 +245,9 @@ def Contact_page_tenant():
 #Route for tenant  show_home page
 @app.route('/home2/show_page_tenant', methods=['GET', 'POST'])
 def show_page_tenant():
-    return render_template('show_home_tenant.html')
+    global global_fullname
+
+    return render_template('show_home_tenant.html', full_name=global_fullname)
 
 # ---------------------------------------------------------------
 
