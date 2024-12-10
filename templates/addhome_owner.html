@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Register House</title>
+   <title>Register Property </title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -33,8 +33,8 @@
    </div>
    <div class="profile">
       <img src="images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">John Doe</h3>
-      <p class="role">homeowner</p>
+      <h3 class="name">{{full_name}}</h3>
+      <p class="role">owner</p>
    </div>
    <nav class="navbar">
      <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>
@@ -45,19 +45,23 @@
 </div>
 
 <section class="form-container">
-   <form action="" method="post" enctype="multipart/form-data">
-      <h3>Register House</h3>
-      <p>House Name <span>*</span></p>
-      <input type="text" name="house_name" placeholder="Enter house name" required maxlength="50" class="box">
+   <form action="" method="POST" enctype="multipart/form-data">
+      <h3>Add Property</h3>
+      <p>Property Name <span>*</span></p>
+      <input type="text" name="property_name" placeholder="Enter Property name" required maxlength="50" class="box">
       <p>Location <span>*</span></p>
-      <input type="text" name="location" placeholder="Enter house location" required maxlength="100" class="box">
+      <input type="text" name="location" placeholder="Enter Property location" required maxlength="100" class="box">
       <p>Price <span>*</span></p>
-      <input type="text" name="price" placeholder="Enter house price" maxlength="20" class="box">
-      <p>House Description <span>*</span></p>
-      <textarea name="description" placeholder="Enter house description" required maxlength="500" class="box"></textarea>
-      <p>Select House Image <span>*</span></p>
+      <input type="text" name="rent_price" placeholder="Enter Property price" maxlength="20" class="box">
+
+      <p>Rent Period <span>*</span></p>
+      <input type="text" name="rent_period" placeholder="Enter Property rent period" maxlength="20" class="box">
+
+      <p>Property Description <span>*</span></p>
+      <textarea name="description" placeholder="Enter Property description" required maxlength="500" class="box"></textarea>
+      <p>Select Image <span>*</span></p>
       <input type="file" name="house_image" accept="image/*"  class="box">
-      <input type="submit" value="Register House" name="submit" class="btn">
+      <button type="submit" value="Register House" name="submit" class="btn"> Add property</button>
    </form>
 </section>
 

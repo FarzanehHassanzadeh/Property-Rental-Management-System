@@ -4,6 +4,7 @@ from user import User
 import re
 from datetime import datetime
 
+global_fullname = ''
 
 # Validation functions
 # Check the passwork if it is at least 8 characters and has capital, small letters, special characters and numbers
@@ -72,6 +73,9 @@ def login_page():
                                                'role': 'owner'})
 
             if user_record:
+                global global_fullname
+                global_fullname = user_record['firstname'] + ' ' + user_record['lastname']
+
                 return redirect(url_for('home_page'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -114,7 +118,9 @@ def signup_page():
         d = user.__dict__
         # This will insert a new record in MongoDB collection.
         users_data.insert_one(d)
-        return redirect(url_for('home_page'))
+        global global_fullname
+        global_fullname = request.form['firstname'] + ' ' + request.form['lastname']
+        return redirect(url_for('home_page', fullname=global_fullname))
 
     return render_template('signup.html')
 
@@ -142,6 +148,8 @@ def signup_page2():
         d = user.__dict__
         # This will insert a new record in MongoDB collection.
         users_data.insert_one(d)
+        global global_fullname
+        global_fullname = request.form['firstname'] + ' ' + request.form['lastname']
         return redirect(url_for('home_page_tenant'))
 
     return render_template('signup2.html')
@@ -149,17 +157,47 @@ def signup_page2():
 
 # ----------------------------------------------------------------------------------------------
 
-# **************owner***************************************************
+# **************     owner    ***************************************************
 #Route for owner  home page
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home/', methods=['GET', 'POST'])
 def home_page():
-    return render_template('home.html')
+    property_list=[]
+    if request.method == 'POST':
+        property_list = property_owner_data.find()
+    return render_template('home.html', full_name=global_fullname, property_owner_list=property_list)
 
 #Route for owner add home page
 @app.route('/home/addhome_owner', methods=['GET', 'POST'])
 def home_owner_to_addhome():
-    return render_template('addhome_owner.html')
+    global global_fullname
+    if request.method == 'POST':
+
+        # Gets the attributes of the property
+        house_name = request.form['property_name']
+        location = request.form['location']
+        rent_price = request.form['rent_price']
+        rent_period = request.form['rent_period']
+        description = request.form['description']
+
+        fullname = global_fullname
+
+        current_time = datetime.now()
+        current_date = current_time.date().isoformat()
+        current_time = current_time.time().strftime('%H:%M:%S')
+
+        property_owner_data.insert_one({'owner': fullname,
+                                        'property_name': house_name,
+                                        'location': location,
+                                        'rent_price': rent_price,
+                                        'rent_period': rent_period,
+                                        'description': description,
+                                        'date': current_date,
+                                        'time': current_time
+                                        })
+
+
+    return render_template('addhome_owner.html', full_name=global_fullname)
 
 #Route for owner contact  page
 @app.route('/home/contact', methods=['GET', 'POST'])
@@ -169,14 +207,20 @@ def Contact_page_owner():
 #Route for owner show page
 @app.route('/home/show_home_owner', methods=['GET', 'POST'])
 def show_page_owner():
-    return render_template('show_home_owner.html')
+    global global_fullname
+    property_list = []
+    property_list = property_owner_data.find({'owner': global_fullname})
+
+
+
+    return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
 
 
 
 
 
-# **********************tenant ****************************************
+# **********************   tenant ****************************************
 #Route for tenant  home page
 
 @app.route('/home2', methods=['GET', 'POST'])
@@ -206,6 +250,7 @@ db = client['Property_data']
 
 # Creates a collection called users_data
 users_data = db['users_data']
+property_owner_data = db['property_owner_data']
 
 if __name__ == '__main__':
     app.run(debug=True)
