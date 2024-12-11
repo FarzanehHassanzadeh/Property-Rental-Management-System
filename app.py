@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from user import User
 import re
 from datetime import datetime
+from bson.objectid import ObjectId
 
 global_fullname = ''
 
@@ -52,6 +53,7 @@ def login_page():
     # This variable is used to specify that the login is for owner or tenant.
     # The default state is for owner
     login_stat = "owner_login"
+    global global_fullname
     if request.method == 'POST':
         # Get inputs for owner
         username_owner_input = request.form.get("username-owner")
@@ -73,7 +75,7 @@ def login_page():
                                                'role': 'owner'})
 
             if user_record:
-                global global_fullname
+
                 global_fullname = user_record['firstname'] + ' ' + user_record['lastname']
 
                 return redirect(url_for('home_page'))
@@ -88,6 +90,8 @@ def login_page():
                                                'role': 'tenant'})
 
             if user_record:
+
+                global_fullname = user_record['firstname'] + ' ' + user_record['lastname']
                 return redirect(url_for('home_page_tenant'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -216,7 +220,11 @@ def show_page_owner():
     return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
 
+@app.route('/home/playlist')
+def playlist_page():
+    global global_fullname
 
+    return render_template('playlist.html', full_name=global_fullname)
 
 
 
@@ -248,7 +256,13 @@ def show_page_tenant():
     global global_fullname
 
     return render_template('show_home_tenant.html', full_name=global_fullname)
+@app.route('/<objectID>/home2/playlist')
+def playlist_page2(objectID):
+    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+    owner_name = current_property['owner']
 
+    global global_fullname
+    return render_template('playlist2.html', full_name=global_fullname, property=current_property)
 # ---------------------------------------------------------------
 
 

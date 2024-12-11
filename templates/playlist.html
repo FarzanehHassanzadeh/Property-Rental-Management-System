@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>video playlist</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo">Educa.</a>
+
+      <form action="" method="post" class="search-form">
+         <input type="text" name="search_box"  placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">{{ full_name }}</h3>
+         <p class="role">owner</p>
+         <a href="profile.html" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">login</a>
+            <a href="register.html" class="option-btn">register</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+      <p class="role">studen</p>
+
+   </div>
+
+   <nav class="navbar">
+      <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>
+     </a> <a href="{{ url_for('home_owner_to_addhome') }}"><i class="fas fa-plus"></i><span>Add</span>
+     </a> <a href="{{ url_for('show_page_owner') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+        <a href="{{ url_for('Contact_page_owner') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="playlist-details">
+
+   <h1 class="heading">property details</h1>
+
+   <div class="row">
+
+      <div class="column">
+         <form action="" method="post" class="save-playlist">
+            <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
+         </form>
+      </div>
+      <div class="column">
+         <div class="tutor">
+        name of owner       <h3>john deo</h3>
+        date of added       <span>21-10-2022</span>
+            </div>
+         </div>
+   
+         <div class="details">
+            <h3>complete HTML tutorial</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum minus reiciendis, error sunt veritatis exercitationem deserunt velit doloribus itaque voluptate.</p>
+            <a href="teacher_profile.html" class="inline-btn">view profile</a>
+         </div>
+      </div>
+   </div>
+
+</section>
+
+<footer class="footer">
+
+   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
+
+</footer>
+
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+   
+</body>
+</html>

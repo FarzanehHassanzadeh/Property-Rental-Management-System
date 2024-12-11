@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+   <title>video playlist</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -19,23 +19,23 @@
 
    <section class="flex">
 
-      <form action="" method="POST" class="search-form">
-         <input type="text" name="search_box" placeholder="search property..." maxlength="100">
+      <a href="home.html" class="logo">Educa.</a>
+
+      <form action="" method="post" class="search-form">
+         <input type="text" name="search_box"  placeholder="search property..." maxlength="100">
          <button type="submit" class="fas fa-search"></button>
       </form>
 
       <div class="icons">
-
          <div id="toggle-btn" class="fas fa-sun"></div>
       </div>
 
       <div class="profile">
-<!--         set the name profile-->
-         <img src="static/images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">{{ full_name }}</h3>
-         <p class="role">tenant</p>
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">shaikh anas</h3>
+         <p class="role">studen</p>
+         <a href="" class="btn">view profile</a>
 
-         </div>
       </div>
 
    </section>
@@ -49,7 +49,7 @@
    </div>
 
    <div class="profile">
-      <img src="static/images/pic-1.jpg" class="image" alt="">
+      <img src="" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
 
@@ -64,51 +64,34 @@
 
 </div>
 
-<section class="home-grid">
-</section>
+<section class="playlist-details">
 
+   <h1 class="heading">property details</h1>
 
+   <div class="row">
 
-<section class="courses">
-
-   <h1 class="heading">Properties</h1>
-
-   <div class="box-container">
-       {% for property in property_owner_list %}
-<!--    The elements-->
-      <div class="box">
+      <div class="column">
+         <form action="" method="post" class="save-playlist">
+            <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
+         </form>
+      </div>
+      <div class="column">
          <div class="tutor">
-<!--            <img src="images/pic-2.jpg" alt="">-->
-            <div class="info">
-               <h3>{{ property['property_name']}}</h3>
-               <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+        name of owner       <h3>{{ property['owner'] }}</h3>
+        date of added       <span>{{ property['date'] }}</span>
             </div>
          </div>
-         <div class="thumb">
-<!--            <img src="images/thumb-1.png" alt="">-->
-<!--            <span>10 videos</span>-->
+
+         <div class="details">
+            <h3>{{ property['property_name'] }}</h3>
+            <p>{{ property['description'] }}</p>
+            <a href="" class="inline-btn">view profile</a>
+            <a href="" class="inline-btn">Go to contract</a>
          </div>
-         <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-         <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="inline-btn">view details</a>
       </div>
-<!--The end of elements-->
-{% endfor %}
- </div>
+   </div>
+
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <footer class="footer">
 
@@ -117,7 +100,7 @@
 </footer>
 
 <!-- custom js file link  -->
-<script src="{{ url_for('static', filename='script2.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 
 </body>
