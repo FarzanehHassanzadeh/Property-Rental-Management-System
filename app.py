@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from pymongo import MongoClient
 from user import User
 import re
@@ -183,7 +183,7 @@ def home_owner_to_addhome():
         rent_price = request.form['rent_price']
         rent_period = request.form['rent_period']
         description = request.form['description']
-
+        card_number = request.form['owner_card_number']
         fullname = global_fullname
 
         current_time = datetime.now()
@@ -196,6 +196,7 @@ def home_owner_to_addhome():
                                         'rent_price': rent_price,
                                         'rent_period': rent_period,
                                         'description': description,
+                                        'owner_card_number': card_number,
                                         'date': current_date,
                                         'time': current_time
                                         })
@@ -263,9 +264,65 @@ def playlist_page2(objectID):
 
     global global_fullname
     return render_template('playlist2.html', full_name=global_fullname, property=current_property)
-# ---------------------------------------------------------------
 
 
+# ---------------------------integrated_payment----------------------
+
+# Validate card function
+def validate_card(card_number, cardholder_name, cardholder_lastname, amount_to_deduct,pasword):
+    card_info = cards_data.find_one({
+        "card_number": card_number,
+        "cardholdername": cardholder_name,
+        "cardholderlastname": cardholder_lastname,
+        "password":pasword
+    })
+
+    if card_info and card_info['balance'] >= amount_to_deduct:
+        return True, card_info['balance']
+    return False, None
+
+# Deduct balance function
+def deduct_balance(card_number, amount_to_deduct):
+    result = cards_data.update_one(
+        {"card_number": card_number},
+        {"$inc": {"balance": -amount_to_deduct}}
+    )
+    return result.modified_count > 0
+
+def add_balance(card_number, amount_to_add):
+    result = cards_data.update_one(
+        {"card_number": card_number},
+        {"$inc": {"balance": amount_to_add}}
+    )
+    return result.modified_count > 0
+
+@app.route('/<property_name>/home2/playlist/integrated_payment', methods=['GET', 'POST'])
+def integrated_payment(property_name):
+    if request.method == 'POST':
+        # Get input data from form
+        card_number = request.form['card_number']
+        cardholder_name = request.form['cardholdername']
+        cardholder_lastname = request.form['cardholderlastname']
+        amount_to_deduct = float(request.form['amount'])
+        # amount_to_add = float(request.form['amount'])
+
+        owner_record = users_data.find_one({'property_name': property_name})
+        owner_card_number = owner_record['card_number']
+
+        is_valid, current_balance = validate_card(card_number, cardholder_name, cardholder_lastname, amount_to_deduct)
+
+        if is_valid:
+            if deduct_balance(card_number, amount_to_deduct) and add_balance(card_number, amount_to_deduct):
+                flash(f"The balance was successfully deducted. Current balance: {current_balance - amount_to_deduct}", "success")
+            else:
+                flash("Error in deducting balance. Please try again.", "error")
+        else:
+            flash("Incorrect card information or insufficient balance.", "error")
+
+    return render_template('integrated_payment.html')
+
+
+# ---------------------------------------------------------
 # Creates a database called Property_data
 db = client['Property_data']
 
@@ -273,5 +330,8 @@ db = client['Property_data']
 users_data = db['users_data']
 property_owner_data = db['property_owner_data']
 
+
+# Creates a collection called card_data
+cards_data = db['Cards_data']
 if __name__ == '__main__':
     app.run(debug=True)

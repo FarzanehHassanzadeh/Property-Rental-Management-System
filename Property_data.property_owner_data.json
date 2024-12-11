@@ -1,130 +1,142 @@
-[{
-  "_id": {
-    "$oid": "6758a2621cf449170b5572f6"
+[
+  {
+    "_id": {
+      "$oid": "6758a2621cf449170b5572f6"
+    },
+    "owner": "Emma Johnson",
+    "property_name": "Johnson Family House",
+    "location": "123 Maple Street, Springfield, USA",
+    "rent_price": "$1500",
+    "rent_period": "Monthly",
+    "description": "Spacious 3-bedroom house with a large backyard, modern kitchen, and two bathrooms. Located in a quiet neighborhood close to schools and parks.",
+    "date": "2024-12-10",
+    "time": "23:49:46",
+    "card_number": "1234567890123456"
   },
-  "owner": "Emma Johnson",
-  "property_name": "Johnson Family House",
-  "location": "123 Maple Street, Springfield, USA",
-  "rent_price": "$1500",
-  "rent_period": "Monthly",
-  "description": "Spacious 3-bedroom house with a large backyard, modern kitchen, and two bathrooms. Located in a quiet neighborhood close to schools and parks.",
-  "date": "2024-12-10",
-  "time": "23:49:46"
-},
-{
-  "_id": {
-    "$oid": "6758a2a11cf449170b5572f7"
+  {
+    "_id": {
+      "$oid": "6758a2a11cf449170b5572f7"
+    },
+    "owner": "Emma Johnson",
+    "property_name": "Johnson's Beach House",
+    "location": "456 Ocean Drive, Miami, USA",
+    "rent_price": "$2500",
+    "rent_period": "Weekly",
+    "description": "Beautiful beach house with ocean views, private access to the beach, and fully furnished with modern amenities.",
+    "date": "2024-12-10",
+    "time": "23:50:49",
+    "card_number": "1234567890123457"
   },
-  "owner": "Emma Johnson",
-  "property_name": "Johnson's Beach House",
-  "location": "456 Ocean Drive, Miami, USA",
-  "rent_price": "$2500",
-  "rent_period": "Weekly",
-  "description": "Beautiful beach house with ocean views, private access to the beach, and fully furnished with modern amenities.",
-  "date": "2024-12-10",
-  "time": "23:50:49"
-},
-{
-  "_id": {
-    "$oid": "6758a3411cf449170b5572f8"
+  {
+    "_id": {
+      "$oid": "6758a3411cf449170b5572f8"
+    },
+    "owner": "Liam Smith",
+    "property_name": "Smith's Studio Apartment",
+    "location": "456 Elm Street, Springfield, USA",
+    "rent_price": "$800",
+    "rent_period": "Monthly",
+    "description": "Cozy studio apartment located in the heart of downtown, featuring a small kitchenette, bathroom, and close proximity to public transportation.",
+    "date": "2024-12-10",
+    "time": "23:53:29",
+    "card_number": "1234567890123458"
   },
-  "owner": "Liam Smith",
-  "property_name": "Smith's Studio Apartment",
-  "location": "456 Elm Street, Springfield, USA",
-  "rent_price": "$800",
-  "rent_period": "Monthly",
-  "description": "Cozy studio apartment located in the heart of downtown, featuring a small kitchenette, bathroom, and close proximity to public transportation.",
-  "date": "2024-12-10",
-  "time": "23:53:29"
-},
-{
-  "_id": {
-    "$oid": "6758a3cd1cf449170b5572f9"
+  {
+    "_id": {
+      "$oid": "6758a3cd1cf449170b5572f9"
+    },
+    "owner": "Liam Smith",
+    "property_name": "Smith's Country Cottage",
+    "location": "789 Country Road, Greenfield, USA",
+    "rent_price": "$1200",
+    "rent_period": "Monthly",
+    "description": "Charming country cottage with two bedrooms, a spacious garden, and a fireplace. Perfect for those seeking a peaceful retreat.",
+    "date": "2024-12-10",
+    "time": "23:55:49",
+    "card_number": "1234567890123459"
   },
-  "owner": "Liam Smith",
-  "property_name": "Smith's Country Cottage",
-  "location": "789 Country Road, Greenfield, USA",
-  "rent_price": "$1200",
-  "rent_period": "Monthly",
-  "description": "Charming country cottage with two bedrooms, a spacious garden, and a fireplace. Perfect for those seeking a peaceful retreat.",
-  "date": "2024-12-10",
-  "time": "23:55:49"
-},
-{
-  "_id": {
-    "$oid": "6758a42d1cf449170b5572fa"
+  {
+    "_id": {
+      "$oid": "6758a42d1cf449170b5572fa"
+    },
+    "owner": "Olivia Brown",
+    "property_name": "Brown's Retail Store",
+    "location": "789 Pine Street, Springfield, USA",
+    "rent_price": "$2000",
+    "rent_period": "Monthly",
+    "description": "Prime location retail store with high foot traffic, large display windows, and ample storage space in the back.",
+    "date": "2024-12-10",
+    "time": "23:57:25",
+    "card_number": "1234567890123460"
   },
-  "owner": "Olivia Brown",
-  "property_name": "Brown's Retail Store",
-  "location": "789 Pine Street, Springfield, USA",
-  "rent_price": "$2000",
-  "rent_period": "Monthly",
-  "description": "Prime location retail store with high foot traffic, large display windows, and ample storage space in the back.",
-  "date": "2024-12-10",
-  "time": "23:57:25"
-},
-{
-  "_id": {
-    "$oid": "6758a4491cf449170b5572fb"
+  {
+    "_id": {
+      "$oid": "6758a4491cf449170b5572fb"
+    },
+    "owner": "Olivia Brown",
+    "property_name": "Brown's Office Building",
+    "location": "101 Business Avenue, Springfield, USA",
+    "rent_price": "$4000",
+    "rent_period": "Monthly",
+    "description": "Modern office building with multiple floors, conference rooms, and parking facilities. Ideal for corporate offices.",
+    "date": "2024-12-10",
+    "time": "23:57:53",
+    "card_number": "1234567890123461"
   },
-  "owner": "Olivia Brown",
-  "property_name": "Brown's Office Building",
-  "location": "101 Business Avenue, Springfield, USA",
-  "rent_price": "$4000",
-  "rent_period": "Monthly",
-  "description": "Modern office building with multiple floors, conference rooms, and parking facilities. Ideal for corporate offices.",
-  "date": "2024-12-10",
-  "time": "23:57:53"
-},
-{
-  "_id": {
-    "$oid": "6758a4b41cf449170b5572fc"
+  {
+    "_id": {
+      "$oid": "6758a4b41cf449170b5572fc"
+    },
+    "owner": "Noah Davis",
+    "property_name": "Noah Davis",
+    "location": "101 Oak Street, Springfield, USA",
+    "rent_price": "$1200",
+    "rent_period": "Monthly",
+    "description": "Modern 2-bedroom condo with great city views, a fully equipped kitchen, and secure building access. Located near shopping and dining options.",
+    "date": "2024-12-10",
+    "time": "23:59:40",
+    "card_number": "1234567890123462"
   },
-  "owner": "Noah Davis",
-  "property_name": "Noah Davis",
-  "location": "101 Oak Street, Springfield, USA",
-  "rent_price": "$1200",
-  "rent_period": "Monthly",
-  "description": "Modern 2-bedroom condo with great city views, a fully equipped kitchen, and secure building access. Located near shopping and dining options.",
-  "date": "2024-12-10",
-  "time": "23:59:40"
-},
-{
-  "_id": {
-    "$oid": "6758a4cf1cf449170b5572fd"
+  {
+    "_id": {
+      "$oid": "6758a4cf1cf449170b5572fd"
+    },
+    "owner": "Noah Davis",
+    "property_name": "Davis' Lakeside Cabin",
+    "location": "202 Lakefront Drive, Blue Lake, USA",
+    "rent_price": "$1500",
+    "rent_period": "Weekly",
+    "description": "Rustic lakeside cabin with three bedrooms, a large deck overlooking the lake, and a private dock for boating and fishing.",
+    "date": "2024-12-11",
+    "time": "00:00:07",
+    "card_number": "1234567890123463"
   },
-  "owner": "Noah Davis",
-  "property_name": "Davis' Lakeside Cabin",
-  "location": "202 Lakefront Drive, Blue Lake, USA",
-  "rent_price": "$1500",
-  "rent_period": "Weekly",
-  "description": "Rustic lakeside cabin with three bedrooms, a large deck overlooking the lake, and a private dock for boating and fishing.",
-  "date": "2024-12-11",
-  "time": "00:00:07"
-},
-{
-  "_id": {
-    "$oid": "6758a5371cf449170b5572fe"
+  {
+    "_id": {
+      "$oid": "6758a5371cf449170b5572fe"
+    },
+    "owner": "Ava Miller",
+    "property_name": "Miller's Office Space",
+    "location": "202 Birch Street, Springfield, USA",
+    "rent_price": "$2500",
+    "rent_period": "Monthly",
+    "description": "Spacious office space suitable for small businesses, with multiple private offices, a reception area, and conference room. Located in a commercial district.",
+    "date": "2024-12-11",
+    "time": "00:01:51",
+    "card_number": "1234567890123464"
   },
-  "owner": "Ava Miller",
-  "property_name": "Miller's Office Space",
-  "location": "202 Birch Street, Springfield, USA",
-  "rent_price": "$2500",
-  "rent_period": "Monthly",
-  "description": "Spacious office space suitable for small businesses, with multiple private offices, a reception area, and conference room. Located in a commercial district.",
-  "date": "2024-12-11",
-  "time": "00:01:51"
-},
-{
-  "_id": {
-    "$oid": "6758a55f1cf449170b5572ff"
-  },
-  "owner": "Ava Miller",
-  "property_name": "Miller's Urban Loft",
-  "location": "303 City Center, Springfield, USA",
-  "rent_price": "$1800",
-  "rent_period": "Monthly",
-  "description": "description: Trendy urban loft with high ceilings, large windows, and open floor plan. Features a modern kitchen and stylish furnishings.",
-  "date": "2024-12-11",
-  "time": "00:02:31"
-}]
+  {
+    "_id": {
+      "$oid": "6758a55f1cf449170b5572ff"
+    },
+    "owner": "Ava Miller",
+    "property_name": "Miller's Urban Loft",
+    "location": "303 City Center, Springfield, USA",
+    "rent_price": "$1800",
+    "rent_period": "Monthly",
+    "description": "Trendy urban loft with high ceilings, large windows, and open floor plan. Features a modern kitchen and stylish furnishings.",
+    "date": "2024-12-11",
+    "time": "00:02:31",
+    "card_number": "1234567890123465"
+  }
+]

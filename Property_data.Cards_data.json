@@ -1,0 +1,90 @@
+[{
+  "_id": "6758a2621cf449170b5572f6",
+  "cardholdername": "Emma",
+  "cardholderlastname": "Johnson",
+  "card_number": "1234567890123456",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "639281"
+},
+{
+  "_id": "6758a2a11cf449170b5572f7",
+  "cardholdername": "Emma",
+  "cardholderlastname": "Johnson",
+  "card_number": "1234567890123457",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "947362"
+},
+{
+  "_id": "6758a3411cf449170b5572f8",
+  "cardholdername": "Liam",
+  "cardholderlastname": "Smith",
+  "card_number": "1234567890123458",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "582103"
+},
+{
+  "_id": "6758a3cd1cf449170b5572f9",
+  "cardholdername": "Liam",
+  "cardholderlastname": "Smith",
+  "card_number": "1234567890123459",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "730194"
+},
+{
+  "_id": "6758a42d1cf449170b5572fa",
+  "cardholdername": "Olivia",
+  "cardholderlastname": "Brown",
+  "card_number": "1234567890123460",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "158274"
+},
+{
+  "_id": "6758a4491cf449170b5572fb",
+  "cardholdername": "Olivia",
+  "cardholderlastname": "Brown",
+  "card_number": "1234567890123461",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "493621"
+},
+{
+  "_id": "6758a4b41cf449170b5572fc",
+  "cardholdername": "Noah",
+  "cardholderlastname": "Davis",
+  "card_number": "1234567890123462",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "867502"
+},
+{
+  "_id": "6758a4cf1cf449170b5572fd",
+  "cardholdername": "Noah",
+  "cardholderlastname": "Davis",
+  "card_number": "1234567890123463",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "924685"
+},
+{
+  "_id": "6758a5371cf449170b5572fe",
+  "cardholdername": "Ava",
+  "cardholderlastname": "Miller",
+  "card_number": "1234567890123464",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "374561"
+},
+{
+  "_id": "6758a55f1cf449170b5572ff",
+  "cardholdername": "Ava",
+  "cardholderlastname": "Miller",
+  "card_number": "1234567890123465",
+  "cvv": "1234",
+  "balance": "43900",
+  "password": "640218"
+}]
