@@ -244,7 +244,7 @@
         <div class="flexbox">
             <div class="inputBox">
                 <span>Expiration Month</span>
-                <select name="exp_month" class="month-input" required> <!-- Add name and required -->
+                <select name="exp_month" class="month-input" > <!-- Add name and required -->
                     <option value="" selected disabled>Month</option>
                     <option value="01">01</option>
                     <option value="02">02</option>
@@ -262,7 +262,7 @@
             </div>
             <div class="inputBox">
                 <span>Expiration Year</span>
-                <select name="exp_year" class="year-input" required> <!-- Add name and required -->
+                <select name="exp_year" class="year-input" > <!-- Add name and required -->
                     <option value="" selected disabled>Year</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
@@ -278,7 +278,7 @@
             </div>
             <div class="inputBox">
                 <span>CVV</span>
-                <input type="text" name="cvv" maxlength="4" class="cvv-input" required> <!-- Add name and required -->
+                <input type="text" name="cvv" maxlength="4" class="cvv-input"> <!-- Add name and required -->
             </div>
 
 
@@ -295,8 +295,8 @@
 </body>
 </html>
 
-
-<script>let timeLeft = 10; // تنظیم زمان به 120 ثانیه (دو دقیقه)
+<!-- The time to pay-->
+<script>let timeLeft = 120; // تنظیم زمان به 120 ثانیه (دو دقیقه)
 const timerElement = document.getElementById('timer');
 
 let timerInterval = setInterval(() => {
@@ -308,7 +308,7 @@ let timerInterval = setInterval(() => {
         clearInterval(timerInterval);
         localStorage.removeItem('timeLeft'); // پاک‌سازی زمان از localStorage
         // انتقال خودکار به index.html وقتی زمان به پایان برسد
-        window.location.href = "index.html";
+        window.location.href = "{{ url_for('home_page_tenant') }}";
     }
 }, 1000); // به‌روزرسانی هر ثانیه
 
@@ -371,7 +371,10 @@ window.addEventListener('load', () => {
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
                 localStorage.removeItem('timeLeft'); // Clear from storage when time is up
-                window.location.href = "home.html"; } }, 1000);
+                window.location.href = "{{ url_for('home_page_tenant') }}";
+            }
+            },
+            1000);
 
 
     }

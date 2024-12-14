@@ -304,6 +304,7 @@ def integrated_payment(property_name):
         cardholder_name = request.form['cardholdername']
         cardholder_lastname = request.form['cardholderlastname']
         amount_to_deduct = float(request.form['amount'])
+        
         # amount_to_add = float(request.form['amount'])
 
         owner_record = users_data.find_one({'property_name': property_name})
@@ -312,7 +313,7 @@ def integrated_payment(property_name):
         is_valid, current_balance = validate_card(card_number, cardholder_name, cardholder_lastname, amount_to_deduct)
 
         if is_valid:
-            if deduct_balance(card_number, amount_to_deduct) and add_balance(card_number, amount_to_deduct):
+            if deduct_balance(card_number, amount_to_deduct) and add_balance(owner_card_number, amount_to_deduct):
                 flash(f"The balance was successfully deducted. Current balance: {current_balance - amount_to_deduct}", "success")
             else:
                 flash("Error in deducting balance. Please try again.", "error")
