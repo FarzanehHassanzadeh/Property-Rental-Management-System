@@ -40,6 +40,7 @@ db = client['Property_data']
 # Create collections
 users_data = db['users_data']
 property_owner_data = db['property_owner_data']
+property_tenant_data = db['property_tenant_data']
 cards_data = db['Cards_data']
 
 # This function is used for the start page
@@ -145,7 +146,14 @@ def signup_page2():
 def home_page():
     property_list = []
     if request.method == 'POST':
-        property_list = property_owner_data.find()
+        search_property_name = request.form['search_box']
+        if search_property_name == '':
+             property_list = property_owner_data.find()
+        else:
+
+             property_list = property_owner_data.find({'property_name':{'$regex': search_property_name,
+                                                                        '$options': 'i'}}) # '$options': 'i' is for no being case-sensitive
+
     return render_template('home.html', full_name=global_fullname, property_owner_list=property_list)
 
 # Route for owner add home page
@@ -186,12 +194,21 @@ def contact_page_owner():
 # Route for owner show page
 @app.route('/home/show_home_owner', methods=['GET', 'POST'])
 def show_page_owner():
-    property_list = property_owner_data.find({'owner': global_fullname})
+    search_property_name = ''
+    if request.method == 'POST':
+       search_property_name = request.form['search_box']
+    if search_property_name == '':
+         property_list = property_owner_data.find({'owner': global_fullname})
+    else:
+         property_list = property_owner_data.find({'property_name': {'$regex': search_property_name,
+                                                                    '$options': 'i'}, 'owner': global_fullname})  # '$options': 'i' is for no being case-sensitive
     return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
-@app.route('/home/playlist')
-def playlist_page():
-    return render_template('playlist.html', full_name=global_fullname)
+@app.route('/<objectID>/home/playlist')
+def playlist_page(objectID):
+    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+
+    return render_template('playlist.html', full_name=global_fullname,property=current_property)
 
 # **********************   Tenant ****************************************
 # Route for tenant home page
@@ -199,12 +216,18 @@ def playlist_page():
 def home_page_tenant():
     property_list = []
     if request.method == 'POST':
-        property_list = property_owner_data.find()
+        search_property_name = request.form['search_box']
+        if search_property_name == '':
+            property_list = property_owner_data.find()
+        else:
+
+            property_list = property_owner_data.find({'property_name': {'$regex': search_property_name,
+                                                                        '$options': 'i'}})  # '$options': 'i' is for no being case-sensitive
     return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 # Route for tenant rent home page
 @app.route('/home2/rent_tenant', methods=['GET', 'POST'])
-def add_page_tenant():
+def rent_page_tenant():
     return render_template('rent_tenant.html', full_name=global_fullname)
 
 # Route for tenant contact page
