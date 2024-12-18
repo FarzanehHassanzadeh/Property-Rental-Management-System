@@ -8,6 +8,9 @@ import secrets  # Import secrets module for generating a secure secret key
 
 global_fullname = ''
 a=''
+global_objectID_property_owner = ''
+global_objectID_property_tenant = ''
+
 # Validation functions
 # Check the password if it is at least 8 characters and has capital, small letters, special characters and numbers
 def validate_password(password):
@@ -181,7 +184,8 @@ def home_owner_to_addhome():
             'description': description,
             'owner_card_number': card_number,
             'date': current_date,
-            'time': current_time
+            'time': current_time,
+            'rent_status' : 'Nothing'
         })
 
     return render_template('addhome_owner.html', full_name=global_fullname)
@@ -218,16 +222,19 @@ def home_page_tenant():
     if request.method == 'POST':
         search_property_name = request.form['search_box']
         if search_property_name == '':
-            property_list = property_owner_data.find()
+            property_list = property_owner_data.find({'tenant': 'Nobody'})
         else:
 
-            property_list = property_owner_data.find({'property_name': {'$regex': search_property_name,
-                                                                        '$options': 'i'}})  # '$options': 'i' is for no being case-sensitive
+            property_list = property_owner_data.find({
+                                                      'property_name': {'$regex': search_property_name,'$options': 'i'},
+                                                      'tenant': 'Nobody'
+                                                      })  # '$options': 'i' is for no being case-sensitive
     return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 # Route for tenant rent home page
 @app.route('/home2/rent_tenant', methods=['GET', 'POST'])
 def rent_page_tenant():
+
     return render_template('rent_tenant.html', full_name=global_fullname)
 
 # Route for tenant contact page
@@ -238,20 +245,47 @@ def contact_page_tenant():
 # Route for tenant show home page
 @app.route('/home2/show_page_tenant', methods=['GET', 'POST'])
 def show_page_tenant():
-    return render_template('show_home_tenant.html', full_name=global_fullname)
+
+    property_list = []
+
+    if request.method == 'POST':
+        search_property_name = request.form['search_box']
+        if search_property_name == '':
+              property_list = property_owner_data.find({'tenant': global_fullname})
+        else:
+             property_list = property_owner_data.find({
+                                                       'property_name': {'$regex': search_property_name,'$options': 'i'},
+                                                       'tenant': global_fullname
+                                                       })
+    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 @app.route('/<objectID>/home2/playlist')
 def playlist_page2(objectID):
+    global global_objectID_property_owner
+
+    global_objectID_property_owner = objectID
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
     return render_template('playlist2.html', full_name=global_fullname, property=current_property)
 
 
 @app.route('/transfer_funds', methods=['POST'])
 def transfer_funds():
+    global global_objectID_property_owner, global_fullname
+
     new_balance = None
-    from_card_number = request.form.get('from_card_number')  # using get to avoid KeyError
-    from_cardholder_name = request.form.get('from_cardholdername')
-    to_card_number = request.form.get('to_card_number')
+
+    current_property = property_owner_data.find_one({'_id': ObjectId(global_objectID_property_owner)})
+
+    owner_name = current_property['owner']
+    firstname, lastname = global_fullname.split()
+    owner_firstname, owner_lastname = owner_name.split()
+
+    to_card_data = cards_data.find_one({'cardholdername': owner_firstname})
+
+    # using get to avoid KeyError
+    from_card_number = request.form.get('from_card_number')
+    from_cardholder_name = firstname
+    to_card_number = to_card_data['card_number']
 
     # Check if all fields were filled in the form
     if not from_card_number or not from_cardholder_name or not to_card_number:
@@ -259,7 +293,8 @@ def transfer_funds():
         return render_template('integrated_payment.html', new_balance=new_balance)
 
     try:
-        amount_to_transfer = float(request.form.get('amount', 0))  # using get with a default value
+        # amount_to_transfer = float(request.form.get('amount', 0)) # using get with a default value
+        amount_to_transfer =float((current_property['rent_price']).replace('$', ''))
     except ValueError:
         flash("Invalid amount. Please enter a valid number.", "error")
         return render_template('integrated_payment.html', new_balance=new_balance)
@@ -294,11 +329,31 @@ def transfer_funds():
                 )
 
                 new_balance = from_balance - amount_to_transfer
+                property_name = current_property['property_name']
+                property_rent_price = current_property['rent_price']
+                property_rent_period = current_property['rent_period']
+
+
+                current_time = datetime.now()
+                current_date = current_time.date().isoformat()
+                current_time = current_time.time().strftime('%H:%M:%S')
+
+                property_tenant_data.insert_one({'tenant': global_fullname,
+                                                 'property_name': property_name,
+                                                 'rent_price': property_rent_price,
+                                                 'rent_period': property_rent_period,
+                                                 'date': current_date,
+                                                 'time': current_time})
+
+                property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)},
+                                                   {'$set': {'tenant': global_fullname,
+                                                                     'date': current_date,
+                                                                      'time': current_time}})
+
                 flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
 
                 # Redirect to playlist2 after a successful transfer
-                return redirect(url_for('playlist_page2',
-                                        objectID=to_card_info['_id']))  # Assumes you want to redirect to playlist2
+                return redirect(url_for('home_page_tenant'))  # Assumes you want to redirect to playlist2
 
             else:
                 flash("Insufficient funds in the source account.", "error")
@@ -308,5 +363,6 @@ def transfer_funds():
         flash("Cardholder name or card number is incorrect for one or both accounts.", "error")
 
     return render_template('integrated_payment.html', new_balance=new_balance)
+
 if __name__ == '__main__':
     app.run(debug=True)

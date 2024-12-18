@@ -20,7 +20,7 @@
    <section class="flex">
 
       <form action="" method="POST" class="search-form">
-         <input type="text" name="search_box" required placeholder="search property..." maxlength="100">
+         <input type="text" name="search_box" placeholder="search property..." maxlength="100">
          <button type="submit" class="fas fa-search"></button>
       </form>
 
@@ -57,8 +57,8 @@
 
    <nav class="navbar">
      <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home </span>
-     </a> <a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
-        <a href="{{ url_for('rent_page_tenant') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+     </a><a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+        <a href=""><i class="fas fa-headset"></i><span>Contact Us</span></a>
    </nav>
 
 </div>
@@ -73,44 +73,31 @@
    <h1 class="heading">Properties</h1>
 
    <div class="box-container">
+       {% for property in property_owner_list %}
 <!--    The elements-->
       <div class="box">
          <div class="tutor">
 <!--            <img src="images/pic-2.jpg" alt="">-->
             <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
+               <h3>{{ property['property_name']}}</h3>
+               <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
             </div>
          </div>
          <div class="thumb">
 <!--            <img src="images/thumb-1.png" alt="">-->
 <!--            <span>10 videos</span>-->
          </div>
-         <h3 class="title">complete HTML tutorial</h3>
-         <a href="playlist.html" class="inline-btn">view details</a>
+         <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
+         <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="inline-btn">view details</a>
       </div>
 <!--The end of elements-->
-
+{% endfor %}
  </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="footer">
 
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
+   &copy; copyright @ 2022 by <span>Property Rental Management</span> | all rights reserved!
 
 </footer>
 

@@ -19,12 +19,7 @@
 
    <section class="flex">
 
-      <a href="home.html" class="logo">Educa.</a>
-
-      <form action="" method="post" class="search-form">
-         <input type="text" name="search_box"  placeholder="search property..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
+      <a href="home.html" class="logo">Property Rental Management</a>
 
       <div class="icons">
          <div id="toggle-btn" class="fas fa-sun"></div>
@@ -59,7 +54,7 @@
      <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home </span>
 
      </a> <a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
-        <a href="{{ url_for('add_page_tenant') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+        <a href="{{ url_for('rent_page_tenant') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
    </nav>
 
 </div>
@@ -86,8 +81,8 @@
             <h3>{{ property['property_name'] }}</h3>
             <p>{{ property['description'] }}</p>
             <a href="" class="inline-btn">view profile</a>
-          <form action="{{ url_for('transfer_funds') }}" method="post">
-    <button type="submit" class="inline-btn">Go to contract</button>
+          <form action="{{ url_for('transfer_funds', objectID=property['_id']) }}" method="post">
+    <button type="submit" class="inline-btn">Pay rent</button>
 </form>
          </div>
       </div>
@@ -97,7 +92,7 @@
 
 <footer class="footer">
 
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
+   &copy; copyright @ 2022 by <span>Property Rental Management</span> | all rights reserved!
 
 </footer>
 
