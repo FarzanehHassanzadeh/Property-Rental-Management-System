@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+/*noinspection ALL*/
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0 10px;
+    background-image: url('/static/images/25.png'); /* استفاده از background-image */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 90%; /* کوچک کردن اندازه پس‌زمینه */
+}
+
+.wrapper {
+    margin-left: -370px; /* حرکت به سمت چپ */
+    width: 400px;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    background-color: rgba(173, 216, 230, 0.5); /* رنگ آبی بی‌حال */
+    border: 1px solid rgba(173, 216, 230, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #0b0c0c;
+}
+
+.input-field {
+    position: relative;
+    border-bottom: 2px solid #0b0c0c;
+    margin: 15px 0;
+}
+
+.input-field label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #0b0c0c;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.15s ease;
+}
+
+.input-field input,
+textarea.contact-inputs {
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #0b0c0c;
+    padding: 10px; /* اضافه کردن پدینگ برای تکست اریا */
+}
+
+textarea.contact-inputs {
+    height: auto; /* تنظیم ارتفاع متن داخل textarea */
+}
+
+.input-field input:focus ~ label,
+.input-field input:valid ~ label {
+    font-size: 0.8rem;
+    top: 10px;
+    transform: translateY(-120%);
+}
+
+.forget {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 25px 0 35px 0;
+    color: #4eccd0;
+}
+
+.inline-btn {
+    background: #4eccd0;
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    transition: 0.3s ease;
+}
+
+.inline-btn:hover {
+    color: #4eccd0;
+    border-color: #4eccd0;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.box {
+    background: pink; /* تغییر رنگ پس‌زمینه باکس‌ها به صورتی */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(9,57,73); /* رنگ آبی بی‌حال */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #0b0c0c;
+    width: 200px;
+}
+
+.box a {
+    color: #0b0c0c;
+    text-decoration: none;
+}
+
+.box a:hover {
+    text-decoration: underline;
+}
