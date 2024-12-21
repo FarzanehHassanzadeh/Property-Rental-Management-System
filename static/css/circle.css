@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* تغییر جهت از ردیف به ستون برای قرار دادن ناوبری در بالا */
+    justify-content: flex-start; /* تنظیم محتوا به سمت بالا */
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 50px; /* کاهش فاصله از بالای صفحه */
+
+     background-image: url('/static/images/999.png'); /* استفاده از background-image */
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    background-size: 110%;
+}
+
+.navigation {
+    position: relative;
+    width: 500px; /* افزایش عرض نوار ناوبری */
+    height: 70px;
+    background-color: rgba(63, 73, 76, 0.5); /* رنگ آبی بی‌حال */
+    border: 1px solid rgba(173, 216, 230, 0.6);
+
+  backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 20px; /* فاصله از محتوای اصلی */
+}
+
+.navigation ul {
+    display: flex;
+    width: 450px; /* افزایش عرض لیست آیتم‌ها */
+}
+
+.navigation ul li {
+    position: relative;
+    width: 80px;  /* افزایش عرض هر آیتم لیست */
+    height: 70px;
+    list-style: none;
+    z-index: 1;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+}
+
+.navigation ul li a .icon {
+    line-height: 75px;
+    font-size: 1.5em;
+    color: #fff;
+    transition: .5s;
+}
+
+.navigation ul li.active a .icon {
+    transform: translateY(-32px);
+}
+
+.navigation ul li a .text {
+    position: absolute;
+    color: #fff;
+    font-weight: 400;
+    font-size: .75em;
+    letter-spacing: .05em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .5s;
+}
+
+.navigation ul li.active a .text {
+    opacity: 1;
+    transform: translateY(10px);
+}
+
+.navigation ul li a .circle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    border: 1.8px solid #fff;
+    transform: translateY(-37px) scale(0);
+}
+
+.navigation ul li.active a .circle {
+    transition: .5s;
+    transition-delay: .5s;
+    transform: translateY(-37px) scale(1);
+}
+
+.indicator {
+    position: absolute;
+    top: -50%;
+    width: 80px;  /* افزایش عرض نشانگر */
+    height: 70px;
+background-color: rgba(13, 15, 18, 0.5); /* رنگ آبی تیره */
+border: 1px solid rgba(0, 76, 153, 0.6);
+
+
+
+   backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+
+.indicator::before,
+.indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+}
+
+.indicator::before {
+    left: -22px;
+    border-top-right-radius: 20px;
+   backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.indicator::after {
+    right: -22px;
+    border-top-left-radius: 20px;
+
+   backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.navigation ul li:nth-child(1).active ~ .indicator {
+    transform: translateX(calc(80px * 0)); /* تغییر به 80px */
+}
+
+.navigation ul li:nth-child(2).active ~ .indicator {
+    transform: translateX(calc(80px * 1));
+}
+
+.navigation ul li:nth-child(3).active ~ .indicator {
+    transform: translateX(calc(80px * 2));
+}
+
+.navigation ul li:nth-child(4).active ~ .indicator {
+    transform: translateX(calc(80px * 3));
+}
+
+.navigation ul li:nth-child(5).active ~ .indicator {
+    transform: translateX(calc(80px * 4));
+}
