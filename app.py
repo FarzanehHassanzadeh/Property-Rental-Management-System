@@ -120,7 +120,7 @@ def signup_page():
     return render_template('signup.html')
 
 # This is for signup page for somebody wants to signup as a tenant
-@app.route('/signup2', methods=['POST', 'GET'])
+@app.route('/signup3', methods=['POST', 'GET'])
 def signup_page2():
     if request.method == 'POST':
         if (not validate_password(request.form['password']) or
@@ -145,7 +145,7 @@ def signup_page2():
 # ----------------------------------------------------------------------------------------------
 # **************     Owner    ***************************************************
 # Route for owner home page
-@app.route('/home/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home_page():
     property_list = []
     if request.method == 'POST':
