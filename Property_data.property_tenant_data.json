@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "676283a357762a4b43bfae49"
+  },
+  "tenant": "Emily  Allen",
+  "property_name": "Johnson Family House",
+  "rent_price": "$1500",
+  "rent_period": "Monthly",
+  "date": "2024-12-18",
+  "time": "11:41:15"
+},
+{
+  "_id": {
+    "$oid": "6762857df3e484037bbfb8e1"
+  },
+  "tenant": "Emily  Allen",
+  "property_name": "Johnson Family House",
+  "rent_price": "$1500",
+  "rent_period": "Monthly",
+  "date": "2024-12-18",
+  "time": "11:49:09"
+},
+{
+  "_id": {
+    "$oid": "676549d58c0bd6bda7ba250f"
+  },
+  "tenant": "Emily  Allen",
+  "property_name": "Johnson's Beach House",
+  "rent_price": "$2500",
+  "rent_period": "Weekly",
+  "date": "2024-12-20",
+  "time": "14:11:25"
+},
+{
+  "_id": {
+    "$oid": "67654e028c0bd6bda7ba2510"
+  },
+  "tenant": "Emily  Allen",
+  "property_name": "Smith's Studio Apartment",
+  "rent_price": "$800",
+  "rent_period": "Monthly",
+  "date": "2024-12-20",
+  "time": "14:29:14"
+},
+{
+  "_id": {
+    "$oid": "67655ff98c0bd6bda7ba2511"
+  },
+  "tenant": "Emily  Allen",
+  "property_name": "Smith's Country Cottage",
+  "rent_price": "$1200",
+  "rent_period": "Monthly",
+  "date": "2024-12-20",
+  "time": "15:45:53"
+}]
