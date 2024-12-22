@@ -214,6 +214,28 @@ def playlist_page(objectID):
 
     return render_template('playlist.html', full_name=global_fullname,property=current_property)
 
+
+@app.route('/<objectID>/home/playlist', methods=['GET', 'POST'])
+def Delete_playlist_page(objectID):
+    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+
+    # Check if the property exists
+    if not current_property:
+        flash("Property not found.", "error")
+        return redirect(url_for('some_other_page'))  # Redirect to a relevant page
+
+    # Check the tenant field in the property
+    if current_property.get('tenant') == 'Nobody':
+        # If tenant is 'Nobody', delete the property
+        property_owner_data.delete_one({'_id': ObjectId(objectID)})
+        flash("Property deleted successfully.", "success")
+        return redirect(url_for('some_other_page'))  # Redirect after deletion
+    else:
+        # If the property is rented, show an appropriate message
+        flash("This property is currently rented and cannot be deleted.", "error")
+        return render_template('playlist.html', full_name=global_fullname, property=current_property)
+
+# Make sure to define routes for 'some_other_page' or handle redirection appropriately
 # **********************   Tenant ****************************************
 # Route for tenant home page
 @app.route('/home2', methods=['GET', 'POST'])
