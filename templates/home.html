@@ -1,111 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Slider HTML and CSS | CodingNepal</title>
+    <!-- Linking SwiperJS CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/n.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/circle1.css') }}">
+    <style>
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+    </style>
 </head>
 <body>
 
-<header class="header">
-
-   <section class="flex">
-
-
-      <form action="" method="POST" class="search-form">
-         <input type="text" name="search_box" placeholder="search property..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
-
-      <div class="icons">
-
-         <div id="toggle-btn" class="fas fa-sun"></div>
-      </div>
-
-      <div class="profile">
-<!--         set the name profile-->
-         <img src="static/images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">{{ full_name }}</h3>
-         <p class="role">owner</p>
-
-         </div>
-      </div>
-
-   </section>
-
-</header>
-
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="static/images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">{{ full_name }}</h3>
-      <p class="role">owner</p>
-
-   </div>
-
-   <nav class="navbar">
-     <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>
-     </a> <a href="{{ url_for('home_owner_to_addhome') }}"><i class="fas fa-plus"></i><span>Add</span>
-     </a> <a href="{{ url_for('show_page_owner') }}"><i class="fas fa-eye"></i><span>Show</span></a>
-        <a href="{{ url_for('contact_page_owner') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
-   </nav>
-
-</div>
-
-<section class="home-grid">
-</section>
+    <form action="" method="POST" class="search-form">
+        <input type="text" name="search_box" placeholder="search property..." maxlength="100">
+        <button type="submit" class="fas fa-search"></button>
+    </form>
 
 
-
-<section class="courses">
+    <div class="navigation">
+        <ul>
+            <li class="list active">
+                <a href="{{ url_for('home_page') }}">
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="text">Home</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="{{ url_for('show_page_owner') }}">
+                    <span class="icon">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </span>
+                    <span class="text">Show</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="{{ url_for('home_owner_to_addhome') }}">
+                    <span class="icon">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </span>
+                    <span class="text">Start home</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="{{ url_for('contact_page_tenant') }}">
+                    <span class="icon">
+                        <ion-icon name="call-outline"></ion-icon>
+                    </span>
+                    <span class="text">Contact us</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </span>
+                    <span class="text">Log out</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <div class="indicator"></div>
+        </ul>
+    </div>
 
     <h1 class="heading">Properties</h1>
-   <div class="box-container">
-<!--  The elements -->
-      {% for property in property_owner_list %}
-      <div class="box">
-         <div class="tutor">
-<!--            <img src="images/pic-2.jpg" alt="">-->
-            <div class="info">
-               <h3>{{ property['property_name']}}</h3>
-               <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+         {% for property in property_owner_list %}
+            <!-- The elements -->
+            <div class="swiper-slide">
+                <div class="card-item">
+                    <img src="/static/images/8.jpg" alt="User Image" class="user-image">
+                    <div class="user-name">
+                           <h2>{{ property['property_name']}}</h2>
+                        <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+                    </div>
+
+                      <h2 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h2>
+                        <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="message-button">view details</a>
+
+
+                </div>
             </div>
-         </div>
-         <div class="thumb">
-<!--            <img src="images/thumb-1.png" alt="">-->
-<!--            <span>10 videos</span>-->
-         </div>
-         <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-         <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
-      </div>
-<!--   The end of elements   -->
-      {% endfor %}
+            <!-- The end of elements -->
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
 
- </div>
-</section>
-<footer class="footer">
+    <!-- Linking SwiperJS script -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Custom script to initialize Swiper -->
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 10, // کاهش فاصله بین اسلایدها
+            // Pagination bullets
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            },
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            // Responsive breakpoints
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                }
+            }
+        });
+    </script>
 
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-</footer>
+    <script>
+        const list = document.querySelectorAll('.list');
 
-<!-- custom js file link  -->
+        function activeLink() {
+            list.forEach((item) => item.classList.remove('active'));
+            this.classList.add('active');
+        }
 
-<script src="{{ url_for('static', filename='script2.js') }}"></script>
-
-
+        list.forEach((item) => item.addEventListener('click', activeLink));
+    </script>
 </body>
 </html>
