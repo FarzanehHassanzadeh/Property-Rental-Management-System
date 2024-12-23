@@ -14,7 +14,7 @@ justify-content: flex-start;
 align-items: center;
 min-height: 100vh;
 padding-top: 30px;
-background-image: url('/static/images/304.jpg');
+/*background-image: url('/static/images/304.jpg');*/
 background-repeat: no-repeat;
 background-position: calc(50% + 500px) calc(50% - 250px); /* جابجایی تصویر به بالا */
 background-size: 20%;
@@ -225,9 +225,9 @@ background-size: 20%;
 
 .search-form {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: relative; /* برای استفاده از transform */
-    transform: translate(-500px, 80px); /* 20px به سمت چپ و 20px به سمت پایین */
+    transform: translate(-400px, 80px); /* 20px به سمت چپ و 20px به سمت پایین */
 }
 
 .search-form input[type="text"] {
@@ -236,7 +236,7 @@ background-size: 20%;
     border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
     outline: none;
-    width: 300px;
+    width: 185px;
     height: 50px;
 }
 

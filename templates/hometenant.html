@@ -8,8 +8,76 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/n.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/circle1.css') }}">
-    <style>
+      <style>
+ .hero {
+            width: 100%;
+            min-height: 100vh;
 
+        }
+
+        nav {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the left */
+            position: relative;
+        }
+
+        .user-pic {
+            width: 20px;
+            height: 20px; /* Set height for icon */
+            border-radius: 50%;
+            cursor: pointer;
+            margin-right: 30px; /* Adjust margin for left alignment */
+            display: flex; /* Center icon */
+            align-items: center;
+            justify-content: center;
+            background-color: black; /* Set background color to black */
+            border: 2px solid black; /* Set border color to black */
+        }
+
+        .user-pic ion-icon {
+            color: black; /* Set icon color to black for better visibility */
+        }
+
+        .sub-menu-wrap {
+            display: none; /* پنهان کردن زیرمنو */
+            position: absolute;
+            top: 50px; /* Adjusted to place it below the user picture */
+            left: 0; /* Align to the left */
+            width: 320px;
+            background: #fff;
+            border: 1px solid #ccc;
+            z-index: 1000; /* بالاترین لایه */
+            padding: 10px; /* Padding inside the dropdown */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .sub-menu-wrap.active {
+            display: block; /* نمایش زیرمنو */
+        }
+
+        .sub-menu-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px; /* Space between inputs */
+        }
+
+        .sub-menu-link input {
+            width: 70%; /* Width of the input field */
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .sub-menu-link span {
+            width: 25%; /* Width of the label */
+            text-align: right;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +138,7 @@
         </ul>
 
     </div>
+
  <h3 class="name">{{ full_name }}</h3>
         <p class="role">tenant</p>
     <h1 class="heading">Properties</h1>
@@ -95,6 +164,27 @@
         <div class="swiper-button-next"></div>
     </div>
 
+
+<div class="hero">
+        <nav>
+            <div class="user-pic" onclick="toggleMenu()">
+                <ion-icon name="person-circle" size="large"></ion-icon> <!-- User icon -->
+                <ion-icon name="chevron-down" size="small"></ion-icon> <!-- Dropdown arrow -->
+            </div>
+            <div class="sub-menu-wrap" id="subMenu">
+
+                <div class="sub-menu-link">
+                    <input type="date" placeholder="date">
+                </div>
+                <div class="sub-menu-link">
+                    <input type="time" placeholder="time">
+                </div>
+                <div class="sub-menu-link">
+                    <input type="number" placeholder="Enter amount" aria-placeholder="amount">
+                </div>
+            </div>
+        </nav>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const swiper = new Swiper('.swiper-container', {
@@ -137,6 +227,20 @@
 
         list.forEach((item) => item.addEventListener('click', activeLink));
     </script>
+<script>
+        function toggleMenu() {
+            const subMenu = document.getElementById('subMenu');
+            subMenu.classList.toggle('active');
+        }
 
+        document.addEventListener('click', function(event) {
+            const subMenu = document.getElementById('subMenu');
+            const userPic = document.querySelector('.user-pic');
+
+            if (!userPic.contains(event.target) && !subMenu.contains(event.target)) {
+                subMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
