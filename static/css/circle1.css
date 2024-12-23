@@ -16,8 +16,8 @@ min-height: 100vh;
 padding-top: 30px;
 background-image: url('/static/images/304.jpg');
 background-repeat: no-repeat;
-background-position: calc(50% + 500px) calc(50% - 150px); /* جابجایی تصویر به بالا */
-background-size: 30%;
+background-position: calc(50% + 500px) calc(50% - 250px); /* جابجایی تصویر به بالا */
+background-size: 20%;
 
 }
 
@@ -35,7 +35,26 @@ background-size: 30%;
     border-radius: 10px;
     margin-bottom: 20px;
 }
+.navigation {
+            position: relative; /* Set relative position for child elements */
+        }
 
+        .name, .role {
+            position: absolute; /* Position elements absolutely */
+            top: 200px; /* 20px from the top */
+            right: 200px; /* 20px from the right */
+            margin: 0; /* Remove default margin */
+            text-align: right; /* Align text to the right */
+        }
+
+        .role {
+            position: absolute; /* Position elements absolutely */
+            top: 230px; /* 5px below the name */
+            right:220px; /* Keep it aligned with the name */
+            margin: 0; /* Remove default margin */
+            font-size: 14px; /* Adjust font size for the role */
+            text-align: right;  /* Adjust font size for the role */
+        }
 .navigation ul {
     display: flex;
     width: 450px;

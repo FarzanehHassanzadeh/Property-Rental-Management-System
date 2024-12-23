@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Slider HTML and CSS | CodingNepal</title>
-    <!-- Linking SwiperJS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/n.css') }}">
@@ -19,15 +18,6 @@
         <input type="text" name="search_box" placeholder="search property..." maxlength="100">
         <button type="submit" class="fas fa-search"></button>
     </form>
-{##}
-{#--------------Advanced search bar------------------      #}
-{##}
-{#    <form action="" method="POST" class="search-form">#}
-{#        <input type="text" name="search_box" placeholder="search property..." maxlength="100">#}
-{#        <button type="submit" class="fas fa-search"></button>#}
-{#    </form>#}
-{##}
-{#--------------Advanced search bar------------------      #}
 
     <div class="navigation">
         <ul>
@@ -78,14 +68,15 @@
             </li>
             <div class="indicator"></div>
         </ul>
-    </div>
 
+    </div>
+ <h3 class="name">{{ full_name }}</h3>
+        <p class="role">tenant</p>
     <h1 class="heading">Properties</h1>
 
     <div class="swiper-container">
         <div class="swiper-wrapper">
             {% for property in property_owner_list %}
-            <!-- The elements -->
             <div class="swiper-slide">
                 <div class="card-item">
                     <img src="/static/images/8.jpg" alt="User Image" class="user-image">
@@ -97,7 +88,6 @@
                     <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="message-button">View details</a>
                 </div>
             </div>
-            <!-- The end of elements -->
             {% endfor %}
         </div>
         <div class="swiper-pagination"></div>
@@ -105,26 +95,21 @@
         <div class="swiper-button-next"></div>
     </div>
 
-    <!-- Linking SwiperJS script -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- Custom script to initialize Swiper -->
     <script>
         const swiper = new Swiper('.swiper-container', {
             loop: true,
             grabCursor: true,
-            spaceBetween: 10, // کاهش فاصله بین اسلایدها
-            // Pagination bullets
+            spaceBetween: 10,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
                 dynamicBullets: true
             },
-            // Navigation arrows
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            // Responsive breakpoints
             breakpoints: {
                 0: {
                     slidesPerView: 1
@@ -153,4 +138,5 @@
         list.forEach((item) => item.addEventListener('click', activeLink));
     </script>
 
+</body>
 </html>
