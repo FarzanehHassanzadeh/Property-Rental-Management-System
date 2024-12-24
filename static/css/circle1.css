@@ -224,7 +224,7 @@ background-size: 20%;
 }
 
 .search-form {
-    display: flex;
+
     margin-bottom: 10px;
     position: relative; /* برای استفاده از transform */
     transform: translate(-400px, 80px); /* 20px به سمت چپ و 20px به سمت پایین */

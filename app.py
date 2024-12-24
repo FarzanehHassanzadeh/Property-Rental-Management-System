@@ -45,6 +45,7 @@ users_data = db['users_data']
 property_owner_data = db['property_owner_data']
 property_tenant_data = db['property_tenant_data']
 cards_data = db['Cards_data']
+contacts_data = db['Contacts_data']
 
 # This function is used for the start page
 @app.route('/', methods=['GET', 'POST'])
@@ -193,6 +194,17 @@ def home_owner_to_addhome():
 # Route for owner contact page
 @app.route('/home/contact', methods=['GET', 'POST'])
 def contact_page_owner():
+    if request.method == 'POST':
+
+
+        contact_email = request.form['contact_email']
+        contact_name = request.form['name']
+        contact_msg = request.form['msg']
+
+
+        contacts_data.insert_one({'email': contact_email, 'name': contact_name, 'msg': contact_msg})
+
+
     return render_template('contact.html')
 
 # Route for owner show page
@@ -215,21 +227,21 @@ def playlist_page(objectID):
     return render_template('playlist.html', full_name=global_fullname,property=current_property)
 
 
-@app.route('/<objectID>/home/playlist', methods=['GET', 'POST'])
-def Delete_playlist_page(objectID):
+@app.route('/<objectID>/home/playlist/delete', methods=['GET', 'POST'])
+def delete_playlist_page(objectID):
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
 
     # Check if the property exists
     if not current_property:
         flash("Property not found.", "error")
-        return redirect(url_for('some_other_page'))  # Redirect to a relevant page
+        return redirect(url_for('home_page'))  # Redirect to a relevant page
 
     # Check the tenant field in the property
     if current_property.get('tenant') == 'Nobody':
         # If tenant is 'Nobody', delete the property
         property_owner_data.delete_one({'_id': ObjectId(objectID)})
         flash("Property deleted successfully.", "success")
-        return redirect(url_for('some_other_page'))  # Redirect after deletion
+        return redirect(url_for('home_page'))  # Redirect after deletion
     else:
         # If the property is rented, show an appropriate message
         flash("This property is currently rented and cannot be deleted.", "error")
@@ -241,16 +253,45 @@ def Delete_playlist_page(objectID):
 @app.route('/home2', methods=['GET', 'POST'])
 def home_page_tenant():
     property_list = []
+
+    search_property_name =''
+    date_property = ''
+    time_property = ''
+    amount_property = ''
+
+
     if request.method == 'POST':
         search_property_name = request.form['search_box']
-        if search_property_name == '':
-            property_list = property_owner_data.find({'tenant': 'Nobody'})
-        else:
+        owner_property = request.form['owner']
+        location_property = request.form['location']
+        rent_price_property = '$' + request.form['rent_price']
+        rent_period_property = request.form['rent_period']
+        myQuery = {}
 
-            property_list = property_owner_data.find({
-                                                      'property_name': {'$regex': search_property_name,'$options': 'i'},
-                                                      'tenant': 'Nobody'
-                                                      })  # '$options': 'i' is for no being case-sensitive
+        if owner_property != '':
+            myQuery['owner'] = {'$regex': owner_property, '$options': 'i'}
+        if location_property != '':
+            myQuery['location'] = {'$regex': location_property, '$options': 'i'}
+        if rent_price_property != '$':
+            myQuery['rent_price'] = rent_price_property
+        if rent_period_property != '':
+            myQuery['rent_period'] = rent_period_property
+        if search_property_name != '':
+            myQuery['property_name'] = {'$regex': search_property_name, '$options': 'i'}
+        myQuery['tenant'] = 'Nobody'
+
+        property_list = property_owner_data.find(myQuery)
+
+        # if search_property_name == '':
+        #     property_list = property_owner_data.find({'tenant': 'Nobody'})
+        # else:
+        #
+        #     property_list = property_owner_data.find({
+        #                                               'property_name': {'$regex': search_property_name,'$options': 'i'},
+        #                                               'tenant': 'Nobody'
+        #                                               })  # '$options': 'i' is for no being case-sensitive
+
+
     return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 # Route for tenant rent home page
@@ -262,6 +303,13 @@ def rent_page_tenant():
 # Route for tenant contact page
 @app.route('/home2/contact', methods=['GET', 'POST'])
 def contact_page_tenant():
+    if request.method == 'POST':
+        contact_email = request.form['email']
+        contact_name = request.form['name']
+        contact_msg = request.form['msg']
+
+        contacts_data.insert_one({'email': contact_email, 'name': contact_name, 'msg': contact_msg})
+
     return render_template('contact.html')
 
 # Route for tenant show home page

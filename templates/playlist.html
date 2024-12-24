@@ -77,11 +77,6 @@
    <div class="row">
 
       <div class="column">
-         <form action="" method="post" class="save-playlist">
-            <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
-         </form>
-      </div>
-      <div class="column">
          <div class="tutor">
         name of owner       <h3>{{ property['owner'] }}</h3>
         date of added       <span>{{ property['date'] }}</span>
@@ -91,7 +86,7 @@
          <div class="details">
             <h3>{{ property['property_name'] }}</h3>
             <p>{{ property['description'] }}</p>
-            <a href="" class="inline-btn">view profile</a>
+            <a href="{{ url_for('delete_playlist_page', objectID=property['_id']) }}" class="inline-btn">Delete Property</a>
          </div>
       </div>
    </div>
@@ -100,7 +95,7 @@
 
 <footer class="footer">
 
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
+   &copy; copyright @ 2022 by <span>Property Rental Management</span> | all rights reserved!
 
 </footer>
 

@@ -84,6 +84,30 @@
 
     <form action="" method="POST" class="search-form">
         <input type="text" name="search_box" placeholder="search property..." maxlength="100">
+        <div class="hero">
+         <nav>
+            <div class="user-pic" onclick="toggleMenu()">
+                <ion-icon name="person-circle" size="large"></ion-icon> <!-- User icon -->
+                <ion-icon name="chevron-down" size="small"></ion-icon> <!-- Dropdown arrow -->
+            </div>
+            <div class="sub-menu-wrap" id="subMenu">
+
+                <div class="sub-menu-link">
+                    <input type="text" name="owner" placeholder="owner">
+                </div>
+                <div class="sub-menu-link">
+                    <input type="text" name="location" placeholder="location">
+                </div>
+                <div class="sub-menu-link">
+                    <input type="number" name="rent_price" placeholder="Enter Rent Price" aria-placeholder="amount">
+                </div>
+
+                <div class="sub-menu-link">
+                    <input type="text" name="rent_period" placeholder="Enter Rent Period" aria-placeholder="amount">
+                </div>
+            </div>
+        </nav>
+    </div>
         <button type="submit" class="fas fa-search"></button>
     </form>
 
@@ -165,26 +189,7 @@
     </div>
 
 
-<div class="hero">
-        <nav>
-            <div class="user-pic" onclick="toggleMenu()">
-                <ion-icon name="person-circle" size="large"></ion-icon> <!-- User icon -->
-                <ion-icon name="chevron-down" size="small"></ion-icon> <!-- Dropdown arrow -->
-            </div>
-            <div class="sub-menu-wrap" id="subMenu">
 
-                <div class="sub-menu-link">
-                    <input type="date" placeholder="date">
-                </div>
-                <div class="sub-menu-link">
-                    <input type="time" placeholder="time">
-                </div>
-                <div class="sub-menu-link">
-                    <input type="number" placeholder="Enter amount" aria-placeholder="amount">
-                </div>
-            </div>
-        </nav>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const swiper = new Swiper('.swiper-container', {

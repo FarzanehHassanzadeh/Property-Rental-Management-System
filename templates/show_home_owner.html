@@ -86,12 +86,7 @@
                          <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
 
                             <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-                            <a href="" class="inline-btn">view details</a>
-                        <a href="{{ url_for(' Delete_playlist_page', objectID=property['_id']) }}" class="message-button">Delete </a>
-
-
-{##}
-{#                    <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="message-button">View details</a>#}
+                        <a href="{{ url_for('playlist_page', objectID=property['_id']) }}" class="message-button">view detail </a>
                 </div>
             </div>
             </div>
