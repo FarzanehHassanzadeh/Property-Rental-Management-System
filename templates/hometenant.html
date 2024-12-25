@@ -6,169 +6,102 @@
     <title>Card Slider HTML and CSS | CodingNepal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/n.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/circle1.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
-<body><form action="" method="POST">
-    <input type="text" name="search_box" placeholder="search property..." maxlength="100">
-    <div class="user-pic" onclick="toggleMenu()">
-        <ion-icon name="person-circle" size="large"></ion-icon> <!-- User icon -->
-        <ion-icon name="chevron-down" size="small"></ion-icon> <!-- Dropdown arrow -->
-    </div>
-    <div class="sub-menu-wrap" id="subMenu">
-        <div class="sub-menu-link">
-            <input type="text" name="owner" placeholder="owner">
-        </div>
-        <div class="sub-menu-link">
-            <input type="text" name="location" placeholder="location">
-        </div>
-        <div class="sub-menu-link">
-            <input type="number" name="rent_price" placeholder="Enter Rent Price" aria-placeholder="amount">
-        </div>
-        <div class="sub-menu-link">
-            <input type="text" name="rent_period" placeholder="Enter Rent Period" aria-placeholder="amount">
-        </div>
-    </div>
-    <button type="submit" class="fas fa-search"></button>
+<body>
+
+
+<header class="header" >
+   <section class="flex">
+      <a href="home.html" class="logo"></a>
+      <!-- the search -->
+      <form action="" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+      <!-- the advance search -->
+      <div class="icons">
+         <!-- the advance search icon -->
+         <div id="user-btn" class="fas fa-search"></div>
+         <!-- the advance search icon -->
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+      <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+      <div class="profile"   onclick="toggleMenu()">
+         <input class="name" type="text" name="owner" placeholder="owner">
+         <input class="name" type="text" name="location" placeholder="location">
+         <input class="name" type="text" name="rent_period" placeholder="Enter Rent Period" aria-placeholder="amount">
+         <input class="name" type="number" name="rent_price" placeholder="Enter Rent Price" aria-placeholder="amount">
+      </div>
+      <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+   </section>
+</header>
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="static/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+      <p class="role">tenant</p>
+      <a href="" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+      <a href="{{ url_for('contact_page_tenant') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<section class="home-grid">
+</section>
+
+<section class="courses">
+   <h1 class="heading">Properties</h1>
+   <div class="box-container">
+      {% for property in property_owner_list %}
+      <!-- The elements -->
+      <div class="box">
+         <div class="tutor">
+            <img src="/static/images/999.png" alt="">
+            <div class="info">
+               <h3>{{ property['property_name']}}</h3>
+               <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="/static/images/999.png" alt="">
+         </div>
+         <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
+         <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="inline-btn">view details</a>
+
+          <form action="{{url_for('Payment_on_time') }}" method="post" style="display: inline;">
+    <input type="hidden" name="objectID" value="{{ property['_id'] }}">
+    <button type="submit" class="inline-btn">Payment on time</button>
 </form>
 
+      </div>
+      <!-- The end of elements -->
+      {% endfor %}
+   </div>
+</section>
 
-    <div class="navigation">
-        <ul>
-            <li class="list active">
-                <a href="{{ url_for('home_page_tenant') }}">
-                    <span class="icon">
-                        <ion-icon name="home-outline"></ion-icon>
-                    </span>
-                    <span class="text">Home</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ url_for('show_page_tenant') }}">
-                    <span class="icon">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </span>
-                    <span class="text">Show</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="/">
-                    <span class="icon">
-                        <ion-icon name="add-circle-outline"></ion-icon>
-                    </span>
-                    <span class="text">Start home</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ url_for('contact_page_tenant') }}">
-                    <span class="icon">
-                        <ion-icon name="call-outline"></ion-icon>
-                    </span>
-                    <span class="text">Contact us</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </span>
-                    <span class="text">Log out</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <div class="indicator"></div>
-        </ul>
-    </div>
-
-<div class="courses">
-
-      <h1 class="heading">Properties</h1>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            {% for property in property_owner_list %}
-            <!-- The elements -->
-            <div class="swiper-slide">
-                <div class="card-item">
-                    <img src="/static/images/8.jpg" alt="User Image" class="user-image">
-                    <div class="user-name">
-                        <h2>{{ property['property_name']}}</h2>
-                        <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
-                    </div>
-                    <h2 class="user-name">Rent price: {{ property['rent_price'] }} Rent period: {{ property['rent_period'] }}</h2>
-                    <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="message-button">View details</a>
-                </div>
-            </div>
-                        {% endfor %}
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-    </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            grabCursor: true,
-            spaceBetween: 10,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1
-                },
-                768: {
-                    slidesPerView: 2
-                },
-                1024: {
-                    slidesPerView: 3
-                }
-            }
-        });
-    </script>
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-    <script>
-        const list = document.querySelectorAll('.list');
-
-        function activeLink() {
-            list.forEach((item) => item.classList.remove('active'));
-            this.classList.add('active');
+<!-- custom js file link -->
+<script src="{{ url_for('static', filename='js.js') }}"></script>
+<script>
+    function toggleMenu() {
+        const subMenu = document.getElementById('subMenu');
+        subMenu.classList.toggle('active');
+    }
+    document.addEventListener('click', function(event) {
+        const subMenu = document.getElementById('subMenu');
+        const userPic = document.querySelector('.user-pic');
+        if (!userPic.contains(event.target) && !subMenu.contains(event.target)) {
+            subMenu.classList.remove('active');
         }
-
-        list.forEach((item) => item.addEventListener('click', activeLink));
-    </script>
-
-    <script>
-        function toggleMenu() {
-            const subMenu = document.getElementById('subMenu');
-            subMenu.classList.toggle('active');
-        }
-
-        document.addEventListener('click', function(event) {
-            const subMenu = document.getElementById('subMenu');
-            const userPic = document.querySelector('.user-pic');
-
-            if (!userPic.contains(event.target) && !subMenu.contains(event.target)) {
-                subMenu.classList.remove('active');
-            }
-        });
-    </script>
+    });
+</script>
 </body>
 </html>

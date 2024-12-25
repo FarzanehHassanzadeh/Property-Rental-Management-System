@@ -4,258 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Slider HTML and CSS | CodingNepal</title>
-    <!-- Linking SwiperJS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/n.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/circle1.css') }}">
-      <style>
- .hero {
-            width: 100%;
-            min-height: 100vh;
-            background: #ececff;
-        }
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-        nav {
-            width: 100%;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* Align items to the left */
-            position: relative;
-        }
 
-        .user-pic {
-            width: 40px;
-            height: 40px; /* Set height for icon */
-            border-radius: 50%;
-            cursor: pointer;
-            margin-right: 30px; /* Adjust margin for left alignment */
-            display: flex; /* Center icon */
-            align-items: center;
-            justify-content: center;
-            background-color: black; /* Set background color to black */
-            border: 2px solid black; /* Set border color to black */
-        }
-
-        .user-pic ion-icon {
-            color: black; /* Set icon color to black for better visibility */
-        }
-
-        .sub-menu-wrap {
-            display: none; /* پنهان کردن زیرمنو */
-            position: absolute;
-            top: 50px; /* Adjusted to place it below the user picture */
-            left: 0; /* Align to the left */
-            width: 320px;
-            background: #fff;
-            border: 1px solid #ccc;
-            z-index: 1000; /* بالاترین لایه */
-            padding: 10px; /* Padding inside the dropdown */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
-            border-radius: 5px; /* Rounded corners */
-        }
-
-        .sub-menu-wrap.active {
-            display: block; /* نمایش زیرمنو */
-        }
-
-        .sub-menu-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px; /* Space between inputs */
-        }
-
-        .sub-menu-link input {
-            width: 70%; /* Width of the input field */
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .sub-menu-link span {
-            width: 25%; /* Width of the label */
-            text-align: right;
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
-<div class="hero">
-        <nav>
-            <div class="user-pic" onclick="toggleMenu()">
-                <ion-icon name="person-circle" size="large"></ion-icon> <!-- User icon -->
-                <ion-icon name="chevron-down" size="small"></ion-icon> <!-- Dropdown arrow -->
-            </div>
-            <div class="sub-menu-wrap" id="subMenu">
-                <div class="sub-menu-link">
-                    <span>Edit Profile:</span>
-                    <input type="text" placeholder="Enter your name">
-                </div>
-                <div class="sub-menu-link">
-                    <span>Date:</span>
-                    <input type="date">
-                </div>
-                <div class="sub-menu-link">
-                    <span>Time:</span>
-                    <input type="time">
-                </div>
-                <div class="sub-menu-link">
-                    <span>Payment Amount:</span>
-                    <input type="number" placeholder="Enter amount">
-                </div>
-            </div>
-        </nav>
-    </div>
 
-    <form action="" method="POST" class="search-form">
-        <input type="text" name="search_box" placeholder="search property..." maxlength="100">
-        <button type="submit" class="fas fa-search"></button>
-    </form>
+<header class="header" onclick="toggleMenu()">
+
+   <section class="flex">
+{# the search #}
+      <a href="home.html" class="logo"></a>
+
+      <form action="" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+{# the search  #}
+      <div class="icons">
+{# the advance search  icon#}
+         <div id="user-btn" class="fas fa-search"></div>
+          {# the advance search  icon#}
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+      <div class="profile">
+         <input   class="name" type="text" name="owner" placeholder="owner">
+         <input  class="name" type="text" name="location" placeholder="location">
+         <input   class="name" type="text" name="rent_period" placeholder="Enter Rent Period" aria-placeholder="amount">
+         <input    class="name" type="number" name="rent_price" placeholder="Enter Rent Price" aria-placeholder="amount">
+
+         </div>
+      </div>
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+   </section>
+
+</header>
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="static/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+       <p class="role">owner</p>
+        <a href="" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+          <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>
+     </a> <a href="{{ url_for('home_owner_to_addhome') }}"><i class="fas fa-plus"></i><span>Add</span>
+     </a> <a href="{{ url_for('show_page_owner') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+        <a href="{{ url_for('contact_page_tenant') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+<section class="home-grid">
+</section>
 
 
-    <div class="navigation">
-        <ul>
-            <li class="list active">
-                <a href="{{ url_for('home_page') }}">
-                    <span class="icon">
-                        <ion-icon name="home-outline"></ion-icon>
-                    </span>
-                    <span class="text">Home</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ url_for('show_page_owner') }}">
-                    <span class="icon">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </span>
-                    <span class="text">Show</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ url_for('home_owner_to_addhome') }}">
-                    <span class="icon">
-                        <ion-icon name="add-circle-outline"></ion-icon>
-                    </span>
-                    <span class="text">Start home</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ url_for('contact_page_tenant') }}">
-                    <span class="icon">
-                        <ion-icon name="call-outline"></ion-icon>
-                    </span>
-                    <span class="text">Contact us</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </span>
-                    <span class="text">Log out</span>
-                    <span class="circle"></span>
-                </a>
-            </li>
-            <div class="indicator"></div>
-        </ul>
-    </div>
-      <h3 class="name">{{full_name}}</h3>
-      <p class="role">owner</p>
-    <h1 class="heading">Properties</h1>
-
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
+<section class="courses">
+   <h1 class="heading">Properties</h1>
+   <div class="box-container">
          {% for property in property_owner_list %}
-            <!-- The elements -->
-            <div class="swiper-slide">
-                <div class="card-item">
-                    <img src="/static/images/8.jpg" alt="User Image" class="user-image">
-                    <div class="user-name">
-                           <h2>{{ property['property_name']}}</h2>
-                        <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
-                    </div>
+<!--    The elements-->
+      <div class="box">
+         <div class="tutor">
+            <img src="/static/images/999.png" alt="">
+            <div class="info">
+                           <h3>{{ property['property_name']}}</h3>
+               <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+                            </div>
+         </div>
+         <div class="thumb">
+           <img src="/static/images/999.png" alt="">
+<!--            <span>10 videos</span>-->
+         </div>
+                  <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
+         <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
+      </div>
+<!--The end of elements-->
+{% endfor %}
+ </div>
+</section>
+<!-- custom js file link  -->
+{#<script src="{{ url_for('static', filename='script2.js') }}"></script>#}
 
-                      <h2 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h2>
-                        <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="message-button">view details</a>
-
-
-                </div>
-            </div>
-            <!-- The end of elements -->
-            {% endfor %}
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-    </div>
-
-    <!-- Linking SwiperJS script -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- Custom script to initialize Swiper -->
-    <script>
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            grabCursor: true,
-            spaceBetween: 10, // کاهش فاصله بین اسلایدها
-            // Pagination bullets
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true
-            },
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            // Responsive breakpoints
-            breakpoints: {
-                0: {
-                    slidesPerView: 1
-                },
-                768: {
-                    slidesPerView: 2
-                },
-                1024: {
-                    slidesPerView: 3
-                }
-            }
-        });
-    </script>
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-    <script>
-        const list = document.querySelectorAll('.list');
-
-        function activeLink() {
-            list.forEach((item) => item.classList.remove('active'));
-            this.classList.add('active');
-        }
-
-        list.forEach((item) => item.addEventListener('click', activeLink));
-    </script>
+<script src="{{ url_for('static', filename='js.js') }}"></script>
  <script>
         function toggleMenu() {
             const subMenu = document.getElementById('subMenu');
             subMenu.classList.toggle('active');
         }
-
         document.addEventListener('click', function(event) {
             const subMenu = document.getElementById('subMenu');
             const userPic = document.querySelector('.user-pic');
-
             if (!userPic.contains(event.target) && !subMenu.contains(event.target)) {
                 subMenu.classList.remove('active');
             }
         });
     </script>
-</body>
+ </body>
 </html>
