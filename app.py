@@ -15,7 +15,7 @@ time_property=''
 global_birthday=''
 global_username=''
 global_img=''
-global_img_home=''
+
 # Validation functions
 # Check the password if it is at least 8 characters and has capital, small letters, special characters and numbers
 def validate_password(password):
@@ -400,7 +400,7 @@ def playlist_page2(objectID):
 
     global_objectID_property_owner = objectID
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
-    return render_template('playlist2.html', full_name=global_fullname, property=current_property)
+    return render_template('playlist2.html', full_name=global_fullname, property=current_property,img=global_img)
 # -----------------------------------------------------------
 # /---------------------------------------------------
 # --------------------------------------
@@ -433,17 +433,13 @@ def Payment_on_time(objectID):
 @app.route('/transfer_funds', methods=['POST'])
 def transfer_funds():
     global global_objectID_property_owner, global_fullname
-
     new_balance = None
 
     current_property = property_owner_data.find_one({'_id': ObjectId(global_objectID_property_owner)})
-
     owner_name = current_property['owner']
     firstname, lastname = global_fullname.split()
     owner_firstname, owner_lastname = owner_name.split()
-
     to_card_data = cards_data.find_one({'cardholdername': owner_firstname})
-
     # using get to avoid KeyError
     from_card_number = request.form.get('from_card_number')
     from_cardholder_name = firstname
@@ -456,7 +452,7 @@ def transfer_funds():
 
     try:
         # amount_to_transfer = float(request.form.get('amount', 0)) # using get with a default value
-        amount_to_transfer =float((current_property['rent_price']).replace('$', ''))
+        amount_to_transfer = float((current_property['rent_price']).replace('$', ''))
     except ValueError:
         flash("Invalid amount. Please enter a valid number.", "error")
         return render_template('integrated_payment.html', new_balance=new_balance)
@@ -494,39 +490,37 @@ def transfer_funds():
                 property_name = current_property['property_name']
                 property_rent_price = current_property['rent_price']
                 property_rent_period = current_property['rent_period']
-
-
                 current_time = datetime.now()
                 current_date = current_time.date().isoformat()
                 current_time = current_time.time().strftime('%H:%M:%S')
-
                 property_tenant_data.insert_one({'tenant': global_fullname,
                                                  'property_name': property_name,
                                                  'rent_price': property_rent_price,
                                                  'rent_period': property_rent_period,
                                                  'date': current_date,
                                                  'time': current_time})
-
                 property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)},
-                                                   {'$set': {'tenant': global_fullname,
-                                                                     'date': current_date,
-                                                                      'time': current_time}})
-
+                                               {'$set': {'tenant': global_fullname,
+                                                         'date': current_date,
+                                                         'time': current_time}})
                 flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
 
-                # Redirect to playlist2 after a successful transfer
-                return redirect(url_for('home_page_tenant'))  # Assumes you want to redirect to playlist2
+                     # Redirect to playlist2 after a successful transfer
+                flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
+
+        # Redirect to playlist2 after a successful transfer
+                return redirect(url_for('home_page_tenant'))
+                # Assumes you want to redirect to playlist2
 
             else:
-                flash("Insufficient funds in the source account.", "error")
+               flash("Insufficient funds in the source account.", "error")
         except ValueError:
-            flash("Current balance is not numeric. Please correct this in the database.", "error")
+                       flash("Current balance is not numeric. Please correct this in the database.", "error")
+
     else:
-        flash("Cardholder name or card number is incorrect for one or both accounts.", "error")
+       flash("Cardholder name or card number is incorrect for one or both accounts.", "error")
 
     return render_template('integrated_payment.html', new_balance=new_balance)
-
-
 
 # Route for tenant rent home page
 @app.route('/home2/profile', methods=['GET', 'POST'])

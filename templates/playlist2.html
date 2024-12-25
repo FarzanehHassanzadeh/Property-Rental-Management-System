@@ -30,12 +30,14 @@
    <div id="close-btn">
       <i class="fas fa-times"></i>
    </div>
-   <div class="profile">
-      <img src="" class="image" alt="">
+    <div class="profile">
+         <div class="profile">
+      <img src="{{img}}" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
-       <a href="" class="btn">view profile</a>
-   </div>
+              <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
+         </div>
+      </div>
    <nav class="navbar">
      <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home </span>
      </a> <a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
@@ -47,7 +49,7 @@
    <div class="row">
       <div class="column">
          <form action="" method="post" class="save-playlist">
-            <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
+
          </form>
       </div>
       <div class="column">
@@ -55,11 +57,11 @@
         name of owner       <h3>{{ property['owner'] }}</h3>
         date of added       <span>{{ property['date'] }}</span>
                          </div>
-         </div>
-         <div class="details">
+          <div class="details">
+
             <h3>{{ property['property_name'] }}</h3>
             <p>{{ property['description'] }}</p>
-            <a href="" class="inline-btn">view profile</a>
+
           <form action="{{ url_for('transfer_funds', objectID=property['_id']) }}" method="post">
     <button type="submit" class="inline-btn">Pay rent</button>
 </form>
@@ -67,9 +69,6 @@
       </div>
    </div>
 </section>
-<footer class="footer">
-   &copy; copyright @ 2022 by <span>Property Rental Management</span> | all rights reserved!
-</footer>
 <!-- custom js file link  -->
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
