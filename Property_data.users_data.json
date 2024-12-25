@@ -8,7 +8,8 @@
   "password": "Lord1234",
   "email": "dalirkiarash2003@gmail.com",
   "birthday": "2003-12-10",
-  "role": "owner"
+  "role": "owner",
+  "imge": "/static/images/img-2.jpg"
 },
 {
   "_id": {
@@ -20,7 +21,8 @@
   "password": "Lord1234",
   "email": "emmajohnson@gmail.com",
   "birthday": "1995-04-15",
-  "role": "owner"
+  "role": "owner",
+  "img": "/static/images/img-2.jpg"
 },
 {
   "_id": {
@@ -92,7 +94,8 @@
   "password": "Lord1234",
   "email": "emily.allen@gmail.com",
   "birthday": "1995-03-28",
-  "role": "tenant"
+  "role": "tenant",
+  "img": "/static/images/img-4.jpg"
 },
 {
   "_id": {

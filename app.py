@@ -14,6 +14,8 @@ global_objectID_property_tenant = ''
 time_property=''
 global_birthday=''
 global_username=''
+global_img=''
+global_img_home=''
 # Validation functions
 # Check the password if it is at least 8 characters and has capital, small letters, special characters and numbers
 def validate_password(password):
@@ -60,7 +62,7 @@ def start_page():
 @app.route('/login', methods=['POST', 'GET'])
 def login_page():
     login_stat = "owner_login"
-    global global_fullname,global_email,global_birthday,global_username
+    global global_fullname,global_email,global_birthday,global_username,global_img
     if request.method == 'POST':
         username_owner_input = request.form.get("username-owner")
         email_owner_input = request.form.get("email-owner")
@@ -84,6 +86,8 @@ def login_page():
                 global_email=user_record['email']
                 global_birthday = user_record['birthday']
                 global_username= user_record['username']
+                global_img= user_record['img']
+
                 return redirect(url_for('home_page'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -101,7 +105,7 @@ def login_page():
                 global_birthday = user_record['birthday']
                 global_email = user_record['email']
                 global_username = user_record['username']
-
+                global_img = user_record['img']
                 return redirect(url_for('home_page_tenant'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -324,7 +328,7 @@ def home_page_tenant():
         myQuery['tenant'] = 'Nobody'
 
         property_list = property_owner_data.find(myQuery)
-    return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
+    return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list,img=global_img)
 
 # Route for tenant rent home page
 @app.route('/home2/rent_tenant', methods=['GET', 'POST'])
@@ -377,7 +381,7 @@ def show_page_tenant():
 
         property_list = property_owner_data.find(myQuery)
 
-    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list)
+    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list,img=global_img)
 @app.route('/<objectID>/home2/show_page_tenant/end_rent', methods=['GET', 'POST'])
 def end_renting(objectID):
     global global_objectID_property_owner
@@ -528,13 +532,13 @@ def transfer_funds():
 @app.route('/home2/profile', methods=['GET', 'POST'])
 def profile_tenant():
 
-    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username)
+    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
 
 # Route for tenant rent home page
 @app.route('/home/profile', methods=['GET', 'POST'])
 def profile_owner():
 
-    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username)
+    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
 
 if __name__ == '__main__':
     app.run(debug=True)

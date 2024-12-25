@@ -35,7 +35,7 @@
 
       <div class="profile">
          <div class="profile">
-      <img src="static/images/img-2.jpg" class="image" alt="">
+      <img src="{{img}}" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
          </div>
@@ -50,7 +50,7 @@
       <i class="fas fa-times"></i>
    </div>
    <div class="profile">
-      <img src="/static/images/img-2.jpg" class="image" alt="">
+      <img src="{{img}}" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">Owner</p>
      <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
@@ -70,7 +70,7 @@
    <div class="info">
  <div class="user">
 {#         <div class="profile">#}
-          <img src="/static/images/img-2.jpg"  alt="">
+          <img src="{{img}}"  alt="">
       <h3 >{{ username  }}</h3>
 
       <h3 >tenant</h3>
@@ -114,26 +114,7 @@
    </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
-
-</footer>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
+<script src="{{ url_for('static', filename='js.js') }}"></script>
 
 
 </body>
