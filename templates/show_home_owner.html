@@ -19,7 +19,7 @@
       <a href="home.html" class="logo"></a>
 
       <form action="" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <input type="text" name="search_box"  placeholder="search property..." maxlength="100">
          <button type="submit" class="fas fa-search"></button>
       </form>
 {# the search  #}
@@ -74,16 +74,15 @@
          <div class="tutor">
             <img src="/static/images/999.png" alt="">
             <div class="info">
-                                       <h3>{{ property['property_name']}}</h3>
+                <h3>{{ property['property_name']}}</h3>
                <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
                             </div>
          </div>
          <div class="thumb">
            <img src="/static/images/999.png" alt="">
-<!--            <span>10 videos</span>-->
          </div>
           <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-         <a href="" class="inline-btn">view details</a>+
+         <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="inline-btn">view details</a>+
       </div>
 <!--The end of elements-->
 {% endfor %}

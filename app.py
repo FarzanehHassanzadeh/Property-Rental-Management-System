@@ -148,15 +148,45 @@ def signup_page2():
 # Route for owner home page
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
+    # property_list = []
+    # if request.method == 'POST':
+    #     search_property_name = request.form['search_box']
+    #     if search_property_name == '':
+    #          property_list = property_owner_data.find()
+    #     else:
+    #
+    #          property_list = property_owner_data.find({'property_name':{'$regex': search_property_name,
+    #                                                                     '$options': 'i'}}) # '$options': 'i' is for no being case-sensitive
+
     property_list = []
+
+    search_property_name = ''
+    date_property = ''
+    time_property = ''
+    amount_property = ''
+
     if request.method == 'POST':
         search_property_name = request.form['search_box']
-        if search_property_name == '':
-             property_list = property_owner_data.find()
-        else:
 
-             property_list = property_owner_data.find({'property_name':{'$regex': search_property_name,
-                                                                        '$options': 'i'}}) # '$options': 'i' is for no being case-sensitive
+        owner_property = request.form.get('owner')
+        location_property = request.form.get('location')
+        rent_price_property = request.form.get('rent_price')
+        rent_period_property = request.form.get('rent_period')
+        myQuery = {}
+
+        if owner_property and owner_property != '':
+            myQuery['owner'] = {'$regex': str(owner_property), '$options': 'i'}
+        if location_property and location_property != '':
+            myQuery['location'] = {'$regex': str(location_property), '$options': 'i'}
+        if rent_price_property and rent_price_property != '':
+            myQuery['rent_price'] = '$' + str(rent_price_property)
+        if rent_period_property and rent_period_property != '':
+            myQuery['rent_period'] = str(rent_period_property)
+        if search_property_name and search_property_name != '':
+            myQuery['property_name'] = {'$regex': str(search_property_name), '$options': 'i'}
+        myQuery['tenant'] = 'Nobody'
+
+        property_list = property_owner_data.find(myQuery)
 
     return render_template('home.html', full_name=global_fullname, property_owner_list=property_list)
 
@@ -211,6 +241,7 @@ def contact_page_owner():
 @app.route('/home/show_home_owner', methods=['GET', 'POST'])
 def show_page_owner():
     search_property_name = ''
+
     if request.method == 'POST':
        search_property_name = request.form['search_box']
     if search_property_name == '':
@@ -241,11 +272,11 @@ def delete_playlist_page(objectID):
         # If tenant is 'Nobody', delete the property
         property_owner_data.delete_one({'_id': ObjectId(objectID)})
         flash("Property deleted successfully.", "success")
-        return redirect(url_for('home_page'))  # Redirect after deletion
+        return "<h1> The property deleted successfully</h1>"  # Redirect after deletion
     else:
         # If the property is rented, show an appropriate message
         flash("This property is currently rented and cannot be deleted.", "error")
-        return render_template('playlist.html', full_name=global_fullname, property=current_property)
+        return "<h1>The property is currently rented and cannot be deleted.</h1>"
 
 # Make sure to define routes for 'some_other_page' or handle redirection appropriately
 # **********************   Tenant ****************************************
@@ -262,36 +293,26 @@ def home_page_tenant():
 
     if request.method == 'POST':
         search_property_name = request.form['search_box']
-        owner_property = request.form['owner']
-        location_property = request.form['location']
-        rent_price_property = '$' + request.form['rent_price']
-        rent_period_property = request.form['rent_period']
+
+        owner_property = request.form.get('owner')
+        location_property = request.form.get('location')
+        rent_price_property =request.form.get('rent_price')
+        rent_period_property = request.form.get('rent_period')
         myQuery = {}
 
-        if owner_property != '':
-            myQuery['owner'] = {'$regex': owner_property, '$options': 'i'}
-        if location_property != '':
-            myQuery['location'] = {'$regex': location_property, '$options': 'i'}
-        if rent_price_property != '$':
-            myQuery['rent_price'] = rent_price_property
-        if rent_period_property != '':
-            myQuery['rent_period'] = rent_period_property
-        if search_property_name != '':
-            myQuery['property_name'] = {'$regex': search_property_name, '$options': 'i'}
+        if  owner_property and owner_property != '' :
+            myQuery['owner'] = {'$regex': str(owner_property), '$options': 'i'}
+        if location_property and location_property != '':
+            myQuery['location'] = {'$regex': str(location_property), '$options': 'i'}
+        if rent_price_property and rent_price_property != '':
+            myQuery['rent_price'] = '$' + str(rent_price_property)
+        if rent_period_property and rent_period_property != '':
+            myQuery['rent_period'] = str(rent_period_property)
+        if search_property_name and search_property_name != '':
+            myQuery['property_name'] = {'$regex': str(search_property_name), '$options': 'i'}
         myQuery['tenant'] = 'Nobody'
 
         property_list = property_owner_data.find(myQuery)
-
-        # if search_property_name == '':
-        #     property_list = property_owner_data.find({'tenant': 'Nobody'})
-        # else:
-        #
-        #     property_list = property_owner_data.find({
-        #                                               'property_name': {'$regex': search_property_name,'$options': 'i'},
-        #                                               'tenant': 'Nobody'
-        #                                               })  # '$options': 'i' is for no being case-sensitive
-
-
     return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 # Route for tenant rent home page
@@ -319,17 +340,44 @@ def show_page_tenant():
     property_list = []
 
     if request.method == 'POST':
-        search_property_name = request.form['search_box']
-        if search_property_name == '':
-              property_list = property_owner_data.find({'tenant': global_fullname})
-        else:
-             property_list = property_owner_data.find({
-                                                       'property_name': {'$regex': search_property_name,'$options': 'i'},
-                                                       'tenant': global_fullname
-                                                       })
-    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list)
 
-@app.route('/<objectID>/home2/playlist')
+        search_property_name = request.form['search_box']
+
+        owner_property = request.form.get('owner')
+        location_property = request.form.get('location')
+        rent_price_property = request.form.get('rent_price')
+        rent_period_property = request.form.get('rent_period')
+
+        myQuery = {'tenant': global_fullname}
+
+        if owner_property and owner_property != '':
+            myQuery['owner'] = {'$regex': str(owner_property), '$options': 'i'}
+        if location_property and location_property != '':
+            myQuery['location'] = {'$regex': str(location_property), '$options': 'i'}
+        if rent_price_property and rent_price_property != '':
+            myQuery['rent_price'] = '$' + str(rent_price_property)
+        if rent_period_property and rent_period_property != '':
+            myQuery['rent_period'] = str(rent_period_property)
+        if search_property_name and search_property_name != '':
+            myQuery['property_name'] = {'$regex': str(search_property_name), '$options': 'i'}
+
+
+        property_list = property_owner_data.find(myQuery)
+
+    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list)
+@app.route('/<objectID>/home2/show_page_tenant/end_rent', methods=['GET', 'POST'])
+def end_renting(objectID):
+    global global_objectID_property_owner
+
+    global_objectID_property_owner = objectID
+    result = property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)}, {'$set': {'tenant': 'Nobody'}})
+
+    if result.modified_count > 0:
+        return "<h1>Property renting has been ended successfully.</h1>"
+    else:
+        return "<h1>there is something wrong</h1>"
+
+@app.route('/<objectID>/home2/show_page_tenant/playlist2', methods=['GET', 'POST'])
 def playlist_page2(objectID):
     global global_objectID_property_owner
 

@@ -19,8 +19,17 @@
       <a href="home.html" class="logo"></a>
 
       <form action="" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <input type="text" name="search_box"  placeholder="search property..." maxlength="100">
          <button type="submit" class="fas fa-search"></button>
+          <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+         <div class="profile">
+             <input   class="name" type="text" name="owner" placeholder="owner">
+             <input  class="name" type="text" name="location" placeholder="location">
+             <input   class="name" type="text" name="rent_period" placeholder="Enter Rent Period" aria-placeholder="amount">
+             <input    class="name" type="number" name="rent_price" placeholder="Enter Rent Price" aria-placeholder="amount">
+         </div>
+      </div>
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
       </form>
 {# the search  #}
       <div class="icons">
@@ -30,16 +39,7 @@
          <div id="menu-btn" class="fas fa-bars"></div>
          <div id="toggle-btn" class="fas fa-sun"></div>
       </div>
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-      <div class="profile">
-         <input   class="name" type="text" name="owner" placeholder="owner">
-         <input  class="name" type="text" name="location" placeholder="location">
-         <input   class="name" type="text" name="rent_period" placeholder="Enter Rent Period" aria-placeholder="amount">
-         <input    class="name" type="number" name="rent_price" placeholder="Enter Rent Price" aria-placeholder="amount">
 
-         </div>
-      </div>
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
    </section>
 
 </header>
@@ -83,7 +83,7 @@
 <!--            <span>10 videos</span>-->
          </div>
                   <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-         <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
+         <a href="" class="inline-btn">view details</a>
       </div>
 <!--The end of elements-->
 {% endfor %}
