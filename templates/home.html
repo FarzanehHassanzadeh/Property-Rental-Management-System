@@ -51,7 +51,7 @@
    <div class="profile">
       <img src="/static/images/img-2.jpg" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
-      <p class="role">ownre</p>
+      <p class="role">owner</p>
      <a href="{{ url_for('profile_owner') }}" class="btn">view profile</a>
    </div>
    <nav class="navbar">
@@ -80,10 +80,9 @@
          </div>
          <div class="thumb">
            <img src="/static/images/999.png" alt="">
-<!--            <span>10 videos</span>-->
          </div>
                   <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-         <a href="" class="inline-btn">view details</a>
+         <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
       </div>
 <!--The end of elements-->
 {% endfor %}

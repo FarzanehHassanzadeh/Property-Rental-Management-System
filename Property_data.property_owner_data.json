@@ -8,8 +8,8 @@
   "rent_price": "$1500",
   "rent_period": "Monthly",
   "description": "Spacious 3-bedroom house with a large backyard, modern kitchen, and two bathrooms. Located in a quiet neighborhood close to schools and parks.",
-  "date": "2024-11-20",
-  "time": "2:58:54",
+  "date": "2024-12-25",
+  "time": "22:01:28",
   "tenant": "Emily  Allen",
   "imgh": "/static/images/2.jpg"
 },
@@ -25,7 +25,7 @@
   "description": "Beautiful beach house with ocean views, private access to the beach, and fully furnished with modern amenities.",
   "date": "2024-12-25",
   "time": "05:09:40",
-  "tenant": "Emily  Allen",
+  "tenant": "Nobody",
   "imgh": "/static/images/3.jpg"
 },
 {

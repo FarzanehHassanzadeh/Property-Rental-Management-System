@@ -21,10 +21,6 @@
 
       <a href="home.html" class="logo">.</a>
 
-      <form action="" method="post" class="search-form">
-         <input type="text" name="search_box"  placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
 
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
@@ -86,7 +82,6 @@
          <div class="details">
             <h3>{{ property['property_name'] }}</h3>
             <p>{{ property['description'] }}</p>
-            <a href="{{ url_for('delete_playlist_page', objectID=property['_id']) }}" class="inline-btn">Delete Property</a>
          </div>
       </div>
    </div>

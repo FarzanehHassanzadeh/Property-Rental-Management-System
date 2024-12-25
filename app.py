@@ -1,8 +1,11 @@
+from xml.sax.handler import all_properties
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 from pymongo import MongoClient
 from user import User
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from bson.objectid import ObjectId
 import secrets  # Import secrets module for generating a secure secret key
 
@@ -163,16 +166,6 @@ def signup_page2():
 # Route for owner home page
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
-    # property_list = []
-    # if request.method == 'POST':
-    #     search_property_name = request.form['search_box']
-    #     if search_property_name == '':
-    #          property_list = property_owner_data.find()
-    #     else:
-    #
-    #          property_list = property_owner_data.find({'property_name':{'$regex': search_property_name,
-    #                                                                     '$options': 'i'}}) # '$options': 'i' is for no being case-sensitive
-
     property_list = []
 
     search_property_name = ''
@@ -256,14 +249,28 @@ def contact_page_owner():
 @app.route('/home/show_home_owner', methods=['GET', 'POST'])
 def show_page_owner():
     search_property_name = ''
+    property_list = []
 
     if request.method == 'POST':
-       search_property_name = request.form['search_box']
-    if search_property_name == '':
-         property_list = property_owner_data.find({'owner': global_fullname})
-    else:
-         property_list = property_owner_data.find({'property_name': {'$regex': search_property_name,
-                                                                    '$options': 'i'}, 'owner': global_fullname})  # '$options': 'i' is for no being case-sensitive
+        search_property_name = request.form['search_box']
+
+        location_property = request.form.get('location')
+        rent_price_property = request.form.get('rent_price')
+        rent_period_property = request.form.get('rent_period')
+        myQuery = {}
+
+        if location_property and location_property != '':
+            myQuery['location'] = {'$regex': str(location_property), '$options': 'i'}
+        if rent_price_property and rent_price_property != '':
+            myQuery['rent_price'] = '$' + str(rent_price_property)
+        if rent_period_property and rent_period_property != '':
+            myQuery['rent_period'] = str(rent_period_property)
+        if search_property_name and search_property_name != '':
+            myQuery['property_name'] = {'$regex': str(search_property_name), '$options': 'i'}
+        myQuery['owner'] = global_fullname
+
+        property_list = property_owner_data.find(myQuery)
+
     return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
 @app.route('/<objectID>/home/playlist')
@@ -475,43 +482,90 @@ def transfer_funds():
 
             # Check if there are sufficient funds
             if from_balance >= amount_to_transfer:
-                # Deduct from the source card
-                cards_data.update_one(
-                    {"card_number": from_card_number},
-                    {"$set": {"balance": from_balance - amount_to_transfer}}
-                )
-                # Add to the destination card
-                cards_data.update_one(
-                    {"card_number": to_card_number},
-                    {"$set": {"balance": to_balance + amount_to_transfer}}
-                )
 
                 new_balance = from_balance - amount_to_transfer
                 property_name = current_property['property_name']
                 property_rent_price = current_property['rent_price']
                 property_rent_period = current_property['rent_period']
+
                 current_time = datetime.now()
+
                 current_date = current_time.date().isoformat()
                 current_time = current_time.time().strftime('%H:%M:%S')
-                property_tenant_data.insert_one({'tenant': global_fullname,
-                                                 'property_name': property_name,
-                                                 'rent_price': property_rent_price,
-                                                 'rent_period': property_rent_period,
-                                                 'date': current_date,
-                                                 'time': current_time})
-                property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)},
-                                               {'$set': {'tenant': global_fullname,
-                                                         'date': current_date,
-                                                         'time': current_time}})
-                flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
 
-                     # Redirect to playlist2 after a successful transfer
-                flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
+                # check if the tenant has already rented the property or not.
+                if not property_tenant_data.find_one({'tenant': global_fullname, 'property_name': property_name}):
 
-        # Redirect to playlist2 after a successful transfer
-                return redirect(url_for('home_page_tenant'))
-                # Assumes you want to redirect to playlist2
 
+                    if current_property['rent_period'] == 'Monthly':
+                        future_rent_time = datetime.now() + relativedelta(months=1)
+                    elif current_property['rent_period'] == 'Weekly':
+                        future_rent_time = datetime.now() + relativedelta(weeks=1)
+                    elif current_property['rent_period'] == 'Daily':
+                        future_rent_time = datetime.now() + relativedelta(days=1)
+
+                    # the property_tenant_data will store the future_rent_time
+                    property_tenant_data.insert_one({'tenant': global_fullname,
+                                                     'property_name': property_name,
+                                                     'rent_price': property_rent_price,
+                                                     'rent_period': property_rent_period,
+                                                     'date': current_date,
+                                                     'time': current_time,
+                                                     'future_rent_time': future_rent_time
+                                                     })
+                    property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)},
+                                                   {'$set': {'tenant': global_fullname,
+                                                             'date': current_date,
+                                                             'time': current_time}})
+
+
+                    flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
+                    # Redirect to playlist2 after a successful transfer
+                    flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
+
+                    # Deduct from the source card
+                    cards_data.update_one(
+                        {"card_number": from_card_number},
+                        {"$set": {"balance": from_balance - amount_to_transfer}}
+                    )
+                    # Add to the destination card
+                    cards_data.update_one(
+                        {"card_number": to_card_number},
+                        {"$set": {"balance": to_balance + amount_to_transfer}}
+                    )
+                    # Redirect to playlist2 after a successful transfer
+                    return "<h1>Your first rent deducted.</h1>"
+                    # Assumes you want to redirect to playlist2
+                else:
+                    # The tenant has rented the property
+                    current_property_tenant_data = property_tenant_data.find_one(
+                        {'tenant': global_fullname, 'property_name': property_name})
+
+                    future_rent_time_property = current_property_tenant_data['future_rent_time']
+                    if datetime.now() < future_rent_time_property:
+                        return "<h1>Your renting time has not been arrived.</h1>"
+                    else:
+
+                        if current_property['rent_period'] == 'Monthly':
+                            future_rent_time = datetime.now() + relativedelta(months=1)
+                        elif current_property['rent_period'] == 'Weekly':
+                            future_rent_time = datetime.now() + relativedelta(weeks=1)
+                        elif current_property['rent_period'] == 'Daily':
+                            future_rent_time = datetime.now() + relativedelta(days=1)
+
+                        property_tenant_data.update_one({'tenant': global_fullname, 'property_name': property_name},
+                                                        {'$set': {'date': future_rent_time}})
+                        # Deduct from the source card
+                        cards_data.update_one(
+                            {"card_number": from_card_number},
+                            {"$set": {"balance": from_balance - amount_to_transfer}}
+                        )
+                        # Add to the destination card
+                        cards_data.update_one(
+                            {"card_number": to_card_number},
+                            {"$set": {"balance": to_balance + amount_to_transfer}}
+                        )
+                        return "<h1>Your last rent deducted.</h1>"
             else:
                flash("Insufficient funds in the source account.", "error")
         except ValueError:
@@ -534,5 +588,20 @@ def profile_owner():
 
     return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
 
+def release_rented_property():
+    properties = property_tenant_data.find()
+
+    for p in properties:
+        time_difference = datetime.now() - p['future_rent_time']
+
+        if time_difference > timedelta(days=4):
+            tenant = p['tenant']
+            property_name = p['property_name']
+
+            property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
+                                           {'$set': {'tenant':'Nobody'}})
+            property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
+
 if __name__ == '__main__':
+    release_rented_property()
     app.run(debug=True)
