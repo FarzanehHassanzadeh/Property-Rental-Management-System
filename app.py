@@ -343,10 +343,12 @@ def playlist_page2(objectID):
 app.secret_key = 'your_secret_key'
 @app.route('/transfer_funds2', methods=['POST'])
 def Payment_on_time():
-    objectID = request.form.get('objectID')  # دریافت objectID از فرم
+
     global global_objectID_property_owner, global_fullname, time_property
 
-    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+    current_property = property_owner_data.find_one({'_id': ObjectId(global_objectID_property_owner)})
+    # objectID = request.form.get('objectID')
+    # current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
     time_property = current_property['date']
     current_date = datetime.now().strftime("%Y-%m-%d")
     current_year, current_month, current_day = current_date.split('-')
@@ -357,7 +359,7 @@ def Payment_on_time():
     time_month = int(time_month)
     # current_date و time_property
     if current_month == (time_month+1):
-        return render_template('integrated_payment.html')
+        return render_template('integrated_payment.html',time=current_date)
     else:
         return render_template('start.html')
 

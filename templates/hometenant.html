@@ -55,67 +55,61 @@
                     <span class="circle"></span>
                 </a>
             </li>
-             <li class="list">
-                <a href="{{ url_for('show_page_tenant') }}">
+            <li class="list">
+                <a href="/">
                     <span class="icon">
-                        <ion-icon name="eye-outline"></ion-icon>
+                        <ion-icon name="add-circle-outline"></ion-icon>
                     </span>
-                    <span class="text">Show</span>
+                    <span class="text">Start home</span>
                     <span class="circle"></span>
                 </a>
             </li>
-             <li class="list">
-                <a href="{{ url_for('show_page_tenant') }}">
+            <li class="list">
+                <a href="{{ url_for('contact_page_tenant') }}">
                     <span class="icon">
-                        <ion-icon name="eye-outline"></ion-icon>
+                        <ion-icon name="call-outline"></ion-icon>
                     </span>
-                    <span class="text">Show</span>
+                    <span class="text">Contact us</span>
                     <span class="circle"></span>
                 </a>
             </li>
-             <li class="list">
-                <a href="{{ url_for('show_page_tenant') }}">
+            <li class="list">
+                <a href="#">
                     <span class="icon">
-                        <ion-icon name="eye-outline"></ion-icon>
+                        <ion-icon name="log-out-outline"></ion-icon>
                     </span>
-                    <span class="text">Show</span>
+                    <span class="text">Log out</span>
                     <span class="circle"></span>
                 </a>
             </li>
+            <div class="indicator"></div>
         </ul>
     </div>
 
+<div class="courses">
 
-<section class="courses">
-
-   <h1 class="heading">Properties</h1>
-
-   <div class="box-container">
-       {% for property in property_owner_list %}
-<!--    The elements-->
-      <div class="box">
-         <div class="tutor">
-<!--            <img src="images/pic-2.jpg" alt="">-->
-            <div class="info">
-               <h3>{{ property['property_name']}}</h3>
-               <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+      <h1 class="heading">Properties</h1>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for property in property_owner_list %}
+            <!-- The elements -->
+            <div class="swiper-slide">
+                <div class="card-item">
+                    <img src="/static/images/8.jpg" alt="User Image" class="user-image">
+                    <div class="user-name">
+                        <h2>{{ property['property_name']}}</h2>
+                        <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
+                    </div>
+                    <h2 class="user-name">Rent price: {{ property['rent_price'] }} Rent period: {{ property['rent_period'] }}</h2>
+                    <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="message-button">View details</a>
+                </div>
             </div>
-         </div>
-         <div class="thumb">
-<!--            <img src="images/thumb-1.png" alt="">-->
-<!--            <span>10 videos</span>-->
-         </div>
-         <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-
-                   <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="inline-btn">view details</a>
-      </div>
-<script src="{{ url_for('static', filename='js.js') }}"></script>
-                <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="inline-btn">view details</a>
-      </div>
-<!--The end of elements-->
-{% endfor %}
- </div>
-</section>
+                        {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
