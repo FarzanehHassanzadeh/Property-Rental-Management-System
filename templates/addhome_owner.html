@@ -1,91 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
-
-
-    <style>
-        body {
-            background-color: white;
-        }
-
-        .box-container {
-            display: flex;
-            justify-content: flex-start; /* تراز کردن به سمت چپ */
-            align-items: flex-start; /* تراز کردن به سمت بالا */
-            flex-direction: column; /* قرار دادن جعبه‌ها در یک ستون */
-            gap: 10px; /* فاصله بین جعبه‌ها */
-            position: absolute; /* موقعیت نسبی برای بالا سمت چپ */
-            top: 70px; /* فاصله از بالا */
-            left: 10px; /* فاصله از چپ */
-        }
-
-        .box {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 0, 0, 0.5);
-            padding: 10px; /* کاهش پدینگ */
-            border-radius: 8px;
-            text-align: left; /* تراز متن به چپ */
-            color: #0b0c0c;
-            width: 200px; /* عرض کمتر */
-            font-size: 0.9rem; /* کوچک‌تر کردن متن */
-        }
-
-        .box i {
-            font-size: 1.2rem; /* کوچک‌تر کردن آیکون */
-            margin-bottom: 5px;
-        }
-
-        .box h3 {
-            font-size: 1rem; /* کوچک‌تر کردن عنوان */
-            margin-bottom: 5px;
-        }
-
-        .box a {
-            font-size: 0.8rem; /* کوچک‌تر کردن لینک‌ها */
-            color: #efefef;
-            text-decoration: none;
-        }
-
-        .box a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register Property </title>
+       <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+       <!-- custom css file link  -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
 <body>
 
-        <div class="wrapper">
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo"></a>
+             <div class="icons">
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+   </section>
+</header>
 
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+      <div class="profile">
+      <img src="static/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+       <p class="role">owner</p>
+        <a href="" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+     <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>
+     </a> <a href="{{ url_for('home_owner_to_addhome') }}"><i class="fas fa-plus"></i><span>Add</span>
+     </a> <a href="{{ url_for('show_page_owner') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+        <a href="{{ url_for('contact_page_owner') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
 
-
+<section class="form-container">
    <form action="" method="POST" enctype="multipart/form-data">
       <h3>Add Property</h3>
       <p>Property Name <span>*</span></p>
-      <input type="text" name="property_name" placeholder="Enter Property name" required maxlength="50" class="input-field">
-      <p>Location <span>*</span></p>
-      <input type="text" name="location" placeholder="Enter Property location" required maxlength="100" class="input-field">
-      <p>Price <span>*</span></p>
-      <input type="text" name="rent_price" placeholder="Enter Property price" maxlength="20" class="input-field">
-
-      <p>Rent Period <span>*</span></p>
-      <input type="text" name="rent_period" placeholder="Enter Property rent period" maxlength="20" class="input-field">
-      <input type="text" name="owner_card_number" placeholder="Enter your card number" maxlength="20" class="input-field">
-      <p>Property Description <span>*</span></p>
-      <textarea name="description" placeholder="Enter Property description" required maxlength="500" class="input-field"></textarea>
-      <p>Select Image <span>*</span></p>
-      <input type="file" name="house_image" accept="image/*"  class="input-field">
-      <button type="submit" value="Register House" name="submit" class="btn"> Add property</button>
+             <input type="text" name="property_name" placeholder="Enter Property name" required maxlength="50" class="box">
+         <p>Location <span>*</span></p>
+         <input type="text" name="location" placeholder="Enter Property location" required maxlength="100" class="box">
+             <p>Price <span>*</span></p>
+      <input type="text" name="rent_price" placeholder="Enter Property price" maxlength="20" class="box">
+             <p>Rent Period <span>*</span></p>
+      <input type="text" name="rent_period" placeholder="Enter Property rent period" maxlength="20" class="box">
+      <input type="text" name="owner_card_number" placeholder="Enter your card number" maxlength="20" class="box">
+             <p>Property Description <span>*</span></p>
+      <textarea name="description" placeholder="Enter Property description" required maxlength="500" class="box"></textarea>
+             <p>Select Image <span>*</span></p>
+      <input type="file" name="house_image" accept="image/*"  class="box">
+             <button type="submit" value="Register House" name="submit" class="btn"> Add property</button>
    </form>
-        </div>
+</section>
+<footer class="footer">
+   &copy; copyright @ 2024 by <span>RealEstate Co.</span> | all rights reserved!
+</footer>
 
-
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='script2.js') }}"></script>
 
 </body>
 </html>

@@ -28,7 +28,7 @@ body {
     padding: 30px;
     text-align: center;
      background-color: rgba(63, 73, 76, 0.2);/* رنگ آبی بی‌حال */
-    border: 1px solid rgba(173, 216, 230, 0.6);
+    border: 1px solid rgb(82, 25, 104);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -89,12 +89,12 @@ textarea.contact-inputs {
     align-items: center;
     justify-content: space-between;
     margin: 25px 0 35px 0;
-    color: #4eccd0;
+    color: #521968;
 }
 
 .inline-btn {
-    background: #4eccd0;
-    color: #000;
+    background: #521968;
+    color: #ffffff;
     font-weight: 600;
     border: none;
     padding: 12px 20px;
@@ -107,7 +107,7 @@ textarea.contact-inputs {
 
 .inline-btn:hover {
     color: rgba(87, 97, 101, 0.5);
-    border-color: #4eccd0;
+    border-color: #521968;
     background: rgba(255, 255, 255, 0.15);
 }
 
@@ -120,7 +120,7 @@ textarea.contact-inputs {
 }
 
 .box {
-    background: pink; /* تغییر رنگ پس‌زمینه باکس‌ها به صورتی */
+    background: rgba(61, 72, 76, 0.6); /* تغییر رنگ پس‌زمینه باکس‌ها به صورتی */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(9,57,73); /* رنگ آبی بی‌حال */
@@ -132,7 +132,7 @@ textarea.contact-inputs {
 }
 
 .box a {
-    color: #0b0c0c;
+    color: #ffffff;
     text-decoration: none;
 }
 

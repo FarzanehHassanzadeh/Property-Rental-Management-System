@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/concat.css') }}">
     <style>
         body {
-            background-color: cadetblue;
+            background-color: #512368;
         }
 
         .box-container {
@@ -24,9 +24,12 @@
         }
 
         .box {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+
+ background-color: rgba(63, 73, 76, 0.2);/* رنگ آبی بی‌حال */
+    border: 1px solid rgb(84, 20, 106);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(8px);
+
             border: 1px solid rgba(0, 0, 0, 0.5);
             padding: 10px; /* کاهش پدینگ */
             border-radius: 8px;
@@ -48,7 +51,7 @@
 
         .box a {
             font-size: 0.8rem; /* کوچک‌تر کردن لینک‌ها */
-            color: #efefef;
+            color: #ffffff;
             text-decoration: none;
         }
 
