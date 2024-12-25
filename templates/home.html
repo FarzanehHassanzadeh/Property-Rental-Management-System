@@ -49,10 +49,10 @@
       <i class="fas fa-times"></i>
    </div>
    <div class="profile">
-      <img src="static/images/pic-1.jpg" class="image" alt="">
+      <img src="/static/images/img-2.jpg" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
-       <p class="role">owner</p>
-        <a href="" class="btn">view profile</a>
+      <p class="role">ownre</p>
+     <a href="{{ url_for('profile_owner') }}" class="btn">view profile</a>
    </div>
    <nav class="navbar">
           <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>

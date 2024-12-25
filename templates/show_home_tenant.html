@@ -44,10 +44,10 @@
       <i class="fas fa-times"></i>
    </div>
    <div class="profile">
-      <img src="static/images/img-2.jpg" class="image" alt="">
+      <img src="/static/images/img-2.jpg" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
-      <a href="" class="btn">view profile</a>
+     <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
    </div>
    <nav class="navbar">
       <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home</span></a>

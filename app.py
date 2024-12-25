@@ -8,9 +8,12 @@ import secrets  # Import secrets module for generating a secure secret key
 
 global_fullname = ''
 a=''
+global_email=''
 global_objectID_property_owner = ''
 global_objectID_property_tenant = ''
 time_property=''
+global_birthday=''
+global_username=''
 # Validation functions
 # Check the password if it is at least 8 characters and has capital, small letters, special characters and numbers
 def validate_password(password):
@@ -57,7 +60,7 @@ def start_page():
 @app.route('/login', methods=['POST', 'GET'])
 def login_page():
     login_stat = "owner_login"
-    global global_fullname
+    global global_fullname,global_email,global_birthday,global_username
     if request.method == 'POST':
         username_owner_input = request.form.get("username-owner")
         email_owner_input = request.form.get("email-owner")
@@ -66,6 +69,7 @@ def login_page():
         email_tenant_input = request.form.get("email-tenant")
         password_tenant_input = request.form.get("password-tenant")
         login_stat = request.form.get("login_status")
+
 
         if login_stat == "owner_login":
             user_record = users_data.find_one({
@@ -77,6 +81,9 @@ def login_page():
 
             if user_record:
                 global_fullname = f"{user_record['firstname']} {user_record['lastname']}"
+                global_email=user_record['email']
+                global_birthday = user_record['birthday']
+                global_username= user_record['username']
                 return redirect(url_for('home_page'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -91,6 +98,10 @@ def login_page():
 
             if user_record:
                 global_fullname = f"{user_record['firstname']} {user_record['lastname']}"
+                global_birthday = user_record['birthday']
+                global_email = user_record['email']
+                global_username = user_record['username']
+
                 return redirect(url_for('home_page_tenant'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -324,8 +335,10 @@ def rent_page_tenant():
 # Route for tenant contact page
 @app.route('/home2/contact', methods=['GET', 'POST'])
 def contact_page_tenant():
+
     if request.method == 'POST':
         contact_email = request.form['email']
+
         contact_name = request.form['name']
         contact_msg = request.form['msg']
 
@@ -508,6 +521,20 @@ def transfer_funds():
         flash("Cardholder name or card number is incorrect for one or both accounts.", "error")
 
     return render_template('integrated_payment.html', new_balance=new_balance)
+
+
+
+# Route for tenant rent home page
+@app.route('/home2/profile', methods=['GET', 'POST'])
+def profile_tenant():
+
+    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username)
+
+# Route for tenant rent home page
+@app.route('/home/profile', methods=['GET', 'POST'])
+def profile_owner():
+
+    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username)
 
 if __name__ == '__main__':
     app.run(debug=True)
