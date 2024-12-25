@@ -86,7 +86,7 @@
                     <div>
                         <h3>{{ property['property_name'] }}</h3>
                         <p>{{ property['description'] }}</p>
-                        
+
                         <form action="{{ url_for('transfer_funds', objectID=property['_id']) }}" method="post">
                             <button type="submit" class="message-button">Pay rent</button>
                         </form>

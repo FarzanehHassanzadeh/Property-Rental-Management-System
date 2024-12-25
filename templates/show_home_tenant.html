@@ -91,6 +91,11 @@
                      <h2 class="user-name">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h2>
 
                     <a href="{{ url_for('playlist_page2', objectID=property['_id']) }}" class="message-button">View details</a>
+                    <form action="{{ url_for('Payment_on_time') }}" method="post" style="display: inline;">
+                         <input type="hidden" name="objectID" value="{{ property['_id'] }}">
+                          <button type="submit" class="message-button">Payment on time</button>
+                        </form>
+
                 </div>
             </div>
             <!-- The end of elements -->

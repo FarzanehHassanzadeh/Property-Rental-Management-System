@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root{
-   /*--hue:223;*/
-   /*--trans-dur:0.4s;*/
-   /*--trans-timing:cubic-bezier(0.65,0,0.35,1) ;*/
-   /*font-size: calc(40px + (80 - 40)*(100vw - 320px)/(2560 - 320));*/
    --main-color:#8e44ad;
    --red:#e74c3c;
    --orange:#f39c12;
@@ -139,7 +135,7 @@ section{
 
 .header{
    position: sticky;
-   top:0; left:0; right: 0;
+   top:10; left:100px; right: 100px;
    background-color: var(--white);
    z-index: 1000;
    border-bottom: var(--border);
@@ -150,22 +146,25 @@ section{
    align-items: center;
    justify-content: space-between;
    position: relative;
-   padding: 1.5rem 2rem;
+   padding: 3rem 2rem;
 }
 
 .header .flex .logo{
-   font-size: 2.5rem;
+   font-size: 8rem;
    color: var(--black);
 }
+/*سرچچچچچچچ */
 
+
+/* --------- search box------------ */
 .header .flex .search-form{
-   width: 50rem;
+   width: 30rem;
    border-radius: .5rem;
    background-color: var(--light-bg);
    padding:1.5rem 2rem;
    display: flex;
    gap:2rem;
-
+   transform: translateX(+300px);
 }
 
 .header .flex .search-form input{
@@ -185,7 +184,7 @@ section{
 .header .flex .search-form button:hover{
    color: var(--main-color);
 }
-
+/*  */
 .header .flex .icons div{
    font-size: 2rem;
    color:var(--black);
@@ -203,10 +202,10 @@ section{
    background-color: var(--black);
    color:var(--white);
 }
-
+/* پروفایل بالا سمت راست */
 .header .flex .profile{
    position: absolute;
-   top:120%; right: 2rem;
+   top:120%; right: 22rem;
    background-color: var(--white);
    border-radius: .5rem;
    padding: 1.5rem;
@@ -230,19 +229,28 @@ section{
    margin-bottom: 1rem;
 }
 
-.header .flex .profile .name{
+.header .flex .profile .name {
    font-size: 2rem;
-   color:var(--black);
+   border: 2px solid black; /* اضافه کردن کادر براق مشکی */
+   backdrop-filter: blur(15px);
+   color: var(--black);
    overflow: hidden;
    text-overflow: ellipsis;
    white-space: nowrap;
+   margin-bottom: 1.5rem; /* افزایش فاصله بین ورودی‌ها */
+   padding: 0.5rem; /* اختیاری: اضافه کردن فاصله درون کادر */
+}
+
+.profile {
+   display: flex;
+   flex-direction: column; /* قرار دادن ورودی‌ها به صورت عمودی */
 }
 
 .header .flex .profile .role{
    font-size: 1.8rem;
    color: var(--light-color);
 }
-
+/* -/* ------پروفایل سمت چپ-------- */ */
 #search-btn{
    display: none;
 }
@@ -305,7 +313,7 @@ section{
    font-size: 1.8rem;
    color: var(--light-color);
 }
-
+/* ؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟ */
 .side-bar .navbar a{
    display: block;
    padding: 2rem;
@@ -313,7 +321,7 @@ section{
 }
 
 .side-bar .navbar a i{
-   margin-right: 1.5rem;
+   margin-right: 2rem;
    color:var(--main-color);
    transition: .2s linear;
 }
@@ -329,7 +337,7 @@ section{
 .side-bar .navbar a:hover i{
    margin-right: 2.5rem;
 }
-
+/* فاصله از چپ */
 .side-bar.active{
    left: -30rem;
 }
@@ -900,7 +908,7 @@ section{
    gap: 1.5rem;
    margin-bottom: 2rem;
 }
-
+/* ----------------- */
 .comments .box-container .box .user img{
    height: 5rem;
    width: 5rem;
@@ -1079,7 +1087,7 @@ section{
 .teacher-profile .details .flex p span{
    color: var(--main-color);
 }
-
+/* ------------------- */
 .user-profile .info{
    background-color: var(--white);
    border-radius: .5rem;
@@ -1130,14 +1138,14 @@ section{
    gap: 2rem;
    margin-bottom: 1rem;
 }
-
+/* مهم */
 .user-profile .info .box-container .box .flex i{
    font-size:2rem;
    color: var(--white);
    background-color: var(--black);
    text-align: center;
    border-radius: .5rem;
-   height: 5rem;
+   height: 15rem;
    width: 5rem;
    line-height: 4.9rem;
 }

@@ -10,7 +10,7 @@ global_fullname = ''
 a=''
 global_objectID_property_owner = ''
 global_objectID_property_tenant = ''
-
+time_property=''
 # Validation functions
 # Check the password if it is at least 8 characters and has capital, small letters, special characters and numbers
 def validate_password(password):
@@ -336,6 +336,31 @@ def playlist_page2(objectID):
     global_objectID_property_owner = objectID
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
     return render_template('playlist2.html', full_name=global_fullname, property=current_property)
+# -----------------------------------------------------------
+# /---------------------------------------------------
+# --------------------------------------
+
+app.secret_key = 'your_secret_key'
+@app.route('/transfer_funds2', methods=['POST'])
+def Payment_on_time():
+    objectID = request.form.get('objectID')  # دریافت objectID از فرم
+    global global_objectID_property_owner, global_fullname, time_property
+
+    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+    time_property = current_property['date']
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_year, current_month, current_day = current_date.split('-')
+    time_year, time_month, time_day = time_property.split('-')
+
+    new_balance = None
+    current_month = int(current_month)
+    time_month = int(time_month)
+    # current_date و time_property
+    if current_month == (time_month+1):
+        return render_template('integrated_payment.html')
+    else:
+        return render_template('start.html')
+
 
 
 @app.route('/transfer_funds', methods=['POST'])

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/n.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/circle1.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
 
     </style>
@@ -74,12 +75,12 @@
       <p class="role">owner</p>
     <h1 class="heading">Properties</h1>
 
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
+    <div class="box-container">
+        <div class="tutor">
             {% for property in property_owner_list  %}
             <!-- The elements -->
-            <div class="swiper-slide">
-                <div class="card-item">
+{#            <div class="swiper-slide">#}
+                <div class="box">
                     <img src="/static/images/8.jpg" alt="User Image" class="user-image">
                     <div class="user-name">
                          <h2>{{ property['property_name']}}</h2>
@@ -88,7 +89,7 @@
                             <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
                         <a href="{{ url_for('playlist_page', objectID=property['_id']) }}" class="message-button">view detail </a>
                 </div>
-            </div>
+{#            </div>#}
             </div>
             <!-- The end of elements -->
             {% endfor %}
