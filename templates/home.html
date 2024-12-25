@@ -82,7 +82,7 @@
            <img src="/static/images/999.png" alt="">
          </div>
                   <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
-         <a href="{{ url_for('playlist_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
+         <a href="{{ url_for('property_details_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
       </div>
 <!--The end of elements-->
 {% endfor %}

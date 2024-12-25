@@ -1,12 +1,14 @@
-from xml.sax.handler import all_properties
-
 from flask import Flask, render_template, request, redirect, url_for, flash
 from pymongo import MongoClient
+from bson.objectid import ObjectId
+
 from user import User
 import re
+
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from bson.objectid import ObjectId
+
+
 import secrets  # Import secrets module for generating a secure secret key
 
 global_fullname = ''
@@ -273,15 +275,15 @@ def show_page_owner():
 
     return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
-@app.route('/<objectID>/home/playlist')
-def playlist_page(objectID):
+@app.route('/<objectID>/home/property_details', methods=['GET', 'POST'])
+def property_details_page(objectID):
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
 
-    return render_template('playlist.html', full_name=global_fullname,property=current_property)
+    return render_template('property_details.html', full_name=global_fullname,property=current_property)
 
 
-@app.route('/<objectID>/home/playlist/delete', methods=['GET', 'POST'])
-def delete_playlist_page(objectID):
+@app.route('/<objectID>/home/property_details/delete', methods=['GET', 'POST'])
+def delete_property_details_page(objectID):
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
 
     # Check if the property exists
@@ -303,6 +305,14 @@ def delete_playlist_page(objectID):
 # Make sure to define routes for 'some_other_page' or handle redirection appropriately
 # **********************   Tenant ****************************************
 # Route for tenant home page
+
+
+# Route for tenant rent home page
+@app.route('/home/profile', methods=['GET', 'POST'])
+def profile_owner():
+
+    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
+
 @app.route('/home2', methods=['GET', 'POST'])
 def home_page_tenant():
     property_list = []
@@ -311,7 +321,6 @@ def home_page_tenant():
     date_property = ''
     time_property = ''
     amount_property = ''
-
 
     if request.method == 'POST':
         search_property_name = request.form['search_box']
@@ -337,14 +346,8 @@ def home_page_tenant():
         property_list = property_owner_data.find(myQuery)
     return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list,img=global_img)
 
-# Route for tenant rent home page
-@app.route('/home2/rent_tenant', methods=['GET', 'POST'])
-def rent_page_tenant():
-
-    return render_template('rent_tenant.html', full_name=global_fullname)
-
 # Route for tenant contact page
-@app.route('/home2/contact', methods=['GET', 'POST'])
+@app.route('/contact', methods=['GET', 'POST'])
 def contact_page_tenant():
 
     if request.method == 'POST':
@@ -389,7 +392,7 @@ def show_page_tenant():
         property_list = property_owner_data.find(myQuery)
 
     return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list,img=global_img)
-@app.route('/<objectID>/home2/show_page_tenant/end_rent', methods=['GET', 'POST'])
+@app.route('/<objectID>/home2/show_page_tenant/property_details2/end_rent', methods=['GET', 'POST'])
 def end_renting(objectID):
     global global_objectID_property_owner
 
@@ -401,44 +404,34 @@ def end_renting(objectID):
     else:
         return "<h1>there is something wrong</h1>"
 
-@app.route('/<objectID>/home2/show_page_tenant/playlist2', methods=['GET', 'POST'])
-def playlist_page2(objectID):
+@app.route('/<objectID>/home2/show_page_tenant/property_details2', methods=['GET', 'POST'])
+def property_details_page2(objectID):
     global global_objectID_property_owner
 
     global_objectID_property_owner = objectID
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
-    return render_template('playlist2.html', full_name=global_fullname, property=current_property,img=global_img)
+    return render_template('property_details2.html', full_name=global_fullname, property=current_property,img=global_img)
 # -----------------------------------------------------------
-# /---------------------------------------------------
-# --------------------------------------
+@app.route('/home2/profile', methods=['GET', 'POST'])
+def profile_tenant():
 
-app.secret_key = 'your_secret_key'
-@app.route('/<objectID>/transfer_funds2', methods=['POST'])
-def Payment_on_time(objectID):
-
-    global global_objectID_property_owner, global_fullname, time_property
-    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
-    # objectID = request.form.get('objectID')
-    # current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
-    time_property = current_property['date']
-    current_date = datetime.now().strftime("%Y-%m-%d")
-    current_year, current_month, current_day = current_date.split('-')
-    time_year, time_month, time_day = time_property.split('-')
-
-    new_balance = None
-    current_month = int(current_month)
-    time_month = int(time_month)
-    # current_date و time_property
-    if current_month == (time_month+1):
-        return redirect(url_for('transfer_funds'),objectID)
-
-    else:
-        return render_template('start.html')
-
+    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
 
 
 @app.route('/transfer_funds', methods=['POST'])
 def transfer_funds():
+    def calculate_and_update_balance():
+        # Deduct from the source card
+        cards_data.update_one(
+            {"card_number": from_card_number},
+            {"$set": {"balance": from_balance - amount_to_transfer}}
+        )
+        # Add to the destination card
+        cards_data.update_one(
+            {"card_number": to_card_number},
+            {"$set": {"balance": to_balance + amount_to_transfer}}
+        )
+
     global global_objectID_property_owner, global_fullname
     new_balance = None
 
@@ -523,16 +516,7 @@ def transfer_funds():
                     # Redirect to playlist2 after a successful transfer
                     flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
 
-                    # Deduct from the source card
-                    cards_data.update_one(
-                        {"card_number": from_card_number},
-                        {"$set": {"balance": from_balance - amount_to_transfer}}
-                    )
-                    # Add to the destination card
-                    cards_data.update_one(
-                        {"card_number": to_card_number},
-                        {"$set": {"balance": to_balance + amount_to_transfer}}
-                    )
+                    calculate_and_update_balance()
                     # Redirect to playlist2 after a successful transfer
                     return "<h1>Your first rent deducted.</h1>"
                     # Assumes you want to redirect to playlist2
@@ -555,16 +539,7 @@ def transfer_funds():
 
                         property_tenant_data.update_one({'tenant': global_fullname, 'property_name': property_name},
                                                         {'$set': {'date': future_rent_time}})
-                        # Deduct from the source card
-                        cards_data.update_one(
-                            {"card_number": from_card_number},
-                            {"$set": {"balance": from_balance - amount_to_transfer}}
-                        )
-                        # Add to the destination card
-                        cards_data.update_one(
-                            {"card_number": to_card_number},
-                            {"$set": {"balance": to_balance + amount_to_transfer}}
-                        )
+                        calculate_and_update_balance()
                         return "<h1>Your last rent deducted.</h1>"
             else:
                flash("Insufficient funds in the source account.", "error")
@@ -577,16 +552,6 @@ def transfer_funds():
     return render_template('integrated_payment.html', new_balance=new_balance)
 
 # Route for tenant rent home page
-@app.route('/home2/profile', methods=['GET', 'POST'])
-def profile_tenant():
-
-    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
-
-# Route for tenant rent home page
-@app.route('/home/profile', methods=['GET', 'POST'])
-def profile_owner():
-
-    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
 
 def release_rented_property():
     properties = property_tenant_data.find()
