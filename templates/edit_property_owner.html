@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register Property </title>
+       <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+       <!-- custom css file link  -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo"></a>
+             <div class="icons">
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+      <div class="profile">
+      <img src="/static/images/img-2.jpg" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+       <p class="role">owner</p>
+       <a href="{{ url_for('profile_owner') }}" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+     <a href="{{ url_for('home_page') }}"><i class="fas fa-home"></i><span>Home </span>
+     </a> <a href="{{ url_for('home_owner_to_addhome') }}"><i class="fas fa-plus"></i><span>Add</span>
+     </a> <a href="{{ url_for('show_page_owner') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+        <a href="{{ url_for('contact_page_owner') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<section class="form-container">
+   <form action="" method="POST" enctype="multipart/form-data">
+      <h3>Add Property</h3>
+      <p>Property Name <span>*</span></p>
+             <input type="text" name="property_name" value="{{ property['property_name'] }}" placeholder="Enter Property name" required maxlength="50" class="box">
+         <p>Location <span>*</span></p>
+         <input type="text" name="location" value="{{  property['location']  }}" placeholder="Enter Property location" required maxlength="100" class="box">
+             <p>Price <span>*</span></p>
+      <input type="text" name="rent_price" value="{{  property['rent_price']  }}" placeholder="Enter Property price" maxlength="20" class="box">
+             <p>Rent Period <span>*</span></p>
+      <input type="text" name="rent_period" value="{{  property['rent_period']  }}" placeholder="Enter Property rent period" maxlength="20" class="box">
+             <p>Property Description <span>*</span></p>
+      <textarea name="description" placeholder="Enter Property description"  maxlength="500" class="box">{{  property['description']  }}</textarea>
+             <p>Select Image <span>*</span></p>
+      <input type="file" name="house_image" value="{{  property['imgh']  }}" accept="image/*" class="box">
+             <button type="submit" value="Register House" name="submit" class="btn"> Add property</button>
+   </form>
+</section>
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='script2.js') }}"></script>
+
+</body>
+</html>

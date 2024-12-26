@@ -233,19 +233,22 @@ def home_owner_to_addhome():
         description = request.form['description']
         image = request.files['house_image']
 
-        image_name = secure_filename(image.filename)
+        if image and image != '':
+            image_name = secure_filename(image.filename)
 
-        if not os.path.exists(UPLOAD_FOLDER):
-            os.makedirs(UPLOAD_FOLDER)
+            if not os.path.exists(UPLOAD_FOLDER):
+                os.makedirs(UPLOAD_FOLDER)
 
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
+            image.save(image_path)
 
-        image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
-        image.save(image_path)
+            # image_url = url_for('uploaded_file', filename=image_name)
+            image_path = os.path.join(UPLOAD_FOLDER, image_name)
 
-        # image_url = url_for('uploaded_file', filename=image_name)
-        image_path = os.path.join(UPLOAD_FOLDER, image_name)
+            image_path_final = '/' + image_path.replace('\\', '/')
+        else:
+            image_path_final = ''
 
-        image_path_final ='/' +  image_path.replace('\\', '/')
         fullname = global_fullname
 
         current_time = datetime.now()
@@ -313,6 +316,65 @@ def show_page_owner():
 
     return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
+@app.route('/<objectID>/home/edit_property', methods=['GET', 'POST'])
+def edit_property(objectID):
+    global global_fullname
+    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+    if request.method == 'POST':
+          if current_property['tenant'] == 'Nobody':
+              if (request.form['property_name'] == ''
+                  and request.form['location'] == ''
+                  and request.form['rent_price'] == ''
+                  and request.form['rent_period'] == ''
+                  and request.form['description'] == ''
+                  and request.form['house_image']) == '':
+                  return render_template('edit_property_owner.html', full_name=global_fullname,
+                                         property=current_property)
+              else:
+                  house_name = request.form['property_name']
+                  location = request.form['location']
+                  rent_price = request.form['rent_price']
+                  rent_period = request.form['rent_period']
+                  description = request.form['description']
+                  image = request.files['house_image']
+
+                  myQuery = {}
+
+                  if house_name and house_name != '':
+                      myQuery['property_name'] = str(house_name)
+                  else:
+                      myQuery['property_name'] = current_property['property_name']
+
+                  if location and location != '':
+                      myQuery['location'] = str(location)
+                  else:
+                      myQuery['location'] = current_property['location']
+
+                  if rent_price and rent_price != '':
+                      myQuery['rent_price'] = str(rent_price)
+                  else:
+                      myQuery['rent_price'] = current_property['rent_price']
+
+                  if rent_period and rent_period != '':
+                      myQuery['rent_period'] = str(rent_period)
+                  else:
+                      myQuery['rent_period'] = current_property['rent_period']
+
+                  if description and description != '':
+                      myQuery['description'] = str(description)
+                  else:
+                      myQuery['description'] = current_property['description']
+
+                  if image and image != '':
+                      myQuery['imgh'] = image
+                  else:
+                      myQuery['imgh'] = current_property['imgh']
+
+                  property_owner_data.update_one({'_id': ObjectId(objectID)},{'$set': myQuery})
+          else:
+              return "<h1>Sorry. The property is in rent.</h1>"
+
+    return render_template('edit_property_owner.html', full_name=global_fullname, property=current_property)
 @app.route('/<objectID>/home/property_details', methods=['GET', 'POST'])
 def property_details_page(objectID):
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})

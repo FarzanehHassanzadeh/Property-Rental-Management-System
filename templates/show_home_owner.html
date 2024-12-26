@@ -88,7 +88,8 @@
 <!--         </div>-->
                   <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
          <a href="{{ url_for('property_details_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
-          <a href="{{ url_for('delete_property_details_page', objectID=property['_id']) }}" class="inline-btn">Delete Property</a>
+          <a href="{{ url_for('delete_property_details_page', objectID=property['_id']) }}" class="inline-btn">delete Property</a>
+          <a href="{{ url_for('edit_property', objectID=property['_id']) }}" class="inline-btn">edit</a>
       </div>
 <!--The end of elements-->
 {% endfor %}
