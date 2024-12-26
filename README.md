@@ -44,10 +44,10 @@ Certainly! Here's the text translated to English:
 6. After successful registration and login, owners and tenants are directed to their respective sections.
 
 ### Owners:
-   - Click on **Add** to list your properties for sale or rent.
+   - Click on **Add** to add your properties for rent.
    - On the **Home Owner** page, use the magnifying glass at the top of the page to view properties you have listed for rent or sale.
-   - After viewing the properties, you can delete any property listed for rent or sale.
-   - Use **View Profile** to access your profile and view information such as name, country, birth date, and the calendar of rented properties.
+   - On the **Show** you can see your property, After viewing the your properties, you can delete any property that don't want it anymore.
+   - Use **View Profile** to access your profile and view information such as name, country, birth date, and the calendar or history of rented properties.
 
 ### Tenants:
    - After logging into their **Home** page, tenants can use the magnifying glass at the top of the page and property features to search for desired properties. 
@@ -68,7 +68,7 @@ Certainly! Here's the text translated to English:
 ## Contact
 For questions, suggestions, and issues, please contact:
 - **Email**: hsnzadhfrzanh234@gmail.com
-- **Email**: kiarsh.dalir2003@gmail.com
+- **Email**: dalirkiarash2003@gmail.com
 ```
 
 Feel free to make any adjustments or let me know if there are additional details you'd like to include!
