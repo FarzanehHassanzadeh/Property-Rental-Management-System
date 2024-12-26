@@ -602,17 +602,17 @@ def transfer_funds():
 
 def release_rented_property():
     properties = property_tenant_data.find()
-    #
-    # for p in properties:
-    #     time_difference = datetime.now() - p['future_rent_time']
-    #
-    #     if time_difference > timedelta(days=4):
-    #         tenant = p['tenant']
-    #         property_name = p['property_name']
-    #
-    #         property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
-    #                                        {'$set': {'tenant':'Nobody'}})
-    #         property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
+
+    for p in properties:
+         time_difference = datetime.now() - p['future_rent_time']
+
+         if time_difference > timedelta(days=4):
+             tenant = p['tenant']
+             property_name = p['property_name']
+
+             property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
+                                            {'$set': {'tenant':'Nobody'}})
+             property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
 
 
 
