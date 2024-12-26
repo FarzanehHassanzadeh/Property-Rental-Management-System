@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from werkzeug.utils import secure_filename, send_from_directory
+
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+
 
 from user import User
 import re
@@ -8,6 +11,7 @@ import re
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
+import os
 
 import secrets  # Import secrets module for generating a secure secret key
 
@@ -214,6 +218,10 @@ def home_page():
 
     return render_template('home.html', full_name=global_fullname, property_owner_list=property_list)
 
+
+UPLOAD_FOLDER = os.path.join('static', 'images')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # Route for owner add home page
 @app.route('/home/addhome_owner', methods=['GET', 'POST'])
 def home_owner_to_addhome():
@@ -223,6 +231,21 @@ def home_owner_to_addhome():
         rent_price = request.form['rent_price']
         rent_period = request.form['rent_period']
         description = request.form['description']
+        image = request.files['house_image']
+
+        image_name = secure_filename(image.filename)
+
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
+
+
+        image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
+        image.save(image_path)
+
+        # image_url = url_for('uploaded_file', filename=image_name)
+        image_path = os.path.join(UPLOAD_FOLDER, image_name)
+
+        image_path_final ='/' +  image_path.replace('\\', '/')
         fullname = global_fullname
 
         current_time = datetime.now()
@@ -238,12 +261,14 @@ def home_owner_to_addhome():
             'description': description,
             'date': current_date,
             'time': current_time,
-            'tenant' : 'Nothing',
-            'imgh': ''
+            'tenant' : 'Nobody',
+            'imgh': image_path_final
         })
 
     return render_template('addhome_owner.html', full_name=global_fullname)
-
+# @app.route('/static/images/<filename>')
+# def uploaded_file(filename):
+#     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 # Route for owner contact page
 @app.route('/home/contact', methods=['GET', 'POST'])
 def contact_page_owner():

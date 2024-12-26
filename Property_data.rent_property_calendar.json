@@ -9,4 +9,16 @@
   "date": "2024-12-26",
   "time": "17:36:08",
   "action": "deduction"
+},
+{
+  "_id": {
+    "$oid": "676dcb971c828ac7896aa900"
+  },
+  "property_name": "Johnson's Beach House",
+  "owner": "Emma Johnson",
+  "tenant": "Emily  Allen",
+  "rent_price": "$2500",
+  "date": "2024-12-27",
+  "time": "01:03:11",
+  "action": "deduction"
 }]

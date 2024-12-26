@@ -46,7 +46,7 @@
       <i class="fas fa-times"></i>
    </div>
    <div class="profile">
-      <img src="{{img}}" class="image" alt="">
+      <img src="/static/images/img-2.jpg" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
       <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
@@ -66,18 +66,23 @@
    <div class="box-container">
       {% for property in property_owner_list %}
       <!-- The elements -->
-      <div class="box">
+       <div class="box">
          <div class="tutor">
-              <img src="/static/images/1.jpg" alt="">
+             {%   if property['imgh'] != ''  %}
+               <img src="{{ property['imgh'] }}" alt="">
+             {% else %}
+                         <img src="" alt="">
+             {%  endif  %}
+
             <div class="info">
-               <h3>{{ property['property_name']}}</h3>
+                           <h3>{{ property['property_name']}}</h3>
                <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
-            </div>
+                            </div>
          </div>
-         <div class="thumb">
-              <img src="/static/images/1.jpg" alt="">
-         </div>
-         <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
+<!--         <div class="thumb">-->
+<!--           <img src="/static/images/999.png" alt="">-->
+<!--         </div>-->
+                  <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
          <a href="{{ url_for('property_details_page2', objectID=property['_id']) }}" class="inline-btn">view details</a>
       </div>
       <!-- The end of elements -->

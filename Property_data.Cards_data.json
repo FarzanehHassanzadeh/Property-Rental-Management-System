@@ -4,7 +4,7 @@
   "cardholderlastname": "Johnson",
   "card_number": "1234567890123456",
   "cvv": "1234",
-  "balance": 74000,
+  "balance": 76500,
   "password": "6281"
 },
 {
@@ -94,6 +94,6 @@
   "cardholderlastname": "Allen",
   "card_number": "1234567890123466",
   "cvv": "1234",
-  "balance": 48500,
+  "balance": 46000,
   "password": "1234"
 }]
