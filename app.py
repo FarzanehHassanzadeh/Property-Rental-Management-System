@@ -16,10 +16,12 @@ a=''
 global_email=''
 global_objectID_property_owner = ''
 global_objectID_property_tenant = ''
+
 time_property=''
 global_birthday=''
 global_username=''
 global_img=''
+global_country=''
 
 # Validation functions
 # Check the password if it is at least 8 characters and has capital, small letters, special characters and numbers
@@ -39,6 +41,7 @@ def validate_birthday(birthday):
         return True
     except ValueError:
         return False
+
 
 # This initiates the Flask application
 app = Flask(__name__)
@@ -67,7 +70,7 @@ def start_page():
 @app.route('/login', methods=['POST', 'GET'])
 def login_page():
     login_stat = "owner_login"
-    global global_fullname,global_email,global_birthday,global_username,global_img
+    global global_fullname,global_email,global_birthday,global_username,global_img,global_country
     if request.method == 'POST':
         username_owner_input = request.form.get("username-owner")
         email_owner_input = request.form.get("email-owner")
@@ -92,7 +95,7 @@ def login_page():
                 global_birthday = user_record['birthday']
                 global_username= user_record['username']
                 global_img= user_record['img']
-
+                global_country=user_record['country']
                 return redirect(url_for('home_page'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -111,6 +114,7 @@ def login_page():
                 global_email = user_record['email']
                 global_username = user_record['username']
                 global_img = user_record['img']
+                global_country = user_record['country']
                 return redirect(url_for('home_page_tenant'))
             else:
                 return render_template('login.html', login_status=login_stat)
@@ -130,7 +134,7 @@ def signup_page():
             users_data.find_one({'email': request.form['email'], 'role': 'owner'})):
             return render_template('signup.html')
 
-        user = User(request.form['username'], request.form['firstname'], request.form['lastname'],
+        user = User(request.form['coutry'],request.form['username'], request.form['firstname'], request.form['lastname'],
                     request.form['password'], request.form['email'], request.form['birthday'], Role='owner')
 
         d = dict(user.__dict__)
@@ -146,6 +150,7 @@ def signup_page2():
     if request.method == 'POST':
         if (not validate_password(request.form['password']) or
             not validate_email(request.form['email']) or
+
             not validate_birthday(request.form['birthday'])):
             return render_template('signup2.html')
 
@@ -153,7 +158,7 @@ def signup_page2():
             users_data.find_one({'email': request.form['email'], 'role': 'tenant'})):
             return render_template('signup2.html')
 
-        user = User(request.form['username'], request.form['firstname'], request.form['lastname'],
+        user = User(request.form['coutry'],request.form['username'], request.form['firstname'], request.form['lastname'],
                     request.form['password'], request.form['email'], request.form['birthday'], Role='tenant')
 
         d = dict(user.__dict__)
@@ -311,7 +316,7 @@ def delete_property_details_page(objectID):
 @app.route('/home/profile', methods=['GET', 'POST'])
 def profile_owner():
 
-    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
+    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img,country=global_country)
 
 @app.route('/home2', methods=['GET', 'POST'])
 def home_page_tenant():
@@ -410,12 +415,12 @@ def property_details_page2(objectID):
 
     global_objectID_property_owner = objectID
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
-    return render_template('property_details2.html', full_name=global_fullname, property=current_property,img=global_img)
+    return render_template('property_details2.html', full_name=global_fullname, property=current_property,img=global_img,country=global_country)
 # -----------------------------------------------------------
 @app.route('/home2/profile', methods=['GET', 'POST'])
 def profile_tenant():
 
-    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img)
+    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img,country=global_country)
 
 
 @app.route('/transfer_funds', methods=['POST'])
