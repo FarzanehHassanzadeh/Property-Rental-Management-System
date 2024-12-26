@@ -9,7 +9,8 @@
   "email": "dalirkiarash2003@gmail.com",
   "birthday": "2003-12-10",
   "role": "owner",
-  "imge": "/static/images/img-2.jpg"
+  "imge": "/static/images/img-2.jpg",
+  "country":"us"
 },
 {
   "_id": {
@@ -22,7 +23,8 @@
   "email": "emmajohnson@gmail.com",
   "birthday": "1995-04-15",
   "role": "owner",
-  "img": "/static/images/img-2.jpg"
+  "img": "/static/images/img-2.jpg",
+   "country":"us"
 },
 {
   "_id": {
@@ -34,7 +36,8 @@
   "password": "Lord1234",
   "email": "liamsmith@gmail.com",
   "birthday": "1993-06-22",
-  "role": "owner"
+  "role": "owner",
+   "country":"us"
 },
 {
   "_id": {
@@ -46,7 +49,8 @@
   "password": "Lord1234",
   "email": "oliviabrown@gmail.com",
   "birthday": "1994-09-03",
-  "role": "owner"
+  "role": "owner",
+   "country":"us"
 },
 {
   "_id": {
@@ -58,7 +62,8 @@
   "password": "Lord1234",
   "email": "noahdavis@gmail.com",
   "birthday": "1992-01-19",
-  "role": "owner"
+  "role": "owner",
+   "country":"us"
 },
 {
   "_id": {
@@ -70,7 +75,8 @@
   "password": "Lord1234",
   "email": "avamiller@gmail.com",
   "birthday": "1996-02-08",
-  "role": "owner"
+  "role": "owner",
+   "country":"us"
 },
 {
   "_id": {
@@ -82,7 +88,8 @@
   "password": "Lord1234",
   "email": "sophiawilson@gmail.com",
   "birthday": "1995-07-27",
-  "role": "owner"
+  "role": "owner",
+   "country":"us"
 },
 {
   "_id": {
@@ -95,7 +102,8 @@
   "email": "emily.allen@gmail.com",
   "birthday": "1995-03-28",
   "role": "tenant",
-  "img": "/static/images/img-4.jpg"
+  "img": "/static/images/img-4.jpg",
+   "country":"us"
 },
 {
   "_id": {
@@ -107,5 +115,6 @@
   "password": "Lord1234",
   "email": "michael.walker@gmail.com",
   "birthday": "1995-03-28",
-  "role": "tenant"
+  "role": "tenant",
+   "country":"us"
 }]
