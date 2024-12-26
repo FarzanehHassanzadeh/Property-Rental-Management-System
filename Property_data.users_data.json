@@ -2,6 +2,7 @@
   "_id": {
     "$oid": "67589c281cf449170b5572ef"
   },
+  "country": "Iran",
   "username": "Kiarash2003",
   "firstname": "Kiarash",
   "lastname": "Dalir",
@@ -9,12 +10,13 @@
   "email": "dalirkiarash2003@gmail.com",
   "birthday": "2003-12-10",
   "role": "owner",
-  "imge": "/static/images/img-2.jpg"
+  "img": "/static/images/img-2.jpg"
 },
 {
   "_id": {
     "$oid": "67589c811cf449170b5572f0"
   },
+  "country": "The USA",
   "username": "emmaj2024",
   "firstname": "Emma",
   "lastname": "Johnson",
@@ -28,66 +30,77 @@
   "_id": {
     "$oid": "67589ce51cf449170b5572f1"
   },
+  "country": "The USA",
   "username": "liamsmith24",
   "firstname": "Liam",
   "lastname": "Smith",
   "password": "Lord1234",
   "email": "liamsmith@gmail.com",
   "birthday": "1993-06-22",
-  "role": "owner"
+  "role": "owner",
+  "img": ""
 },
 {
   "_id": {
     "$oid": "67589d1a1cf449170b5572f2"
   },
+  "country": "The USA",
   "username": "oliviab2024",
   "firstname": "Olivia",
   "lastname": "Brown",
   "password": "Lord1234",
   "email": "oliviabrown@gmail.com",
   "birthday": "1994-09-03",
-  "role": "owner"
+  "role": "owner",
+  "img": ""
 },
 {
   "_id": {
     "$oid": "67589d551cf449170b5572f3"
   },
+  "country": "The USA",
   "username": "noahd2024",
   "firstname": "Noah",
   "lastname": "Davis",
   "password": "Lord1234",
   "email": "noahdavis@gmail.com",
   "birthday": "1992-01-19",
-  "role": "owner"
+  "role": "owner",
+  "img": ""
 },
 {
   "_id": {
     "$oid": "67589d891cf449170b5572f4"
   },
+  "country": "The USA",
   "username": "avamiller24",
   "firstname": "Ava",
   "lastname": "Miller",
   "password": "Lord1234",
   "email": "avamiller@gmail.com",
   "birthday": "1996-02-08",
-  "role": "owner"
+  "role": "owner",
+  "img": ""
 },
 {
   "_id": {
     "$oid": "67589dd01cf449170b5572f5"
   },
+  "country": "The USA",
   "username": "sophiaw2024",
   "firstname": "Sophia",
   "lastname": "Wilson",
   "password": "Lord1234",
   "email": "sophiawilson@gmail.com",
   "birthday": "1995-07-27",
-  "role": "owner"
+  "role": "owner",
+  "img": ""
 },
 {
   "_id": {
     "$oid": "6758b3c13b00d40c5391d2d9"
   },
+  "country": "The USA",
   "username": "emilya2024",
   "firstname": "Emily",
   "lastname": " Allen",
@@ -101,11 +114,13 @@
   "_id": {
     "$oid": "6758b6322d28a73b5b1cc9fc"
   },
+  "country": "The USA",
   "username": "michaelw2024",
   "firstname": "Michael",
   "lastname": "Walker",
   "password": "Lord1234",
   "email": "michael.walker@gmail.com",
   "birthday": "1995-03-28",
-  "role": "tenant"
+  "role": "tenant",
+  "img": ""
 }]

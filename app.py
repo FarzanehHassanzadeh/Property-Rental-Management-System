@@ -75,9 +75,11 @@ def login_page():
         username_owner_input = request.form.get("username-owner")
         email_owner_input = request.form.get("email-owner")
         password_owner_input = request.form.get("password-owner")
+
         username_tenant_input = request.form.get("username-tenant")
         email_tenant_input = request.form.get("email-tenant")
         password_tenant_input = request.form.get("password-tenant")
+
         login_stat = request.form.get("login_status")
 
 
@@ -134,7 +136,7 @@ def signup_page():
             users_data.find_one({'email': request.form['email'], 'role': 'owner'})):
             return render_template('signup.html')
 
-        user = User(request.form['coutry'],request.form['username'], request.form['firstname'], request.form['lastname'],
+        user = User(request.form['country'],request.form['username'], request.form['firstname'], request.form['lastname'],
                     request.form['password'], request.form['email'], request.form['birthday'], Role='owner')
 
         d = dict(user.__dict__)
@@ -158,7 +160,7 @@ def signup_page2():
             users_data.find_one({'email': request.form['email'], 'role': 'tenant'})):
             return render_template('signup2.html')
 
-        user = User(request.form['coutry'],request.form['username'], request.form['firstname'], request.form['lastname'],
+        user = User(request.form['country'],request.form['username'], request.form['firstname'], request.form['lastname'],
                     request.form['password'], request.form['email'], request.form['birthday'], Role='tenant')
 
         d = dict(user.__dict__)
@@ -214,7 +216,6 @@ def home_owner_to_addhome():
         rent_price = request.form['rent_price']
         rent_period = request.form['rent_period']
         description = request.form['description']
-        card_number = request.form['owner_card_number']
         fullname = global_fullname
 
         current_time = datetime.now()
@@ -228,7 +229,6 @@ def home_owner_to_addhome():
             'rent_price': rent_price,
             'rent_period': rent_period,
             'description': description,
-            'owner_card_number': card_number,
             'date': current_date,
             'time': current_time,
             'rent_status' : 'Nothing'
