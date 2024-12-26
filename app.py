@@ -129,6 +129,7 @@ def login_page():
 # This is for signup page for somebody wants to signup as an owner
 @app.route('/signup', methods=['POST', 'GET'])
 def signup_page():
+    global global_fullname
     if request.method == 'POST':
         if (not validate_password(request.form['password']) or
             not validate_email(request.form['email']) or
@@ -146,13 +147,14 @@ def signup_page():
         d['img'] = ''
         users_data.insert_one(d)
         global_fullname = f"{request.form['firstname']} {request.form['lastname']}"
-        return redirect(url_for('home_page', fullname=global_fullname))
+        return redirect(url_for('home_page'))
 
     return render_template('signup.html')
 
 # This is for signup page for somebody wants to signup as a tenant
 @app.route('/signup3', methods=['POST', 'GET'])
 def signup_page2():
+    global global_fullname
     if request.method == 'POST':
         if (not validate_password(request.form['password']) or
             not validate_email(request.form['email']) or
@@ -600,17 +602,24 @@ def transfer_funds():
 
 def release_rented_property():
     properties = property_tenant_data.find()
+    #
+    # for p in properties:
+    #     time_difference = datetime.now() - p['future_rent_time']
+    #
+    #     if time_difference > timedelta(days=4):
+    #         tenant = p['tenant']
+    #         property_name = p['property_name']
+    #
+    #         property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
+    #                                        {'$set': {'tenant':'Nobody'}})
+    #         property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
 
-    for p in properties:
-        time_difference = datetime.now() - p['future_rent_time']
 
-        if time_difference > timedelta(days=4):
-            tenant = p['tenant']
-            property_name = p['property_name']
 
-            property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
-                                           {'$set': {'tenant':'Nobody'}})
-            property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
+@app.route('/home/about_page_owner', methods=['GET', 'POST'])
+def about():
+
+    return render_template('about.html')
 
 if __name__ == '__main__':
     release_rented_property()

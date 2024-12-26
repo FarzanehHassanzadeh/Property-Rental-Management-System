@@ -1,92 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>about us</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-image: url('/static/images/112.jpg');
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+            background-repeat: no-repeat;
+            background-size: 55% auto;
+            background-position: right ;
+            background-color: #a83f57;
+        }
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+        .box-container {
+         text-align: left;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 20px;
 
+            top: 80px;
+            left: -500px;
+        }
+
+        .box {
+            {#border-top-left-radius: 500px;#}
+            background-color: rgba(99, 115, 120, 0.4);
+            border: 1px solid rgb(84, 20, 106,0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 15px;
+            border-radius: 8px;
+            align: left;
+            text-align: left;
+            color: #0b0c0c;
+            height: 178px;
+            width: 480px;
+            font-size: 1.5rem;
+        }
+
+        .box i {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .box h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .box a {
+            font-size:1rem;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .box a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="wrapper">
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact">
+                <input type="hidden" name="access_key" value="b2f0b254-a043-450e-8ee6-58d5536380c8">
 
-<header class="header">
-   
-   <section class="flex">
+                <div class="box">
+                    <h3><i class="fas fa-building"></i> Welcome to Property Management</h3>
+                    <p>Hello! At Property Management, we are proud to offer professional and efficient services in property management across the United States. Our team is led by two experienced professionals, Farzaneh Hassanzadeh and Kiarash Dalir.</p>
+                </div>
 
-      <a href="home.html" class="logo">Educa.</a>
+                <div class="box">
+                    <h3><i class="fas fa-info-circle"></i> About Us</h3>
+                    <p>Farzaneh Hassanzadeh and Kiarash Dalir bring years of experience in the property management industry, striving to provide the best services to you. With their technical expertise and deep industry experience, we are committed to delivering exceptional and efficient services that meet all your property needs.</p>
+                </div>
 
-      <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
+                <div class="box">
+                    <h3><i class="fas fa-concierge-bell"></i> Our Services</h3>
+                    <p>Professional management of residential and commercial properties</p>
+                    <p>Investment consultation in real estate</p>
+                    <p>Property maintenance and repairs</p>
+                    <p>Rental and sales services</p>
+                </div>
 
-         <div id="toggle-btn" class="fas fa-sun"></div>
-      </div>
+                <div class="box">
+                    <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                    <p>For more information about our services or to get a free consultation, feel free to contact us. We are always ready to answer your questions.</p>
+                </div>
 
-   </section>
-
-</header>   
-
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">shaikh anas</h3>
-      <p class="role">studen</p>
-      <a href="profile.html" class="btn">view profile</a>
-   </div>
- <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
-      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
-</div>
-
-   </div>
-
-</section> 
-
-<section class="reviews">
-
-   <h1 class="heading">student's reviews</h1>
-
-   <div class="box-container">
-
-
-   </div>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
-
-</footer>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-   
+            </form>
+        </div>
+    </header>
 </body>
 </html>
