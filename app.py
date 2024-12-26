@@ -55,8 +55,11 @@ db = client['Property_data']
 
 # Create collections
 users_data = db['users_data']
+
 property_owner_data = db['property_owner_data']
 property_tenant_data = db['property_tenant_data']
+rent_property_calendar = db['rent_property_calendar']
+
 cards_data = db['Cards_data']
 contacts_data = db['Contacts_data']
 
@@ -140,6 +143,7 @@ def signup_page():
                     request.form['password'], request.form['email'], request.form['birthday'], Role='owner')
 
         d = dict(user.__dict__)
+        d['img'] = ''
         users_data.insert_one(d)
         global_fullname = f"{request.form['firstname']} {request.form['lastname']}"
         return redirect(url_for('home_page', fullname=global_fullname))
@@ -164,6 +168,7 @@ def signup_page2():
                     request.form['password'], request.form['email'], request.form['birthday'], Role='tenant')
 
         d = dict(user.__dict__)
+        d['img'] = ''
         users_data.insert_one(d)
         global_fullname = f"{request.form['firstname']} {request.form['lastname']}"
         return redirect(url_for('home_page_tenant'))
@@ -231,7 +236,8 @@ def home_owner_to_addhome():
             'description': description,
             'date': current_date,
             'time': current_time,
-            'rent_status' : 'Nothing'
+            'tenant' : 'Nothing',
+            'imgh': ''
         })
 
     return render_template('addhome_owner.html', full_name=global_fullname)
@@ -315,8 +321,12 @@ def delete_property_details_page(objectID):
 # Route for tenant rent home page
 @app.route('/home/profile', methods=['GET', 'POST'])
 def profile_owner():
-
-    return render_template('profileowner.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img,country=global_country)
+    property_list = rent_property_calendar.find({'owner': global_fullname})
+    return render_template('profileowner.html', full_name=global_fullname,
+                           email=global_email,birth=global_birthday,
+                           username=global_username,
+                           img=global_img,country=global_country,
+                           property_list=property_list)
 
 @app.route('/home2', methods=['GET', 'POST'])
 def home_page_tenant():
@@ -402,9 +412,24 @@ def end_renting(objectID):
     global global_objectID_property_owner
 
     global_objectID_property_owner = objectID
-    result = property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)}, {'$set': {'tenant': 'Nobody'}})
+    current_property = property_owner_data.find_one({'_id': ObjectId(global_objectID_property_owner)})
 
+
+    result = property_owner_data.update_one({'_id': ObjectId(global_objectID_property_owner)}, {'$set': {'tenant': 'Nobody'}})
+    property_tenant_data.delete_one({'tenant': global_fullname, 'property_name': current_property['property_name']})
     if result.modified_count > 0:
+        current_time = datetime.now()
+
+        current_date = current_time.date().isoformat()
+        current_time = current_time.time().strftime('%H:%M:%S')
+
+        rent_property_calendar.insert_one({'property_name': current_property['property_name'],
+                                           'owner': current_property['owner'],
+                                           'tenant': global_fullname,
+                                           'rent_price': current_property['rent_price'],
+                                           'date': current_date,
+                                           'time': current_time,
+                                           'action': 'end_renting'})
         return "<h1>Property renting has been ended successfully.</h1>"
     else:
         return "<h1>there is something wrong</h1>"
@@ -419,8 +444,12 @@ def property_details_page2(objectID):
 # -----------------------------------------------------------
 @app.route('/home2/profile', methods=['GET', 'POST'])
 def profile_tenant():
-
-    return render_template('profile.html', full_name=global_fullname,email=global_email,birth=global_birthday,username=global_username,img=global_img,country=global_country)
+    property_list = rent_property_calendar.find({'tenant': global_fullname})
+    return render_template('profile.html',
+                           full_name=global_fullname,
+                           email=global_email,birth=global_birthday,
+                           username=global_username,img=global_img,country=global_country,
+                           property_list=property_list)
 
 
 @app.route('/transfer_funds', methods=['POST'])
@@ -436,6 +465,14 @@ def transfer_funds():
             {"card_number": to_card_number},
             {"$set": {"balance": to_balance + amount_to_transfer}}
         )
+    def store_deduction_in_calender_property_collocation():
+        rent_property_calendar.insert_one({'property_name': property_name,
+                                           'owner': owner_name,
+                                           'tenant': global_fullname,
+                                           'rent_price': property_rent_price,
+                                           'date': current_date,
+                                           'time': current_time,
+                                           'action': 'deduction'})
 
     global global_objectID_property_owner, global_fullname
     new_balance = None
@@ -522,6 +559,7 @@ def transfer_funds():
                     flash(f"The amount of {amount_to_transfer} has been successfully transferred.", "success")
 
                     calculate_and_update_balance()
+                    store_deduction_in_calender_property_collocation()
                     # Redirect to playlist2 after a successful transfer
                     return "<h1>Your first rent deducted.</h1>"
                     # Assumes you want to redirect to playlist2
@@ -545,6 +583,8 @@ def transfer_funds():
                         property_tenant_data.update_one({'tenant': global_fullname, 'property_name': property_name},
                                                         {'$set': {'date': future_rent_time}})
                         calculate_and_update_balance()
+                        store_deduction_in_calender_property_collocation()
+
                         return "<h1>Your last rent deducted.</h1>"
             else:
                flash("Insufficient funds in the source account.", "error")

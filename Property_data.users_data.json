@@ -123,4 +123,18 @@
   "birthday": "1995-03-28",
   "role": "tenant",
   "img": ""
+},
+{
+  "_id": {
+    "$oid": "676d585d6081b92b86c0c8b5"
+  },
+  "country": "The USA",
+  "username": "cc",
+  "firstname": "d",
+  "lastname": "david",
+  "password": "Lord1234",
+  "email": "davidcc@gmail.com",
+  "birthday": "2100-11-11",
+  "role": "owner",
+  "img": ""
 }]

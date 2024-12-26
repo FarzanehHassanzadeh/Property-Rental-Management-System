@@ -124,6 +124,28 @@
    </div>
 </section>
 
+
+<section class="user-profile">
+
+   <h1 class="heading">your property calendar </h1>
+<!-- start element -->
+    {%  for property in property_list  %}
+  <div class="box">
+         <div class="tutor">
+            <div class="info">
+                           <h3> {{property['property_name']}}</h3>
+                           <h3> tenant: {{property['tenant']}}</h3>
+               <span> Done in {{property['time']}} {{property['date']}} </span>
+                            </div>
+         </div>
+         <div class="thumb">
+
+         </div>
+                  <h3 class="title"> rent price : {{property['rent_price']}} action: {{property['action']}} </h3>
+      </div>
+<!--    end element -->
+    {%  endfor  %}
+</section>
 <script src="{{ url_for('static', filename='js.js') }}"></script>
 
 

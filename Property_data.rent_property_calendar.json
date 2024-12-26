@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "676d62d098f4e03a75010bd6"
+  },
+  "property_name": "Johnson Family House",
+  "owner": "Emma Johnson",
+  "tenant": "Emily  Allen",
+  "rent_price": "$1500",
+  "date": "2024-12-26",
+  "time": "17:36:08",
+  "action": "deduction"
+}]
