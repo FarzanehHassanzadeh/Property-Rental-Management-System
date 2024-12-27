@@ -13,18 +13,20 @@
 <body>
 
 <header class="header">
+
    <section class="flex">
+
       <a href="" class="logo">Property Rental Management</a>
+
       <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
          <div id="toggle-btn" class="fas fa-sun"></div>
       </div>
-      <div class="profile">
-         <img src="images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">shaikh anas</h3>
-         <p class="role">studen</p>
-         <a href="" class="btn">view profile</a>
-      </div>
+
    </section>
+
 </header>
 <div class="side-bar">
    <div id="close-btn">
@@ -32,7 +34,7 @@
    </div>
     <div class="profile">
          <div class="profile">
-      <img src="{{img}}" class="image" alt="">
+      <img src="/static/images/img-2.jpg" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
               <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
@@ -45,27 +47,18 @@
    </nav>
 </div>
 <section class="playlist-details">
-   <h4 class="heading">property details</h4>
+
+   <h1 class="heading">property details</h1>
    <div class="row">
+
       <div class="column">
-          <div class ="thumb">
-               <img src="/static/images/1.jpg" alt="">
-          </div>
-
-
-      </div>
-      <div class="column">
-
          <div class="tutor">
-               <img src="{{img}}" alt="">
         name of owner       <h3>{{ property['owner'] }}</h3>
         date of added       <span>{{ property['date'] }}</span>
                          </div>
           <div class="details">
-
             <h3>{{ property['property_name'] }}</h3>
             <p>{{ property['description'] }}</p>
-
           <form action="{{ url_for('transfer_funds', objectID=property['_id']) }}" method="post">
     <button type="submit" class="inline-btn">Pay rent</button>
 </form>

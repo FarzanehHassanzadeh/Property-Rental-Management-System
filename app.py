@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from werkzeug.utils import secure_filename, send_from_directory
+
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+
 
 from user import User
 import re
@@ -8,6 +11,7 @@ import re
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
+import os
 
 import secrets  # Import secrets module for generating a secure secret key
 
@@ -214,6 +218,10 @@ def home_page():
 
     return render_template('home.html', full_name=global_fullname, property_owner_list=property_list)
 
+
+UPLOAD_FOLDER = os.path.join('static', 'images')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # Route for owner add home page
 @app.route('/home/addhome_owner', methods=['GET', 'POST'])
 def home_owner_to_addhome():
@@ -223,6 +231,24 @@ def home_owner_to_addhome():
         rent_price = request.form['rent_price']
         rent_period = request.form['rent_period']
         description = request.form['description']
+        image = request.files['house_image']
+
+        if image and image != '':
+            image_name = secure_filename(image.filename)
+
+            if not os.path.exists(UPLOAD_FOLDER):
+                os.makedirs(UPLOAD_FOLDER)
+
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
+            image.save(image_path)
+
+            # image_url = url_for('uploaded_file', filename=image_name)
+            image_path = os.path.join(UPLOAD_FOLDER, image_name)
+
+            image_path_final = '/' + image_path.replace('\\', '/')
+        else:
+            image_path_final = ''
+
         fullname = global_fullname
 
         current_time = datetime.now()
@@ -238,12 +264,14 @@ def home_owner_to_addhome():
             'description': description,
             'date': current_date,
             'time': current_time,
-            'tenant' : 'Nothing',
-            'imgh': ''
+            'tenant' : 'Nobody',
+            'imgh': image_path_final
         })
 
     return render_template('addhome_owner.html', full_name=global_fullname)
-
+# @app.route('/static/images/<filename>')
+# def uploaded_file(filename):
+#     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 # Route for owner contact page
 @app.route('/home/contact', methods=['GET', 'POST'])
 def contact_page_owner():
@@ -288,6 +316,65 @@ def show_page_owner():
 
     return render_template('show_home_owner.html', full_name=global_fullname, property_owner_list=property_list)
 
+@app.route('/<objectID>/home/edit_property', methods=['GET', 'POST'])
+def edit_property(objectID):
+    global global_fullname
+    current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
+    if request.method == 'POST':
+          if current_property['tenant'] == 'Nobody':
+              if (request.form['property_name'] == ''
+                  and request.form['location'] == ''
+                  and request.form['rent_price'] == ''
+                  and request.form['rent_period'] == ''
+                  and request.form['description'] == ''
+                  and request.form['house_image']) == '':
+                  return render_template('edit_property_owner.html', full_name=global_fullname,
+                                         property=current_property)
+              else:
+                  house_name = request.form['property_name']
+                  location = request.form['location']
+                  rent_price = request.form['rent_price']
+                  rent_period = request.form['rent_period']
+                  description = request.form['description']
+                  image = request.files['house_image']
+
+                  myQuery = {}
+
+                  if house_name and house_name != '':
+                      myQuery['property_name'] = str(house_name)
+                  else:
+                      myQuery['property_name'] = current_property['property_name']
+
+                  if location and location != '':
+                      myQuery['location'] = str(location)
+                  else:
+                      myQuery['location'] = current_property['location']
+
+                  if rent_price and rent_price != '':
+                      myQuery['rent_price'] = str(rent_price)
+                  else:
+                      myQuery['rent_price'] = current_property['rent_price']
+
+                  if rent_period and rent_period != '':
+                      myQuery['rent_period'] = str(rent_period)
+                  else:
+                      myQuery['rent_period'] = current_property['rent_period']
+
+                  if description and description != '':
+                      myQuery['description'] = str(description)
+                  else:
+                      myQuery['description'] = current_property['description']
+
+                  if image and image != '':
+                      myQuery['imgh'] = image
+                  else:
+                      myQuery['imgh'] = current_property['imgh']
+
+                  property_owner_data.update_one({'_id': ObjectId(objectID)},{'$set': myQuery})
+          else:
+              return "<h1>Sorry. The property is in rent.</h1>"
+
+    return render_template('edit_property_owner.html', full_name=global_fullname, property=current_property)
 @app.route('/<objectID>/home/property_details', methods=['GET', 'POST'])
 def property_details_page(objectID):
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
@@ -602,17 +689,17 @@ def transfer_funds():
 
 def release_rented_property():
     properties = property_tenant_data.find()
-
-    for p in properties:
-         time_difference = datetime.now() - p['future_rent_time']
-
-         if time_difference > timedelta(days=4):
-             tenant = p['tenant']
-             property_name = p['property_name']
-
-             property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
-                                            {'$set': {'tenant':'Nobody'}})
-             property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
+    #
+    # for p in properties:
+    #      time_difference = datetime.now() - p['future_rent_time']
+    #
+    #      if time_difference > timedelta(days=4):
+    #          tenant = p['tenant']
+    #          property_name = p['property_name']
+    #
+    #          property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
+    #                                         {'$set': {'tenant':'Nobody'}})
+    #          property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
 
 
 

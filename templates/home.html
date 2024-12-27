@@ -72,15 +72,20 @@
 <!--    The elements-->
       <div class="box">
          <div class="tutor">
-            <img src="/static/images/999.png" alt="">
+             {%   if property['imgh'] != ''  %}
+               <img src="{{ property['imgh'] }}" alt="">
+             {% else %}
+                         <img src="" alt="">
+             {%  endif  %}
+
             <div class="info">
                            <h3>{{ property['property_name']}}</h3>
                <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
                             </div>
          </div>
-         <div class="thumb">
-           <img src="/static/images/999.png" alt="">
-         </div>
+<!--         <div class="thumb">-->
+<!--           <img src="/static/images/999.png" alt="">-->
+<!--         </div>-->
                   <h3 class="title"> rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
          <a href="{{ url_for('property_details_page',objectID=property['_id']) }}" class="inline-btn">view details</a>
       </div>

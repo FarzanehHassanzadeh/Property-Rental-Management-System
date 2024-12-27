@@ -43,17 +43,17 @@
    <form action="" method="POST" enctype="multipart/form-data">
       <h3>Add Property</h3>
       <p>Property Name <span>*</span></p>
-             <input type="text" name="property_name" placeholder="Enter Property name" required maxlength="50" class="box">
+             <input type="text" name="property_name" value="{{ property['property_name'] }}" placeholder="Enter Property name" required maxlength="50" class="box">
          <p>Location <span>*</span></p>
-         <input type="text" name="location" placeholder="Enter Property location" required maxlength="100" class="box">
+         <input type="text" name="location" value="{{  property['location']  }}" placeholder="Enter Property location" required maxlength="100" class="box">
              <p>Price <span>*</span></p>
-      <input type="text" name="rent_price" placeholder="Enter Property price" maxlength="20" class="box">
+      <input type="text" name="rent_price" value="{{  property['rent_price']  }}" placeholder="Enter Property price" maxlength="20" class="box">
              <p>Rent Period <span>*</span></p>
-      <input type="text" name="rent_period" placeholder="Enter Property rent period" maxlength="20" class="box">
+      <input type="text" name="rent_period" value="{{  property['rent_period']  }}" placeholder="Enter Property rent period" maxlength="20" class="box">
              <p>Property Description <span>*</span></p>
-      <textarea name="description" placeholder="Enter Property description" required maxlength="500" class="box"></textarea>
+      <textarea name="description" placeholder="Enter Property description"  maxlength="500" class="box">{{  property['description']  }}</textarea>
              <p>Select Image <span>*</span></p>
-      <input type="file" name="house_image" accept="image/*" class="box">
+      <input type="file" name="house_image" value="{{  property['imgh']  }}" accept="image/*" class="box">
              <button type="submit" value="Register House" name="submit" class="btn"> Add property</button>
    </form>
 </section>

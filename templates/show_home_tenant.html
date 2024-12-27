@@ -13,6 +13,7 @@
 
 <header class="header" >
    <section class="flex">
+        <a href="home.html" class="logo"></a>
       <!-- the search -->
       <form action="" method="post" class="search-form">
          <input type="text" name="search_box" placeholder="search property..." maxlength="100">
@@ -43,18 +44,13 @@
    <div id="close-btn">
       <i class="fas fa-times"></i>
    </div>
-      <div class="profile">
          <div class="profile">
-      <img src="{{img}}" class="image" alt="">
+      <img src="/static/images/img-2.jpg" class="image" alt="">
       <h3 class="name">{{ full_name }}</h3>
       <p class="role">tenant</p>
               <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
          </div>
-      </div>
 
-   </section>
-
-</header>
    <nav class="navbar">
       <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home</span></a>
       <a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
@@ -78,9 +74,9 @@
                <span>Added in {{ property['time'] }}  {{ property['date'] }}</span>
             </div>
          </div>
-         <div class="thumb">
-            <img src="/static/images/1.jpg" alt="">
-         </div>
+<!--         <div class="thumb">-->
+<!--            <img src="/static/images/1.jpg" alt="">-->
+<!--         </div>-->
          <h3 class="title">rent price : {{ property['rent_price'] }} rent period: {{ property['rent_period'] }}</h3>
          <a href="{{ url_for('property_details_page2', objectID=property['_id']) }}" class="inline-btn">View details</a>
           <a href="{{ url_for('end_renting', objectID=property['_id'])  }}" class="inline-btn"> End renting</a>

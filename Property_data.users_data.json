@@ -126,15 +126,15 @@
 },
 {
   "_id": {
-    "$oid": "676d585d6081b92b86c0c8b5"
+    "$oid": "676d7d3acf523dc39fc62881"
   },
   "country": "The USA",
-  "username": "cc",
-  "firstname": "d",
-  "lastname": "david",
+  "username": "ab",
+  "firstname": "A",
+  "lastname": "B",
   "password": "Lord1234",
-  "email": "davidcc@gmail.com",
-  "birthday": "2100-11-11",
+  "email": "ab@gmail.com",
+  "birthday": "1996-11-11",
   "role": "owner",
   "img": ""
 }]

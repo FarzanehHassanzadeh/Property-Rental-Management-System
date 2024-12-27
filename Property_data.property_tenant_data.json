@@ -11,4 +11,18 @@
   "future_rent_time": {
     "$date": "2025-01-26T17:36:08.224Z"
   }
+},
+{
+  "_id": {
+    "$oid": "676dcb971c828ac7896aa8ff"
+  },
+  "tenant": "Emily  Allen",
+  "property_name": "Johnson's Beach House",
+  "rent_price": "$2500",
+  "rent_period": "Weekly",
+  "date": "2024-12-27",
+  "time": "01:03:11",
+  "future_rent_time": {
+    "$date": "2025-01-03T01:03:11.138Z"
+  }
 }]
