@@ -18,9 +18,9 @@ Certainly! Here's the text translated to English:
    cd PropertyRentalManagementSystem
    ```
 
-2. Install dependencies:
+2. Install flask API:
    ```shell
-   pip install -r requirements.txt
+   pip install -flask
    ```
 
 3. Start MongoDB:
@@ -30,7 +30,10 @@ Certainly! Here's the text translated to English:
 
 4. Run the project:
    - Open the project in PyCharm and run it.
-
+## Implementation
+   this project is implemented with flask API which is micro backend framework and it is very flexible. This is also implemented woth pymongo which
+   is a mongoBD driver for python and through that you can work with
+   datadases.
 ## Usage
 1. After running the program, open `http://127.0.0.1:5000` in your browser and go to the `start` page.
 2. There are several buttons at the top of the page:
