@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>profile</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+
+<header class="header">
+
+   <section class="flex">
+{##}
+     <a href="home.html" class="logo"></a>
+{##}
+{#      <form action="search.html" method="post" class="search-form">#}
+{#         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">#}
+{#         <button type="submit" class="fas fa-search"></button>#}
+{#      </form>#}
+
+     <div class="icons">
+{#         <div id="menu-btn" class="fas fa-bars"></div>#}
+{#         <div id="search-btn" class="fas fa-search"></div>#}
+{#         <div id="user-btn" class="fas fa-user"></div>#}
+   <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <div class="profile">
+      <img src="{{img}}" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+      <p class="role">tenant</p>
+         </div>
+      </div>
+
+   </section>
+
+</header>
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="{{img}}" class="image" alt="">
+      <h3 class="name">{{ full_name }}</h3>
+      <p class="role">tenant</p>
+     <a href="{{ url_for('profile_tenant') }}" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="{{ url_for('home_page_tenant') }}"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="{{ url_for('show_page_tenant') }}"><i class="fas fa-eye"></i><span>Show</span></a>
+      <a href="{{ url_for('contact_page_tenant') }}"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<section class="user-profile">
+   <div class="info">
+
+      <div class="user">
+         <img src="images/pic-1.jpg" alt="">
+          <h3><i class="fas fa-building"></i> Welcome to Property Management</h3>
+         <p>Hello! At Property Management, we are proud to offer professional and efficient services in property management across the United States. Our team is led by two experienced professionals, Farzaneh Hassanzadeh and Kiarash Dalir.</p>
+
+             <h3><i class="fas fa-info-circle"></i> About Us</h3>
+         <p>Farzaneh Hassanzadeh and Kiarash Dalir bring years of experience in the property management industry, striving to provide the best services to you. With their technical expertise and deep industry experience, we are committed to delivering exceptional and efficient services that meet all your property needs.</p>
+
+             <h3><i class="fas fa-concierge-bell"></i> Our Services</h3>
+        <p>
+           Professional management of residential and commercial properties
+            Investment consultation in real estate
+            Property maintenance and repairs
+            Rental and sales services
+
+         </p>
+         <><i class="fas fa-envelope"></i> Contact Us
+         <p>For more information about our services or to get a free consultation, feel free to contact us. We are always ready to answer your questions.</p>
+
+      </div>
+
+   </div>
+
+</section>
+
+<script src="{{ url_for('static', filename='js.js') }}"></script>
+
+
+</body>
+</html>
