@@ -414,7 +414,7 @@ def profile_owner():
     return render_template('profileowner.html', full_name=global_fullname,
                            email=global_email,birth=global_birthday,
                            username=global_username,
-                           img=global_img,country=global_country,
+                           country=global_country,
                            property_list=property_list)
 
 @app.route('/home2', methods=['GET', 'POST'])
@@ -448,7 +448,7 @@ def home_page_tenant():
         myQuery['tenant'] = 'Nobody'
 
         property_list = property_owner_data.find(myQuery)
-    return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list,img=global_img)
+    return render_template('hometenant.html', full_name=global_fullname, property_owner_list=property_list)
 
 # Route for tenant contact page
 @app.route('/contact', methods=['GET', 'POST'])
@@ -495,7 +495,7 @@ def show_page_tenant():
 
         property_list = property_owner_data.find(myQuery)
 
-    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list,img=global_img)
+    return render_template('show_home_tenant.html', full_name=global_fullname, property_owner_list=property_list)
 @app.route('/<objectID>/home2/show_page_tenant/property_details2/end_rent', methods=['GET', 'POST'])
 def end_renting(objectID):
     global global_objectID_property_owner
@@ -529,7 +529,7 @@ def property_details_page2(objectID):
 
     global_objectID_property_owner = objectID
     current_property = property_owner_data.find_one({'_id': ObjectId(objectID)})
-    return render_template('property_details2.html', full_name=global_fullname, property=current_property,img=global_img,country=global_country)
+    return render_template('property_details2.html', full_name=global_fullname, property=current_property,country=global_country)
 # -----------------------------------------------------------
 @app.route('/home2/profile', methods=['GET', 'POST'])
 def profile_tenant():
@@ -537,7 +537,7 @@ def profile_tenant():
     return render_template('profile.html',
                            full_name=global_fullname,
                            email=global_email,birth=global_birthday,
-                           username=global_username,img=global_img,country=global_country,
+                           username=global_username,country=global_country,
                            property_list=property_list)
 
 
@@ -691,14 +691,14 @@ def release_rented_property():
     properties = property_tenant_data.find()
 
     for p in properties:
-          time_difference = datetime.now() - p['future_rent_time']
+         time_difference = datetime.now() - p['future_rent_time']
 
-          if time_difference > timedelta(days=4):
-              tenant = p['tenant']
-              property_name = p['property_name']
+         if time_difference > timedelta(days=4):
+             tenant = p['tenant']
+             property_name = p['property_name']
 
-              property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
-                                                {'$set': {'tenant':'Nobody'}})
+             property_owner_data.update_one({'tenant': tenant, 'property_name': property_name},
+                                            {'$set': {'tenant':'Nobody'}})
              property_tenant_data.delete_one({'tenant': tenant, 'property_name': property_name})
 
 
